@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+    <!-- Replace the content tag with appropriate information -->
+    <meta name="description" content="DESCRIPTION META TAG" />
+    <meta property="og:title" content="SOCIAL MEDIA TITLE TAG" />
+    <meta
+      property="og:description"
+      content="SOCIAL MEDIA DESCRIPTION TAG TAG"
+    />
+    <meta property="og:url" content="URL OF THE WEBSITE" />
+    <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+    <meta property="og:image" content="assets/image/your_banner_image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG" />
+    <meta
+      name="twitter:description"
+      content="TWITTER BANNER DESCRIPTION META TAG"
+    />
+    <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+    <meta
+      name="twitter:image"
+      content="assets/images/your_twitter_banner_image.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- Keywords for your paper to be indexed by-->
+    <meta
+      name="keywords"
+      content="cybersecurity, CyberGym, large language model, agent, LLM"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>CyberGym</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="assets/css/bulma.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/index.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+
+    <script src="assets/js/load-leaderboard.js"></script>
+  </head>
+  <body>
+    <section class="hero is-light title-section">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <h1 class="title is-1 publication-title">
+                <img src="assets/images/favicon.ico" class="publication-logo" />
+                <span style="vertical-align: middle; font-weight: 600">
+                  CyberGym
+                </span>
+                <br />
+                <span style="font-size: 2.5rem">
+                  Evaluating AI Agents' Cybersecurity Capabilities with
+                  Real-World Vulnerabilities at Scale
+                </span>
+              </h1>
+              <div class="is-size-5 publication-authors">
+                <!-- Paper authors -->
+                <span class="author-block"> Zhun Wang<sup>*</sup>,</span>
+                <span class="author-block"> Tianneng Shi<sup>*</sup>,</span>
+                <span class="author-block"> Jingxuan He,</span>
+                <span class="author-block"> Matthew Cai,</span>
+                <span class="author-block"> Jialin Zhang,</span>
+                <span class="author-block"> Dawn Song</span>
+              </div>
+
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">UC Berkeley</span>
+                <span class="eql-cntrb"
+                  ><small
+                    ><br /><sup>*</sup>Indicates Equal Contribution</small
+                  ></span
+                >
+              </div>
+              <div
+                class="columns is-centered has-text-centered"
+                style="margin-top: 0.8rem"
+              >
+                <div class="column is-four-fifths">
+                  <div class="content has-text-justified">
+                    <p>
+                      A large-scale, high-quality cybersecurity evaluation
+                      framework designed to rigorously assess the capabilities
+                      of AI agents on real-world vulnerability analysis tasks.
+                      CyberGym includes 1,507 historical vulnerabilities from
+                      188 large software projects.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <!-- Arxiv PDF link -->
+                  <span class="link-block">
+                    <a
+                      href="https://arxiv.org/abs/2506.02548"
+                      target="_blank"
+                      class="external-link button is-normal"
+                    >
+                      <span>Paper</span>
+                      <span class="icon" style="font-size: 1.2rem">
+                        <i class="ai ai-arxiv"></i>
+                      </span>
+                    </a>
+                  </span>
+
+                  <!-- Github link -->
+                  <span class="link-block">
+                    <a
+                      href="https://github.com/sunblaze/cybergym"
+                      target="_blank"
+                      class="external-link button is-normal"
+                    >
+                      <span>Code</span>
+                      <span class="icon" style="font-size: 1.5rem">
+                        <i class="hgi hgi-stroke hgi-source-code"></i>
+                      </span>
+                    </a>
+                  </span>
+
+                  <!-- ArXiv abstract Link -->
+                  <!-- <span class="link-block">
+                    <a
+                      href="https://arxiv.org/abs/2506.02548"
+                      target="_blank"
+                      class="external-link button is-normal"
+                    >
+                      <span>ArXiv</span>
+                      <span class="icon" style="font-size: 1.2rem">
+                        <i class="ai ai-arxiv"></i>
+                      </span>
+                    </a>
+                  </span> -->
+
+                  <!-- Hugging Face link -->
+                  <span class="link-block">
+                    <a
+                      href="https://huggingface.co/datasets/sunblaze-ucb/cybergym"
+                      target="_blank"
+                      class="external-link button is-normal"
+                    >
+                      <span>Dataset</span>
+                      <span class="icon" style="font-size: 1.4rem">
+                        <i class="hgi hgi-stroke hgi-database-01"></i>
+                      </span>
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Paper abstract -->
+    <!-- <section class="section hero">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <p>
+                Large language model (LLM) agents are becoming increasingly
+                skilled at handling cybersecurity tasks autonomously. Thoroughly
+                assessing their cybersecurity capabilities is critical and
+                urgent, given the high stakes in this domain. However, existing
+                benchmarks fall short, often failing to capture real-world
+                scenarios or being limited in scope. To address this gap, we
+                introduce CyberGym, a large-scale and high-quality cybersecurity
+                evaluation framework featuring 1,507 real-world vulnerabilities
+                found and patched across 188 large software projects. While it
+                includes tasks of various settings, CyberGym primarily focuses
+                on the generation of proof-of-concept (PoC) tests for
+                vulnerability reproduction, based on text descriptions and
+                corresponding source repositories. Solving this task is
+                particularly challenging, as it requires comprehensive reasoning
+                across entire codebases to locate relevant code fragments and
+                produce effective PoCs that accurately trigger the target
+                vulnerability starting from the program's entry point. Our
+                evaluation across 4 state-of-the-art agent frameworks and 9 LLMs
+                reveals that even the best combination (OpenHands and
+                Claude-3.7-Sonnet) achieves only a 11.9% reproduction success
+                rate, mainly on simpler cases. Beyond reproducing historical
+                vulnerabilities, we find that PoCs generated by LLM agents can
+                reveal new vulnerabilities, identifying 15 zero-days affecting
+                the latest versions of the software projects.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+    <!-- End paper abstract -->
+
+    <!-- Leaderboard section -->
+    <section class="section hero">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full">
+            <h2 class="title is-3">Leaderboard</h2>
+
+            <!-- Level 1 Tab Content -->
+            <div id="level1" class="tab-content is-active">
+              <div class="table-container leaderboard-table">
+                <table class="table is-fullwidth is-striped is-hoverable">
+                  <thead>
+                    <tr>
+                      <th style="vertical-align: middle">Rank</th>
+                      <th style="vertical-align: middle">Agent</th>
+                      <th style="vertical-align: middle">
+                        % Reproducing <br />Target Vuln.
+                      </th>
+                      <th style="vertical-align: middle">
+                        % Finding Post-<br />Patch Vuln.
+                      </th>
+                      <th style="vertical-align: middle">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody id="level1-tbody">
+                    <tr>
+                      <td colspan="5" class="has-text-centered">Loading...</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Footnotes -->
+            <div
+              class="content has-text-left"
+              style="margin-top: 2rem; font-size: 0.9rem; color: #666"
+            >
+              <strong>Metrics:</strong><br />
+              • <strong>% Reproducing Target Vuln.:</strong> Percentage of
+              target vulnerabilities successfully reproduced by generating
+              working PoC<br />
+              • <strong>% Finding Post-Patch Vuln.:</strong> Percentage of test
+              cases where the agent discovers new vulnerabilities which cause
+              crash on post-patch programs
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End leaderboard section -->
+
+    <!-- Overview -->
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Overview of CyberGym</h2>
+            <div class="content has-text-justified">
+              <p>
+                CyberGym tests AI agents' ability to handle real-world
+                cybersecurity tasks.
+              </p>
+              <p>
+                We collect 1,507 benchmark instances by systematically gathering
+                real-world vulnerabilities discovered and patched across 188
+                large software projects. Each instance is derived from
+                vulnerabilities found by OSS-Fuzz, Google's continuous fuzzing
+                campaign, ensuring authentic security challenges from
+                widely-used codebases.
+              </p>
+            </div>
+            <figure class="image">
+              <img
+                src="assets/images/overview.svg"
+                alt="CyberGym Overview"
+                class="overview-image"
+              />
+            </figure>
+            <div class="content has-text-justified">
+              <p>
+                Per instance, we construct evaluation environments with the
+                target repository at the pre-patch commit state. The primary
+                task requires agents to generate proof-of-concept (PoC) tests
+                that can reproduce the described vulnerability by reasoning
+                across entire codebases, often spanning thousands of files and
+                millions of lines of code. Agents must locate relevant code
+                fragments and produce effective PoCs that trigger
+                vulnerabilities from program entry points. Beyond vulnerability
+                reproduction, CyberGym supports varied task difficulty levels
+                reflecting different stages of the vulnerability lifecycle,
+                including vulnerability discovery given only the codebase, and
+                vulnerability analysis using patch information to simulate
+                real-world one-day analysis conditions.
+              </p>
+              <p>
+                CyberGym evaluation works as follows. Per task instance, an AI
+                agent receives a vulnerability description and the corresponding
+                unpatched codebase. The agent should generate a PoC test to
+                reproduce the vulnerability, with iterative refinement based on
+                execution feedback. Success is determined by running the PoC on
+                both pre-patch (should trigger) and post-patch (should not
+                trigger) program versions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Findings -->
+    <section class="section hero">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full">
+            <h2 class="title is-3">Key Findings</h2>
+            <div class="columns is-centered">
+              <div class="column is-four-fifths">
+                <div class="content has-text-justified">
+                  <p>
+                    In addition to the absolute success rates shown in the
+                    leaderboard, our comprehensive evaluation reveals several
+                    critical insights into the current capabilities of AI agents
+                    in cybersecurity.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div id="key-findings-carousel"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Zero-Day Vulnerabilities -->
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full">
+            <h2 class="title is-3">Agents Can Find Zero-Day Vulnerabilities</h2>
+            <div class="columns is-centered">
+              <div class="column is-four-fifths">
+                <div class="content has-text-justified">
+                  <p>
+                    Automated agents successfully identified new vulnerabilities
+                    that cause crashes in post-patch executables across multiple
+                    projects. Initial testing generated 540 proof-of-concept
+                    exploits across 54 projects, of which 32 still triggered
+                    crashes on the latest versions. This yielded 9 unique
+                    vulnerabilities affecting 6 projects. A subsequent
+                    investigation using OpenHands with GPT-4.1 expanded the
+                    scope to 431 projects containing 1,748 executables,
+                    triggering 16 additional crashes. Manual inspection
+                    confirmed 8 of these as unique vulnerabilities.
+                  </p>
+                  <p>
+                    In total, 17 vulnerabilities were discovered:
+                    <strong> 15 are zero-days and 2 are unpatched </strong>
+                    but previously disclosed. These vulnerabilities follow
+                    common patterns including insufficient error handling,
+                    missing boundary checks, and excessive recursion. The
+                    breakdown includes 4 out-of-bounds reads, 1 out-of-bounds
+                    write, 6 null pointer dereferences, and 4 stack overflows.
+                    All confirmed vulnerabilities have been responsibly
+                    disclosed to the respective project maintainers.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section hero">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full">
+            <h2 class="title is-3">An Example of Successful Agent Trace</h2>
+            <div class="columns is-centered">
+              <div class="column is-four-fifths">
+                <div class="content has-text-justified">
+                  <p>
+                    An example where the agent successfully reproduces the
+                    target vulnerability based on the provided description and
+                    codebase. The agent begins by browsing relevant files using
+                    the given keywords, constructs a test case using the
+                    retrieved information, mutates the test case, and ultimately
+                    triggers the crash.
+                  </p>
+                  <img
+                    src="assets/images/case_study.png"
+                    alt="Agent Trace Example"
+                    class="agent-trace-image"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--BibTex citation -->
+    <section class="section hero is-light" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <h2 class="title">Citation</h2>
+        <p>If you use this work in your research, please cite the following:</p>
+        <div class="bibtex-container">
+          <pre class="bibtex"><code id="bibtex-code">@misc{wang2025cybergym,
+      title={CyberGym: Evaluating AI Agents' Cybersecurity Capabilities with Real-World Vulnerabilities at Scale}, 
+      author={Zhun Wang and Tianneng Shi and Jingxuan He and Matthew Cai and Jialin Zhang and Dawn Song},
+      year={2025},
+      eprint={2506.02548},
+      archivePrefix={arXiv},
+      primaryClass={cs.CR},
+      url={https://arxiv.org/abs/2506.02548}, 
+}</code></pre>
+          <button class="copy-bibtex-btn" title="Copy BibTeX" onclick="copyBibtex()">
+            <i class="hgi hgi-stroke hgi-copy-01"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+    <!--End BibTex citation -->
+
+    <footer class="footer">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content">
+              <p>
+                This page was built using the
+                <a
+                  href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                  target="_blank"
+                  >Academic Project Page Template</a
+                >.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Statcounter tracking code -->
+
+    <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+    <script src="assets/js/key-findings-carousel.js"></script>
+    <script src="assets/js/copy-bibtex.js"></script>
+  </body>
+</html>

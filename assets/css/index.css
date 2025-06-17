@@ -189,3 +189,13 @@ pre code {
   color: #4a4a4a !important;
   text-decoration: none;
 }
+
+.author-block .email-link {
+  color: #3273dc !important;
+  text-decoration: none;
+}
+
+.author-block .email-link:hover {
+  color: #4a4a4a !important;
+  text-decoration: none;
+}

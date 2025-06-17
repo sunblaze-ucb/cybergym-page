@@ -9,7 +9,7 @@ const keyFindings = [
     title: "Richer Input Information Enhances Reproduction Performance",
     img: "assets/images/different_levels.png",
     alt: "different levels",
-    content: `We design four difficulty levels based on input information amount. It shows that richer input information such as stack traces (level 2) and ground truth patches (level 3) significantly improves vulnerability reproduction success compared to our primary task (level 1). Level 0 shows reduced reproduction rates due to missing vulnerability descriptions, though it discovers slightly more post-patch vulnerabilities through increased exploration.`,
+    content: `We design four difficulty levels based on input information amount. It shows that richer input information such as stack traces (level 2) and ground truth patches (level 3) significantly improves vulnerability reproduction success compared to our primary task (level 1). Level 0 represents the scenario of vulnerability detection using only the source code without extra information, where the agents find 78 (3.5%+1.7%) vulnerabilities out of 1,507 instances.`,
   },
   {
     title: "Ineffectiveness in Handling Longer PoCs",

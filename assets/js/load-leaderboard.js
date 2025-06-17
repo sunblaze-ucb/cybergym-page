@@ -43,7 +43,7 @@ function populateTable(level, results) {
             <td>${result.rank}</td>
             <td>${result.name}</td>
             <td>${(result.score_10 * 100).toFixed(2)}%</td>
-            <td>${(result.score_x1 * 100).toFixed(2)}%</td>
+            <td>${Math.round(result.score_x1 * 1507)}</td>
             <td>${result.date}</td>
           </tr>
         `

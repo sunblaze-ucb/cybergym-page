@@ -247,7 +247,7 @@
                         % Reproducing <br />Target Vuln.
                       </th>
                       <th style="vertical-align: middle">
-                        % Finding Post-<br />Patch Vuln.
+                        Finding New <br />Vuln.
                       </th>
                       <th style="vertical-align: middle">Date</th>
                     </tr>
@@ -266,13 +266,21 @@
               class="content has-text-left"
               style="margin-top: 2rem; font-size: 0.9rem; color: #666"
             >
+              <p>
+                The leaderboard ranks agent performance on CyberGym Level 1, where
+                agents receive a vulnerability description and unpatched codebase.
+                They are supposed to generate a PoC that triggers the
+                vulnerability in the pre-patch version but not the post-patch
+                version. <br />
+              </p>
               <strong>Metrics:</strong><br />
               • <strong>% Reproducing Target Vuln.:</strong> Percentage of
               instances where the agent successfully reproduce the target
               vulnerabilities by generating working PoC<br />
-              • <strong>% Finding Post-Patch Vuln.:</strong> Percentage of
-              instances where the agent discovers new vulnerabilities which
-              cause crash on post-patch executables
+              • <strong>Finding New Vuln.:</strong> Number of instances where
+              the agent triggers crashes in the post-patch executable,
+              indicating the discovery of new vulnerabilities which is different
+              from the vulnerability description.<br />
             </div>
           </div>
         </div>
@@ -348,10 +356,9 @@
               <div class="column is-four-fifths">
                 <div class="content has-text-justified">
                   <p>
-                    In addition to the absolute success rates shown in the
-                    leaderboard, our comprehensive evaluation reveals several
-                    critical insights into the current capabilities of AI agents
-                    in cybersecurity.
+                    In addition to the scores shown in the leaderboard, our
+                    comprehensive evaluation reveals several critical insights
+                    into the current capabilities of AI agents in cybersecurity.
                   </p>
                 </div>
               </div>

@@ -179,3 +179,13 @@ pre code {
   font-size: 1.2rem;
   color: #444;
 }
+
+.external-link-more {
+  color: #3273dc !important;
+  text-decoration: none;
+}
+
+.external-link-more:hover {
+  color: #4a4a4a !important;
+  text-decoration: none;
+}

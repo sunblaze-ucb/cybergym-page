@@ -132,8 +132,9 @@
                       A large-scale, high-quality cybersecurity evaluation
                       framework designed to rigorously assess the capabilities
                       of AI agents on real-world vulnerability analysis tasks.
-                      CyberGym includes 1,507 historical vulnerabilities from
-                      188 large software projects.
+                      CyberGym includes 1,507 benchmark instances with
+                      historical vulnerabilities from 188 large software
+                      projects.
                     </p>
                   </div>
                 </div>
@@ -260,10 +261,12 @@
                       <th style="vertical-align: middle">Rank</th>
                       <th style="vertical-align: middle">Agent</th>
                       <th style="vertical-align: middle">
-                        % Reproducing <br />Target Vuln.
+                        % Target Vuln.<br />
+                        Reproduced
                       </th>
                       <th style="vertical-align: middle">
-                        Finding New <br />Vuln.
+                        % Post-Patch<br />
+                        Vuln. Found
                       </th>
                       <th style="vertical-align: middle">Date</th>
                     </tr>
@@ -285,18 +288,29 @@
               <p>
                 The leaderboard ranks agent performance on CyberGym Level 1,
                 where agents receive a vulnerability description and unpatched
-                codebase. They are supposed to generate a PoC that triggers the
-                vulnerability in the pre-patch version but not the post-patch
-                version. <br />
+                codebase. We have two main metrics to evaluate the agents'
+                performance: <br />
               </p>
-              <strong>Metrics:</strong><br />
-              • <strong>% Reproducing Target Vuln.:</strong> Percentage of
-              instances where the agent successfully reproduce the target
-              vulnerabilities by generating working PoC<br />
-              • <strong>Finding New Vuln.:</strong> Number of instances where
-              the agent triggers crashes in the post-patch executable,
-              indicating the discovery of new vulnerabilities which is different
-              from the vulnerability description.<br />
+              <p>
+                • <strong>% Target Vuln. Reproduced:</strong> Percentage of
+                instances where the agent successfully reproduce the target
+                vulnerabilities by generating working PoC<br />
+                • <strong>% Post-Patch Vuln. Found:</strong> Percentage of
+                instances where the agent triggers crashes in the post-patch
+                executable, indicating the discovery of new vulnerabilities
+                which is different from the vulnerability description.<br />
+              </p>
+              <p>
+                Given the promising capabilities of the agents, we further
+                assess whether their PoCs that can crash the post-patch
+                executable are also able to crash the latest version of the
+                project. In addition, we conduct an experiment in which the
+                agents analyze the latest codebase without any prior context to
+                identify new vulnerabilities. Remarkably, the agents discovered
+                <strong>15 zero-day</strong> vulnerabilities in total, which are detailed in
+                <a href="#zero-days">this section</a>.
+                <br />
+              </p>
             </div>
           </div>
         </div>
@@ -362,31 +376,8 @@
       </div>
     </section>
 
-    <!-- Key Findings -->
-    <section class="section hero">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-full">
-            <h2 class="title is-3">Key Findings</h2>
-            <div class="columns is-centered">
-              <div class="column is-four-fifths">
-                <div class="content has-text-justified">
-                  <p>
-                    In addition to the scores shown in the leaderboard, our
-                    comprehensive evaluation reveals several critical insights
-                    into the current capabilities of AI agents in cybersecurity.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div id="key-findings-carousel"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Zero-Day Vulnerabilities -->
-    <section class="section hero is-light">
+    <section class="section hero" id="zero-days">
       <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
           <div class="column is-full">
@@ -397,14 +388,14 @@
                   <p>
                     Automated agents successfully identified new vulnerabilities
                     that cause crashes in post-patch executables across multiple
-                    projects. Initial testing generated 540 proof-of-concept
-                    exploits across 54 projects, of which 32 still triggered
-                    crashes on the latest versions. This yielded 9 unique
-                    vulnerabilities affecting 6 projects. A subsequent
-                    investigation using OpenHands with GPT-4.1 expanded the
-                    scope to 431 projects containing 1,748 executables,
-                    triggering 16 additional crashes. Manual inspection
-                    confirmed 8 of these as unique vulnerabilities.
+                    projects. Initial testing across different agents and models
+                    generated 540 PoCs across 54 projects, of which 32 still
+                    triggered crashes on the latest versions. This yielded 9
+                    unique vulnerabilities affecting 6 projects. A subsequent
+                    experiment using OpenHands with GPT-4.1 expanded the scope
+                    to 431 projects containing 1,748 executables on the latest
+                    codebase, triggering 16 additional crashes. Manual
+                    inspection confirmed 8 of these as unique vulnerabilities.
                   </p>
                   <p>
                     In total, 17 vulnerabilities were discovered:
@@ -424,6 +415,30 @@
         </div>
       </div>
     </section>
+
+    <!-- Key Findings -->
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full">
+            <h2 class="title is-3">More Key Findings</h2>
+            <div class="columns is-centered">
+              <div class="column is-four-fifths">
+                <div class="content has-text-justified">
+                  <p>
+                    In addition to the scores shown in the leaderboard, our
+                    comprehensive evaluation reveals several critical insights
+                    into the current capabilities of AI agents in cybersecurity.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div id="key-findings-carousel"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section hero">
       <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
@@ -525,7 +540,7 @@
     <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
 
     <!-- End of Statcounter Code -->
-    <script src="assets/js/key-findings-carousel.js"></script>
+    <script src="assets/js/key-findings-plain.js"></script>
     <script src="assets/js/copy-bibtex.js"></script>
   </body>
 </html>

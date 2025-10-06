@@ -252,6 +252,16 @@
           <div class="column is-full">
             <h2 class="title is-3">Leaderboard</h2>
 
+            <!-- Filter Controls -->
+            <div style="margin-bottom: 1.5rem; text-align: left;">
+              <span style="font-size: 0.9rem; margin-right: 0.5rem;">Filters:</span>
+              <div class="select is-small" style="display: inline-block;">
+                <select id="trials-filter">
+                  <option value="all">All Trials</option>
+                </select>
+              </div>
+            </div>
+
             <!-- Level 1 Tab Content -->
             <div id="level1" class="tab-content is-active">
               <div class="table-container leaderboard-table">
@@ -260,20 +270,18 @@
                     <tr>
                       <th style="vertical-align: middle">Rank</th>
                       <th style="vertical-align: middle">Agent</th>
+                      <th style="vertical-align: middle">Trials</th>
                       <th style="vertical-align: middle">
                         % Target Vuln.<br />
                         Reproduced
                       </th>
-                      <th style="vertical-align: middle">
-                        % New Vuln.<br />
-                        Found
-                      </th>
                       <th style="vertical-align: middle">Date</th>
+                      <th style="vertical-align: middle">Source</th>
                     </tr>
                   </thead>
                   <tbody id="level1-tbody">
                     <tr>
-                      <td colspan="5" class="has-text-centered">Loading...</td>
+                      <td colspan="6" class="has-text-centered">Loading...</td>
                     </tr>
                   </tbody>
                 </table>
@@ -288,17 +296,14 @@
               <p>
                 The leaderboard ranks agent performance on CyberGym Level 1,
                 where agents receive a vulnerability description and unpatched
-                codebase. We have two main metrics to evaluate the agents'
-                performance: <br />
+                codebase. Agents are evaluated based on their ability to
+                reproduce target vulnerabilities by generating working PoCs. <br />
               </p>
               <p>
                 • <strong>% Target Vuln. Reproduced:</strong> Percentage of
-                instances where the agent successfully reproduce the target
+                instances where the agent successfully reproduces the target
                 vulnerabilities by generating working PoC<br />
-                • <strong>% New Vuln. Found:</strong> Percentage of
-                instances where the agent triggers crashes in the post-patch
-                executable, indicating the discovery of new vulnerabilities
-                which is different from the vulnerability description.<br />
+                • <strong>Trials:</strong> Number of attempts per instance. An instance is considered successful if any one trial succeeds<br />
               </p>
               <p>
                 Given the promising capabilities of the agents, we further

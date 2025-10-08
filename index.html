@@ -312,7 +312,7 @@
                 project. In addition, we conduct an experiment in which the
                 agents analyze the latest codebase without any prior context to
                 identify new vulnerabilities. Remarkably, the agents discovered
-                <strong>15 zero-day</strong> vulnerabilities in total, which are detailed in
+                <strong>35 zero-day</strong> vulnerabilities and <strong>17 historically incomplete patches</strong> in total, which are detailed in
                 <a href="#zero-days">this section</a>.
                 <br />
               </p>
@@ -345,7 +345,7 @@
             </div>
             <figure class="image">
               <img
-                src="assets/images/overview.svg"
+                src="assets/images/overview.png"
                 alt="CyberGym Overview"
                 class="overview-image"
               />
@@ -386,32 +386,31 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
           <div class="column is-full">
-            <h2 class="title is-3">Agents Can Find Zero-Day Vulnerabilities</h2>
+            <h2 class="title is-3">Real-World Security Impact</h2>
             <div class="columns is-centered">
               <div class="column is-four-fifths">
                 <div class="content has-text-justified">
                   <p>
-                    Automated agents successfully identified new vulnerabilities
-                    that cause crashes in post-patch executables across multiple
-                    projects. Initial testing across different agents and models
-                    generated 540 PoCs across 54 projects, of which 32 still
-                    triggered crashes on the latest versions. This yielded 9
-                    unique vulnerabilities affecting 6 projects. A subsequent
-                    experiment using OpenHands with GPT-4.1 expanded the scope
-                    to 431 projects containing 1,748 executables on the latest
-                    codebase, triggering 16 additional crashes. Manual
-                    inspection confirmed 8 of these as unique vulnerabilities.
+                    Beyond benchmarking, CyberGym demonstrates tangible real-world value: the agents not only reproduced known vulnerabilities but also <strong>uncovered incomplete patches and previously unknown zero-day bugs.</strong>
                   </p>
+                  <h3 class="title is-5" style="margin-top: 1.5rem;">PoCs Generated for CyberGym Reveal Incomplete Patches</h3>
                   <p>
-                    In total, 17 vulnerabilities were discovered:
-                    <strong> 15 are zero-days and 2 are unpatched </strong>
-                    but previously disclosed. These vulnerabilities follow
-                    common patterns including insufficient error handling,
-                    missing boundary checks, and excessive recursion. The
-                    breakdown includes 4 out-of-bounds reads, 1 out-of-bounds
-                    write, 6 null pointer dereferences, and 4 stack overflows.
-                    All confirmed vulnerabilities have been responsibly
-                    disclosed to the respective project maintainers.
+                    During evaluation, some generated proof-of-concepts (PoCs) unexpectedly caused crashes even on <em>patched</em> versions of programs, suggesting that certain fixes were only partial. Out of all generated PoCs, 759 triggered crashes across 60 projects, and manual inspection confirmed <strong>17 cases of incomplete patches spanning 15 projects</strong>. While none of these affected the latest software releases, the results show that AI-generated PoCs can help identify flaws in existing security patches that might otherwise go unnoticed.
+                  </p>
+                  <h3 class="title is-5" style="margin-top: 1.5rem;">PoCs Generated for CyberGym Reveal Zero-Day Vulnerabilities</h3>
+                  <p>
+                    Further validation of those post-patch crashes revealed 35 PoCs that still crashed the latest versions of their programs. After deduplication and analysis, these corresponded to <strong>10 unique, previously unknown zero-day vulnerabilities</strong>, each persisting for an average of <strong>969 days</strong> before discovery.
+                  </p>
+                  <h3 class="title is-5" style="margin-top: 1.5rem;">Running Agentic Vulnerability Discovery at Scale</h3>
+                  <p>
+                    To test open-ended discovery, we ran OpenHands with GPT-4.1 and GPT-5 using the Level-0 setting (codebase only) across <strong>431 OSS-Fuzz projects</strong> with <strong>1,748 executables</strong>.
+                  </p>
+                  <ul style="margin-left: 1.5rem;">
+                    <li>GPT-4.1 triggered <strong>16 crashes</strong>, leading to <strong>7 confirmed zero-days</strong>.</li>
+                    <li>GPT-5 triggered <strong>56 crashes</strong>, yielding <strong>22 confirmed zero-days</strong>, with 4 overlapping between the two models.</li>
+                  </ul>
+                  <p>
+                    These results confirm that modern LLM agents can autonomously discover new vulnerabilities at scale—and that performance on CyberGym correlates strongly with real-world vulnerability discovery capability. All findings were responsibly disclosed, resulting in <strong>3 assigned CVEs</strong> and <strong>6 patched vulnerabilities</strong> to date.
                   </p>
                 </div>
               </div>

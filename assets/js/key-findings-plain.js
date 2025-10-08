@@ -1,33 +1,33 @@
 const keyFindings = [
   {
-    title: "Thinking Mode Slightly Improves Reproduction Performance",
+    title: "Thinking Mode Improves Success Rate",
     img: "assets/images/thinking_vs_nonthinking.png",
     alt: "thinking vs non-thinking mode",
-    content: `We evaluate the performance difference between thinking and non-thinking modes on a randomly selected subset of 300 tasks (~20% of the entire benchmark) using Qwen3-235B-A22B and Claude-3.7-Sonnet. The thinking mode yields modest performance improvements on vulnerability reproduction for both models, with success rates increasing by 2-3%. However, for finding post-patch vulnerabilities, enabling thinking does not always yield improvement.`,
+    content: `We compare thinking and non-thinking modes on a randomly selected subset of 300 tasks (~20% of the entire benchmark) using Qwen3-235B-A22B, GPT-5, Claude-3.7-Sonnet, and Claude-Sonnet-4. As illustrated in Figure 4, while the thinking mode yields modest gains over other models, it increases GPT-5's success rate from 7.7% (with minimal reasoning) to 22.0% (with high reasoning), surpassing Claude-Sonnet-4. This phenomenon is consistent with GPT-5's results for other benchmarks.`,
   },
   {
-    title: "Richer Input Information Enhances Reproduction Performance",
+    title: "Richer Input Information Enhances Reproduction Effort",
     img: "assets/images/different_levels.png",
     alt: "different levels",
-    content: `We design four difficulty levels based on input information amount. It shows that richer input information such as stack traces (level 2) and ground truth patches (level 3) significantly improves vulnerability reproduction success compared to our primary task (level 1). Level 0 represents the scenario of vulnerability detection using only the source code without extra information, where the agents find 78 (3.5%+1.7%) vulnerabilities out of 1,507 instances.`,
+    content: `We design four difficulty levels based on the amount of input information provided to the agents. The figure shows how these difficulty levels affect the success rate of OpenHands with GPT-4.1. Richer input information, such as stack trace provided in level 2 and ground truth patch provided in level 3, greatly enhances the vulnerability reproduction success rate compared to level 1 (our primary task). For level 0, only 3.5% instances can be successfully reproduced without access to the text description of the target vulnerability.`,
   },
   {
-    title: "Ineffectiveness in Handling Longer PoCs",
+    title: "Challenges in Handling Longer PoCs",
     img: "assets/images/poc_len.png",
     alt: "different poc lengths",
-    content: `Longer ground truth PoCs indicate more complex input parsing logic, making it harder for agents to manipulate inputs and trigger vulnerability conditions. It shows the performance of agents decreases as PoC length increases, highlighting the major challenge agents face when analyzing complex programs and generating effective long inputs.`,
+    content: `A longer ground truth PoC typically implies more complex input parsing logic, making it harder for agents to generate inputs that trigger vulnerability conditions. The figure shows OpenHands with GPT-4.1 and Claude-4-Sonnet performance partitioned by PoC length. Tasks in the [0, 10) byte range achieve the highest success rate. However, success drops significantly as PoC length increases. Agents show only ~10% success on instances with PoCs longer than 100 bytes, which represent 65.7% of the benchmark. This highlights a major challenge for agents in analyzing complex programs and producing effective long inputs.`,
   },
   {
-    title: "Successes are Often Achieved in Earlier Steps",
+    title: "Marginal Improvement with Higher Step Counts",
     img: "assets/images/success_vs_steps.png",
     alt: "different levels",
-    content: `Agents require varying steps to solve tasks iteratively. The figure shows OpenHands with GPT4.1 results across execution steps (max 100). Successful outcomes concentrate between steps 20-80, peaking at 20-40, while nearly half of runs fail at the 90-100 step limit. This suggests agents solve simple instances early but struggle with complex cases, often unsuccessfully iterating through testcases and code analysis in later steps.`,
+    content: `The figure shows OpenHands with Claude-4-Sonnet results across execution steps (max 100). Successful outcomes concentrate between steps 20-80, peaking at 20-50. However, nearly half of runs terminate at 80-100 steps without success, as shown by the grey "Fail" bars. This suggests agents solve simpler instances early but struggle with complex cases, often iterating through test cases and code analysis without success. The 100-step limit offers an effective balance, allowing most solvable problems to complete while efficiently capping resource use on intractable cases.`,
   },
 ];
 
 function renderCarousel() {
   const container = document.getElementById("key-findings-carousel");
-  
+
   // Generate all findings as individual cards
   const findingsHTML = keyFindings.map((finding, index) => {
     const isEven = index % 2 === 0;

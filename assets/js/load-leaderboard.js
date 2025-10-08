@@ -56,6 +56,11 @@ function populateTrialsFilter() {
     option.textContent = `${trials} Trial${trials > 1 ? 's' : ''}`;
     trialsFilter.appendChild(option);
   });
+
+  // Set default filter to 1 trial if it exists
+  if (uniqueTrials.includes(1)) {
+    trialsFilter.value = "1";
+  }
 }
 
 function filterAndPopulateTables() {

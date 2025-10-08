@@ -297,36 +297,53 @@
             <p>
               We collect 1,507 benchmark instances by systematically gathering
               real-world vulnerabilities discovered and patched across 188
-              large software projects. Each instance is derived from
-              vulnerabilities found by OSS-Fuzz, Google's continuous fuzzing
-              campaign, ensuring authentic security challenges from
+              widely distributed and large-scale software projects. Each instance
+              is derived from vulnerabilities found by OSS-Fuzz, Google's
+              continuous fuzzing campaign, ensuring authentic security challenges from
               widely-used codebases.
             </p>
             <img src="assets/images/overview.png" alt="CyberGym Overview" class="overview-image"
               style="padding-bottom: 1rem" />
             <p>
-              Per instance, we construct evaluation environments with the
+              <strong>Benchmarking with Vulnerability Reproduction.</strong>
+              CyberGym creates evaluation environments with target repositories at pre-patch commit
+              states. Agents receive a vulnerability description and unpatched codebase, then must
+              generate proof-of-concept (PoC) tests that reproduce the vulnerability by reasoning
+              across entire codebases, often spanning thousands of files and millions of lines of
+              code. It requires agents to locate relevant code fragments and produce effective PoCs
+              that trigger vulnerabilities from program entry points. Agents iteratively refine PoCs
+              based on execution feedback. Success is determined by verifying the PoC triggers on
+              the pre-patch version but not on the post-patch version.
+              <!-- Per instance, we construct evaluation environments with the
               target repository at the pre-patch commit state. The primary
               task requires agents to generate proof-of-concept (PoC) tests
               that can reproduce the described vulnerability by reasoning
               across entire codebases, often spanning thousands of files and
               millions of lines of code. Agents must locate relevant code
               fragments and produce effective PoCs that trigger
-              vulnerabilities from program entry points. Beyond vulnerability
+              vulnerabilities from program entry points.Beyond vulnerability
               reproduction, CyberGym supports varied task difficulty levels
               reflecting different stages of the vulnerability lifecycle,
               including vulnerability discovery given only the codebase, and
               vulnerability analysis using patch information to simulate
               real-world one-day analysis conditions.
-            </p>
-            <p>
               CyberGym evaluation works as follows. Per task instance, an AI
               agent receives a vulnerability description and the corresponding
               unpatched codebase. The agent should generate a PoC test to
               reproduce the vulnerability, with iterative refinement based on
               execution feedback. Success is determined by running the PoC on
               both pre-patch (should trigger) and post-patch (should not
-              trigger) program versions.
+              trigger) program versions. -->
+            </p>
+            <p>
+              <strong>Open-Ended Vulnerability Discovery.</strong>
+              CyberGym also conducts comprehensive analyses of open-ended vulnerability discovery
+              scenarios that extend beyond static benchmarking. We deploy agents to analyze the
+              latest codebases without prior knowledge of existing vulnerabilities. Agents are
+              challenged to generate PoCs to probe for potential vulnerabilities, which are then
+              validated against the latest software versions with sanitizers enabled. This setup
+              mirrors real-world vulnerability discovery, enabling the identification of
+              previously unknown vulnerabilities.
             </p>
           </div>
         </div>
@@ -367,9 +384,8 @@
                 </p>
                 <p>
                   <strong>Running Agentic Vulnerability Discovery at Scale.</strong>
-                  To test open-ended discovery, we ran OpenHands with GPT-4.1 and GPT-5 using the
-                  Level-0 setting (codebase only) across <em>431 OSS-Fuzz projects</em> with
-                  <em>1,748 executables</em>.
+                  To test open-ended discovery, we ran OpenHands with GPT-4.1 and GPT-5 given only
+                  the latest codebases across <em>431 OSS-Fuzz projects</em> with <em>1,748 executables</em>.
                   GPT-4.1 triggered <em>16 crashes</em>, leading to <em>7 confirmed zero-days</em>.
                   GPT-5 triggered <em>56 crashes</em>, yielding <em>22 confirmed zero-days</em>,
                   with 4 overlapping between the two models.

@@ -157,9 +157,26 @@
                     </span>
                   </a>
                 </span>
+
+                <!-- Blog link -->
+                <span class="link-block">
+                  <a href="https://rdi.berkeley.edu/blog/cybergym/" target="_blank"
+                    class="external-link button is-normal">
+                    <span>Blog</span>
+                    <span class="icon" style="font-size: 1.4rem">
+                      <i class="hgi hgi-stroke hgi-notebook-02"></i>
+                    </span>
+                  </a>
+                </span>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="columns is-centered" style="margin-top: 2rem;">
+        <div class="column is-four-fifths">
+          <img src="assets/images/time_vs_success.png" alt="leaderboard-image"
+            class="leaderboard-image" />
         </div>
       </div>
     </div>
@@ -232,8 +249,7 @@
                     <th style="vertical-align: middle">Agent</th>
                     <th style="vertical-align: middle">Trials</th>
                     <th style="vertical-align: middle">
-                      % Target Vuln.<br />
-                      Reproduced
+                      Success Rate (%)
                     </th>
                     <th style="vertical-align: middle">Date</th>
                     <th style="vertical-align: middle">Source</th>
@@ -385,7 +401,8 @@
                 <p>
                   <strong>Running Agentic Vulnerability Discovery at Scale.</strong>
                   To test open-ended discovery, we ran OpenHands with GPT-4.1 and GPT-5 given only
-                  the latest codebases across <em>431 OSS-Fuzz projects</em> with <em>1,748 executables</em>.
+                  the latest codebases across <em>431 OSS-Fuzz projects</em> with <em>1,748
+                    executables</em>.
                   GPT-4.1 triggered <em>16 crashes</em>, leading to <em>7 confirmed zero-days</em>.
                   GPT-5 triggered <em>56 crashes</em>, yielding <em>22 confirmed zero-days</em>,
                   with 4 overlapping between the two models.

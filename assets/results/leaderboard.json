@@ -1,7 +1,43 @@
 {
   "level1": [
     {
-      "name": "Claude-Sonnet-4.5",
+      "agent": "Kimi Agent",
+      "model": "Kimi K2.5",
+      "score_10": 0.413,
+      "date": "2026-02-02",
+      "source": "Kimi",
+      "source_url": "https://arxiv.org/abs/2602.02276",
+      "trials": 1
+    },
+    {
+      "agent": "SageAgent",
+      "model": "GPT-5",
+      "score_10": 0.602,
+      "date": "2026-02-09",
+      "source": "OpenSage Team",
+      "trials": 1
+    },
+    {
+      "agent": "Anthropic Agent",
+      "model": "Claude-Opus-4.6",
+      "score_10": 0.666,
+      "date": "2026-02-05",
+      "source": "Anthropic",
+      "source_url": "https://www.anthropic.com/claude-opus-4-6-system-card",
+      "trials": 1
+    },
+    {
+      "agent": "Anthropic Agent",
+      "model": "Claude-Opus-4.5",
+      "score_10": 0.5063,
+      "date": "2026-02-05",
+      "source": "Anthropic",
+      "source_url": "https://www.anthropic.com/claude-opus-4-5-system-card",
+      "trials": 1
+    },
+    {
+      "agent": "Anthropic Agent",
+      "model": "Claude-Sonnet-4.5",
       "score_10": 0.667,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -9,7 +45,8 @@
       "trials": 30
     },
     {
-      "name": "Claude-Opus-4.1",
+      "agent": "Anthropic Agent",
+      "model": "Claude-Opus-4.1",
       "score_10": 0.613,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -17,7 +54,8 @@
       "trials": 30
     },
     {
-      "name": "Claude-Sonnet-4",
+      "agent": "Anthropic Agent",
+      "model": "Claude-Sonnet-4",
       "score_10": 0.595,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -25,7 +63,8 @@
       "trials": 30
     },
     {
-      "name": "Claude-Sonnet-3.7",
+      "agent": "Anthropic Agent",
+      "model": "Claude-Sonnet-3.7",
       "score_10": 0.472,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -33,7 +72,8 @@
       "trials": 30
     },
     {
-      "name": "Claude-Sonnet-4.5",
+      "agent": "Anthropic Agent",
+      "model": "Claude-Sonnet-4.5",
       "score_10": 0.289,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -41,15 +81,17 @@
       "trials": 1
     },
     {
-      "name": "Claude-Opus-4.1",
-      "score_10": 0.250,
+      "agent": "Anthropic Agent",
+      "model": "Claude-Opus-4.1",
+      "score_10": 0.25,
       "date": "2025-09-29",
       "source": "Anthropic",
       "source_url": "https://www.anthropic.com/claude-sonnet-4-5-system-card",
       "trials": 1
     },
     {
-      "name": "Claude-Sonnet-4",
+      "agent": "Anthropic Agent",
+      "model": "Claude-Sonnet-4",
       "score_10": 0.226,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -57,7 +99,8 @@
       "trials": 1
     },
     {
-      "name": "Claude-Sonnet-3.7",
+      "agent": "Anthropic Agent",
+      "model": "Claude-Sonnet-3.7",
       "score_10": 0.145,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -65,7 +108,8 @@
       "trials": 1
     },
     {
-      "name": "OpenHands + Claude-Sonnet-4",
+      "agent": "OpenHands",
+      "model": "Claude-Sonnet-4",
       "score_10": 0.17850033178500332,
       "score_x1": 0.019907100199071003,
       "date": "2025-05-23",
@@ -73,7 +117,8 @@
       "trials": 1
     },
     {
-      "name": "OpenHands + Claude-Sonnet-3.7",
+      "agent": "OpenHands",
+      "model": "Claude-Sonnet-3.7",
       "score_10": 0.11944260119442601,
       "score_x1": 0.021897810218978103,
       "date": "2025-05-15",
@@ -81,7 +126,8 @@
       "trials": 1
     },
     {
-      "name": "OpenHands + GPT-4.1",
+      "agent": "OpenHands",
+      "model": "GPT-4.1",
       "score_10": 0.09356337093563372,
       "score_x1": 0.012607830126078301,
       "date": "2025-05-15",
@@ -89,7 +135,8 @@
       "trials": 1
     },
     {
-      "name": "Cybench + GPT-4.1",
+      "agent": "Cybench",
+      "model": "GPT-4.1",
       "score_10": 0.08958195089581951,
       "score_x1": 0.0225613802256138,
       "date": "2025-05-15",
@@ -97,7 +144,8 @@
       "trials": 1
     },
     {
-      "name": "Codex + GPT-4.1",
+      "agent": "Codex",
+      "model": "GPT-4.1",
       "score_10": 0.07365627073656271,
       "score_x1": 0.011944260119442602,
       "date": "2025-05-15",
@@ -105,7 +153,8 @@
       "trials": 1
     },
     {
-      "name": "ENiGMA + GPT-4.1",
+      "agent": "ENiGMA",
+      "model": "GPT-4.1",
       "score_10": 0.07232913072329131,
       "score_x1": 0.019243530192435302,
       "date": "2025-05-15",
@@ -113,7 +162,8 @@
       "trials": 1
     },
     {
-      "name": "OpenHands + Gemini-2.5-Flash",
+      "agent": "OpenHands",
+      "model": "Gemini-2.5-Flash",
       "score_10": 0.04844061048440611,
       "score_x1": 0.007962840079628402,
       "date": "2025-05-15",
@@ -121,7 +171,8 @@
       "trials": 1
     },
     {
-      "name": "OpenHands + DeepSeek-V3",
+      "agent": "OpenHands",
+      "model": "DeepSeek-V3",
       "score_10": 0.035832780358327807,
       "score_x1": 0.006635700066357001,
       "date": "2025-05-15",
@@ -129,7 +180,8 @@
       "trials": 1
     },
     {
-      "name": "OpenHands + o4-mini",
+      "agent": "OpenHands",
+      "model": "o4-mini",
       "score_10": 0.0245520902455209,
       "score_x1": 0.0006635700066357001,
       "date": "2025-05-15",
@@ -137,7 +189,8 @@
       "trials": 1
     },
     {
-      "name": "OpenHands + R2E-Gym-32B",
+      "agent": "OpenHands",
+      "model": "R2E-Gym-32B",
       "score_10": 0.019907100199071003,
       "score_x1": 0.005972130059721301,
       "date": "2025-05-15",
@@ -145,7 +198,8 @@
       "trials": 1
     },
     {
-      "name": "OpenHands + Qwen3-235B-A22B",
+      "agent": "OpenHands",
+      "model": "Qwen3-235B-A22B",
       "score_10": 0.0185799601857996,
       "score_x1": 0.0033178500331785005,
       "date": "2025-05-15",
@@ -153,7 +207,8 @@
       "trials": 1
     },
     {
-      "name": "OpenHands + OpenHands-LM-32B",
+      "agent": "OpenHands",
+      "model": "OpenHands-LM-32B",
       "score_10": 0.0165892501658925,
       "score_x1": 0.0033178500331785005,
       "date": "2025-05-15",
@@ -161,7 +216,8 @@
       "trials": 1
     },
     {
-      "name": "OpenHands + SWE-Gym-32B",
+      "agent": "OpenHands",
+      "model": "SWE-Gym-32B",
       "score_10": 0.0006635700066357001,
       "score_x1": 0.0006635700066357001,
       "date": "2025-05-15",
@@ -171,7 +227,8 @@
   ],
   "level0": [
     {
-      "name": "OpenHands + GPT-4.1",
+      "agent": "OpenHands",
+      "model": "GPT-4.1",
       "score_10": 0.034505640345056404,
       "score_x1": 0.0165892501658925,
       "date": "2025-05-15"
@@ -179,7 +236,8 @@
   ],
   "level2": [
     {
-      "name": "OpenHands + GPT-4.1",
+      "agent": "OpenHands",
+      "model": "GPT-4.1",
       "score_10": 0.13072329130723293,
       "score_x1": 0.0165892501658925,
       "date": "2025-05-15"
@@ -187,7 +245,8 @@
   ],
   "level3": [
     {
-      "name": "OpenHands + GPT-4.1",
+      "agent": "OpenHands",
+      "model": "GPT-4.1",
       "score_10": 0.1712010617120106,
       "score_x1": 0.013271400132714002,
       "date": "2025-05-15"

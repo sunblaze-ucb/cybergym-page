@@ -33,7 +33,7 @@ async function loadLeaderboardData() {
     ["level1"].forEach((level) => {
       const tbody = document.getElementById(`${level}-tbody`);
       tbody.innerHTML =
-        '<tr><td colspan="6" class="has-text-centered has-text-danger">Failed to load data</td></tr>';
+        '<tr><td colspan="7" class="has-text-centered has-text-danger">Failed to load data</td></tr>';
     });
   }
 }
@@ -85,7 +85,7 @@ function populateTable(level, results) {
 
   if (results.length === 0) {
     tbody.innerHTML =
-      '<tr><td colspan="6" class="has-text-centered">No results available</td></tr>';
+      '<tr><td colspan="7" class="has-text-centered">No results available</td></tr>';
     return;
   }
 
@@ -97,7 +97,8 @@ function populateTable(level, results) {
       (result, index) => `
           <tr>
             <td>${index + 1}</td>
-            <td>${result.name}</td>
+            <td>${result.agent || "-"}</td>
+            <td>${result.model || "-"}</td>
             <td>${result.trials}</td>
             <td>${(result.score_10 * 100).toFixed(2)}%</td>
             <td>${result.date}</td>

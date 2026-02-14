@@ -1,6 +1,15 @@
 {
   "level1": [
     {
+      "agent": "Claude Code",
+      "model": "GLM-5",
+      "score_10": 0.432,
+      "date": "2026-02-12",
+      "source": "Zhipu AI",
+      "source_url": "https://z.ai/blog/glm-5",
+      "trials": 1
+    }
+    {
       "agent": "Kimi Agent",
       "model": "Kimi K2.5",
       "score_10": 0.413,

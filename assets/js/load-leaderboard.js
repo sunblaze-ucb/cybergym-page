@@ -100,7 +100,7 @@ function populateTable(level, results) {
             <td>${result.agent || "-"}</td>
             <td>${result.model || "-"}</td>
             <td>${result.trials}</td>
-            <td>${(result.score_10 * 100).toFixed(2)}%</td>
+            <td>${(result.score_10 * 100).toFixed(1)}%</td>
             <td>${result.date}</td>
             <td>${result.source_url ? `<a href="${result.source_url}" target="_blank">${result.source}</a>` : result.source}</td>
           </tr>

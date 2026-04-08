@@ -164,6 +164,14 @@
     },
     {
       "agent": "OpenHands",
+      "model": "GPT-5 (high)",
+      "score_10": 0.394,
+      "date": "2025-12-05",
+      "source": "CyberGym Team",
+      "trials": 1
+    },
+    {
+      "agent": "OpenHands",
       "model": "GPT-4.1",
       "score_10": 0.09356337093563372,
       "score_x1": 0.012607830126078301,

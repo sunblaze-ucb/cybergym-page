@@ -33,11 +33,21 @@
       "score_10": 0.602,
       "date": "2026-02-09",
       "source": "OpenSage Team",
+      "source_url": "https://www.opensage-agent.ai/",
       "trials": 1
     },
     {
       "agent": "Anthropic Agent",
-      "model": "Claude-Opus-4.6",
+      "model": "Claude Mythos Preview",
+      "score_10": 0.831,
+      "date": "2026-04-07",
+      "source": "Anthropic",
+      "source_url": "https://www.anthropic.com/claude-mythos-preview-system-card",
+      "trials": 1
+    },
+    {
+      "agent": "Anthropic Agent",
+      "model": "Claude Opus 4.6",
       "score_10": 0.666,
       "date": "2026-02-05",
       "source": "Anthropic",
@@ -46,7 +56,16 @@
     },
     {
       "agent": "Anthropic Agent",
-      "model": "Claude-Opus-4.5",
+      "model": "Claude Opus 4.6",
+      "score_10": 0.52,
+      "date": "2026-02-17",
+      "source": "Anthropic",
+      "source_url": "https://www.anthropic.com/claude-sonnet-4-6-system-card",
+      "trials": 1
+    },
+    {
+      "agent": "Anthropic Agent",
+      "model": "Claude Opus 4.5",
       "score_10": 0.5063,
       "date": "2026-02-05",
       "source": "Anthropic",
@@ -55,7 +74,7 @@
     },
     {
       "agent": "Anthropic Agent",
-      "model": "Claude-Sonnet-4.5",
+      "model": "Claude Sonnet 4.5",
       "score_10": 0.667,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -64,7 +83,7 @@
     },
     {
       "agent": "Anthropic Agent",
-      "model": "Claude-Opus-4.1",
+      "model": "Claude Opus 4.1",
       "score_10": 0.613,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -73,7 +92,7 @@
     },
     {
       "agent": "Anthropic Agent",
-      "model": "Claude-Sonnet-4",
+      "model": "Claude Sonnet 4",
       "score_10": 0.595,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -82,7 +101,7 @@
     },
     {
       "agent": "Anthropic Agent",
-      "model": "Claude-Sonnet-3.7",
+      "model": "Claude Sonnet 3.7",
       "score_10": 0.472,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -91,7 +110,7 @@
     },
     {
       "agent": "Anthropic Agent",
-      "model": "Claude-Sonnet-4.5",
+      "model": "Claude Sonnet 4.5",
       "score_10": 0.289,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -100,7 +119,7 @@
     },
     {
       "agent": "Anthropic Agent",
-      "model": "Claude-Opus-4.1",
+      "model": "Claude Opus 4.1",
       "score_10": 0.25,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -109,7 +128,7 @@
     },
     {
       "agent": "Anthropic Agent",
-      "model": "Claude-Sonnet-4",
+      "model": "Claude Sonnet 4",
       "score_10": 0.226,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -118,7 +137,7 @@
     },
     {
       "agent": "Anthropic Agent",
-      "model": "Claude-Sonnet-3.7",
+      "model": "Claude Sonnet 3.7",
       "score_10": 0.145,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -127,7 +146,7 @@
     },
     {
       "agent": "OpenHands",
-      "model": "Claude-Sonnet-4",
+      "model": "Claude Sonnet 4",
       "score_10": 0.17850033178500332,
       "score_x1": 0.019907100199071003,
       "date": "2025-05-23",
@@ -136,7 +155,7 @@
     },
     {
       "agent": "OpenHands",
-      "model": "Claude-Sonnet-3.7",
+      "model": "Claude Sonnet 3.7",
       "score_10": 0.11944260119442601,
       "score_x1": 0.021897810218978103,
       "date": "2025-05-15",
@@ -181,7 +200,7 @@
     },
     {
       "agent": "OpenHands",
-      "model": "Gemini-2.5-Flash",
+      "model": "Gemini 2.5 Flash",
       "score_10": 0.04844061048440611,
       "score_x1": 0.007962840079628402,
       "date": "2025-05-15",

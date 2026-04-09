@@ -114,8 +114,19 @@ function renderTimeVsSuccessChart() {
   const chartWidth = Math.round(monthsSpan * PX_PER_MONTH + AXIS_PADDING);
   const chartHeight = Math.round(ySpan * PX_PER_10PCT + AXIS_PADDING);
 
-  canvas.parentElement.style.maxWidth = chartWidth + "px";
-  canvas.style.height = chartHeight + "px";
+  // Render at fixed size, scale down via CSS transform on narrow screens
+  const container = document.getElementById("chart-container");
+  canvas.width = chartWidth;
+  canvas.height = chartHeight;
+
+  function scaleChart() {
+    const availWidth = container.clientWidth;
+    const scale = Math.min(1, availWidth / chartWidth);
+    canvas.style.width = Math.round(chartWidth * scale) + "px";
+    canvas.style.height = Math.round(chartHeight * scale) + "px";
+  }
+  scaleChart();
+  window.addEventListener("resize", scaleChart);
 
   new Chart(canvas, {
     type: "scatter",
@@ -135,8 +146,7 @@ function renderTimeVsSuccessChart() {
       ],
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
+      responsive: false,
       animation: false,
       plugins: {
         legend: { display: false },

@@ -13,6 +13,39 @@
     },
     {
       "agent": "Claude Code",
+      "model": "GLM-5.1",
+      "model_release_date": "2026-04-07",
+      "include_in_plot": true,
+      "score_10": 0.687,
+      "date": "2026-04-07",
+      "source": "Zhipu AI",
+      "source_url": "https://z.ai/blog/glm-5.1",
+      "trials": 1
+    },
+    {
+      "agent": "Codex CLI",
+      "model": "GPT-5.4",
+      "model_release_date": "2026-03-05",
+      "include_in_plot": true,
+      "score_10": 0.663,
+      "date": "2026-04-07",
+      "source": "Zhipu AI",
+      "source_url": "https://z.ai/blog/glm-5.1",
+      "trials": 1
+    },
+    {
+      "agent": "Gemini CLI",
+      "model": "Gemini 3.1 Pro",
+      "model_release_date": "2026-02-19",
+      "include_in_plot": true,
+      "score_10": 0.388,
+      "date": "2026-04-07",
+      "source": "Zhipu AI",
+      "source_url": "https://z.ai/blog/glm-5.1",
+      "trials": 1
+    },
+    {
+      "agent": "Claude Code",
       "model": "GLM-4.7",
       "model_release_date": "2025-12-22",
       "include_in_plot": true,
@@ -231,7 +264,7 @@
       "trials": 1
     },
     {
-      "agent": "Codex",
+      "agent": "Codex CLI",
       "model": "GPT-4.1",
       "model_release_date": "2025-04-14",
       "include_in_plot": false,

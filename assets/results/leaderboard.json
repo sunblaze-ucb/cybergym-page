@@ -3,6 +3,8 @@
     {
       "agent": "Claude Code",
       "model": "GLM-5",
+      "model_release_date": "2026-02-12",
+      "include_in_plot": false,
       "score_10": 0.432,
       "date": "2026-02-12",
       "source": "Zhipu AI",
@@ -12,6 +14,8 @@
     {
       "agent": "Claude Code",
       "model": "GLM-4.7",
+      "model_release_date": "2025-12-22",
+      "include_in_plot": false,
       "score_10": 0.235,
       "date": "2026-02-12",
       "source": "Zhipu AI",
@@ -21,6 +25,8 @@
     {
       "agent": "Kimi Agent",
       "model": "Kimi K2.5",
+      "model_release_date": "2026-02-02",
+      "include_in_plot": false,
       "score_10": 0.413,
       "date": "2026-02-02",
       "source": "Kimi",
@@ -30,6 +36,8 @@
     {
       "agent": "SageAgent",
       "model": "GPT-5",
+      "model_release_date": "2025-08-07",
+      "include_in_plot": false,
       "score_10": 0.602,
       "date": "2026-02-09",
       "source": "OpenSage Team",
@@ -39,6 +47,8 @@
     {
       "agent": "Anthropic Agent",
       "model": "Claude Mythos Preview",
+      "model_release_date": "2026-04-07",
+      "include_in_plot": true,
       "score_10": 0.831,
       "date": "2026-04-07",
       "source": "Anthropic",
@@ -48,6 +58,8 @@
     {
       "agent": "Anthropic Agent",
       "model": "Claude Opus 4.6",
+      "model_release_date": "2026-02-05",
+      "include_in_plot": true,
       "score_10": 0.666,
       "date": "2026-02-05",
       "source": "Anthropic",
@@ -57,6 +69,8 @@
     {
       "agent": "Anthropic Agent",
       "model": "Claude Sonnet 4.6",
+      "model_release_date": "2026-02-17",
+      "include_in_plot": true,
       "score_10": 0.652,
       "date": "2026-02-17",
       "source": "Anthropic",
@@ -66,6 +80,8 @@
     {
       "agent": "Anthropic Agent",
       "model": "Claude Opus 4.5",
+      "model_release_date": "2025-11-24",
+      "include_in_plot": true,
       "score_10": 0.5063,
       "date": "2026-02-05",
       "source": "Anthropic",
@@ -75,6 +91,8 @@
     {
       "agent": "Anthropic Agent",
       "model": "Claude Sonnet 4.5",
+      "model_release_date": "2025-09-29",
+      "include_in_plot": false,
       "score_10": 0.667,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -84,6 +102,8 @@
     {
       "agent": "Anthropic Agent",
       "model": "Claude Opus 4.1",
+      "model_release_date": "2025-08-05",
+      "include_in_plot": false,
       "score_10": 0.613,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -93,6 +113,8 @@
     {
       "agent": "Anthropic Agent",
       "model": "Claude Sonnet 4",
+      "model_release_date": "2025-05-22",
+      "include_in_plot": false,
       "score_10": 0.595,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -102,6 +124,8 @@
     {
       "agent": "Anthropic Agent",
       "model": "Claude Sonnet 3.7",
+      "model_release_date": "2025-02-24",
+      "include_in_plot": false,
       "score_10": 0.472,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -111,6 +135,8 @@
     {
       "agent": "Anthropic Agent",
       "model": "Claude Sonnet 4.5",
+      "model_release_date": "2025-09-29",
+      "include_in_plot": true,
       "score_10": 0.289,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -120,6 +146,8 @@
     {
       "agent": "Anthropic Agent",
       "model": "Claude Opus 4.1",
+      "model_release_date": "2025-08-05",
+      "include_in_plot": true,
       "score_10": 0.25,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -129,6 +157,8 @@
     {
       "agent": "Anthropic Agent",
       "model": "Claude Sonnet 4",
+      "model_release_date": "2025-05-22",
+      "include_in_plot": true,
       "score_10": 0.226,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -138,6 +168,8 @@
     {
       "agent": "Anthropic Agent",
       "model": "Claude Sonnet 3.7",
+      "model_release_date": "2025-02-24",
+      "include_in_plot": true,
       "score_10": 0.145,
       "date": "2025-09-29",
       "source": "Anthropic",
@@ -147,6 +179,8 @@
     {
       "agent": "OpenHands",
       "model": "Claude Sonnet 4",
+      "model_release_date": "2025-05-22",
+      "include_in_plot": false,
       "score_10": 0.17850033178500332,
       "score_x1": 0.019907100199071003,
       "date": "2025-05-23",
@@ -156,6 +190,8 @@
     {
       "agent": "OpenHands",
       "model": "Claude Sonnet 3.7",
+      "model_release_date": "2025-02-24",
+      "include_in_plot": false,
       "score_10": 0.11944260119442601,
       "score_x1": 0.021897810218978103,
       "date": "2025-05-15",
@@ -165,6 +201,8 @@
     {
       "agent": "OpenHands",
       "model": "GPT-5 (high)",
+      "model_release_date": "2025-08-07",
+      "include_in_plot": true,
       "score_10": 0.394,
       "date": "2025-12-05",
       "source": "CyberGym Team",
@@ -173,6 +211,8 @@
     {
       "agent": "OpenHands",
       "model": "GPT-4.1",
+      "model_release_date": "2025-04-14",
+      "include_in_plot": true,
       "score_10": 0.09356337093563372,
       "score_x1": 0.012607830126078301,
       "date": "2025-05-15",
@@ -182,6 +222,8 @@
     {
       "agent": "Cybench",
       "model": "GPT-4.1",
+      "model_release_date": "2025-04-14",
+      "include_in_plot": false,
       "score_10": 0.08958195089581951,
       "score_x1": 0.0225613802256138,
       "date": "2025-05-15",
@@ -191,6 +233,8 @@
     {
       "agent": "Codex",
       "model": "GPT-4.1",
+      "model_release_date": "2025-04-14",
+      "include_in_plot": false,
       "score_10": 0.07365627073656271,
       "score_x1": 0.011944260119442602,
       "date": "2025-05-15",
@@ -200,6 +244,8 @@
     {
       "agent": "ENiGMA",
       "model": "GPT-4.1",
+      "model_release_date": "2025-04-14",
+      "include_in_plot": false,
       "score_10": 0.07232913072329131,
       "score_x1": 0.019243530192435302,
       "date": "2025-05-15",
@@ -208,7 +254,9 @@
     },
     {
       "agent": "OpenHands",
-      "model": "Gemini 2.5 Flash",
+      "model": "Gemini 2.5 Flash Preview",
+      "model_release_date": "2025-04-17",
+      "include_in_plot": true,
       "score_10": 0.04844061048440611,
       "score_x1": 0.007962840079628402,
       "date": "2025-05-15",
@@ -218,6 +266,8 @@
     {
       "agent": "OpenHands",
       "model": "DeepSeek-V3",
+      "model_release_date": "2024-12-26",
+      "include_in_plot": true,
       "score_10": 0.035832780358327807,
       "score_x1": 0.006635700066357001,
       "date": "2025-05-15",
@@ -227,6 +277,8 @@
     {
       "agent": "OpenHands",
       "model": "o4-mini",
+      "model_release_date": "2025-04-16",
+      "include_in_plot": false,
       "score_10": 0.0245520902455209,
       "score_x1": 0.0006635700066357001,
       "date": "2025-05-15",
@@ -236,6 +288,7 @@
     {
       "agent": "OpenHands",
       "model": "R2E-Gym-32B",
+      "include_in_plot": false,
       "score_10": 0.019907100199071003,
       "score_x1": 0.005972130059721301,
       "date": "2025-05-15",
@@ -245,6 +298,8 @@
     {
       "agent": "OpenHands",
       "model": "Qwen3-235B-A22B",
+      "model_release_date": "2025-04-28",
+      "include_in_plot": false,
       "score_10": 0.0185799601857996,
       "score_x1": 0.0033178500331785005,
       "date": "2025-05-15",
@@ -254,6 +309,7 @@
     {
       "agent": "OpenHands",
       "model": "OpenHands-LM-32B",
+      "include_in_plot": false,
       "score_10": 0.0165892501658925,
       "score_x1": 0.0033178500331785005,
       "date": "2025-05-15",
@@ -263,6 +319,7 @@
     {
       "agent": "OpenHands",
       "model": "SWE-Gym-32B",
+      "include_in_plot": false,
       "score_10": 0.0006635700066357001,
       "score_x1": 0.0006635700066357001,
       "date": "2025-05-15",

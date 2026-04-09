@@ -44,6 +44,8 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
 
   <script src="assets/js/load-leaderboard.js"></script>
 </head>
@@ -174,8 +176,7 @@
       </div>
       <div class="columns is-centered" style="margin-top: 2rem;">
         <div class="column is-four-fifths">
-          <img src="assets/images/time_vs_success.png" alt="leaderboard-image"
-            class="leaderboard-image" />
+          <canvas id="time-vs-success-chart"></canvas>
         </div>
       </div>
     </div>

@@ -56,8 +56,8 @@
     },
     {
       "agent": "Anthropic Agent",
-      "model": "Claude Opus 4.6",
-      "score_10": 0.52,
+      "model": "Claude Sonnet 4.6",
+      "score_10": 0.652,
       "date": "2026-02-17",
       "source": "Anthropic",
       "source_url": "https://www.anthropic.com/claude-sonnet-4-6-system-card",

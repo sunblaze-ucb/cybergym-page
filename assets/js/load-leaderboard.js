@@ -29,7 +29,7 @@ async function loadLeaderboardData() {
     filterAndPopulateTables();
 
     // Render the time vs success chart
-    renderTimeVsSuccessChart();
+    await renderTimeVsSuccessChart();
   } catch (error) {
     console.error("Error loading leaderboard data:", error);
     // Show error message in all tables
@@ -83,7 +83,36 @@ function filterAndPopulateTables() {
   });
 }
 
-function renderTimeVsSuccessChart() {
+// Icon URL mapping for model providers
+const ICON_BASE = "https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@1.86.0/icons/";
+const MODEL_ICON_MAP = [
+  { match: (m) => /^Claude/i.test(m), icon: "claude-color.svg" },
+  { match: (m) => /^GPT|^o\d/i.test(m), icon: "openai.svg" },
+  { match: (m) => /^Gemini/i.test(m), icon: "gemini-color.svg" },
+  { match: (m) => /^DeepSeek/i.test(m), icon: "deepseek-color.svg" },
+  { match: (m) => /^GLM/i.test(m), icon: "zai.svg" },
+  { match: (m) => /^Kimi/i.test(m), icon: "kimi.svg" },
+  { match: (m) => /^Qwen/i.test(m), icon: "qwen-color.svg" },
+];
+
+function getModelIconUrl(modelName) {
+  for (const entry of MODEL_ICON_MAP) {
+    if (entry.match(modelName)) return ICON_BASE + entry.icon;
+  }
+  return null;
+}
+
+function loadIcon(url, size) {
+  return new Promise((resolve) => {
+    const img = new Image(size, size);
+    img.crossOrigin = "anonymous";
+    img.onload = () => resolve(img);
+    img.onerror = () => resolve(null); // fallback to default point
+    img.src = url;
+  });
+}
+
+async function renderTimeVsSuccessChart() {
   const canvas = document.getElementById("time-vs-success-chart");
   if (!canvas) return;
 
@@ -97,6 +126,20 @@ function renderTimeVsSuccessChart() {
     agent: d.agent,
     trials: d.trials,
   }));
+
+  // Preload icons for all points
+  const ICON_SIZE = 14;
+  const iconUrls = [...new Set(points.map((p) => getModelIconUrl(p.label)).filter(Boolean))];
+  const iconCache = {};
+  await Promise.all(
+    iconUrls.map(async (url) => {
+      iconCache[url] = await loadIcon(url, ICON_SIZE);
+    })
+  );
+  const pointImages = points.map((p) => {
+    const url = getModelIconUrl(p.label);
+    return url && iconCache[url] ? iconCache[url] : "circle";
+  });
 
   // Compute data range
   const PX_PER_MONTH = 45;
@@ -134,14 +177,9 @@ function renderTimeVsSuccessChart() {
       datasets: [
         {
           data: points,
-          backgroundColor: points.map((p) => {
-            if (p.label.startsWith("Claude")) return "#c1440e";
-            if (p.label.startsWith("GPT")) return "#666";
-            if (p.label.startsWith("Gemini")) return "#9b59b6";
-            return "#3498db";
-          }),
-          pointRadius: 6,
-          pointHoverRadius: 8,
+          pointStyle: pointImages,
+          pointRadius: ICON_SIZE / 2,
+          pointHoverRadius: ICON_SIZE / 2 + 2,
         },
       ],
     },
@@ -242,6 +280,7 @@ function renderTimeVsSuccessChart() {
               y: point.y + pad * dy - (dy < 0 ? H : 0),
               w: tw,
               h: H,
+              rightSide: dx >= 0,
             }));
 
             // Filter out candidates that go outside chart area
@@ -250,16 +289,17 @@ function renderTimeVsSuccessChart() {
                      c.y >= chartArea.top - 5 && c.y + c.h <= chartArea.bottom + 5
             );
 
-            // Pick the candidate with least overlap
+            // Pick the candidate with least overlap; prefer right-side placement
+            const LEFT_PENALTY = 50;
             const allObstacles = obstacles.concat(labels);
             let best = (valid.length ? valid : candidates)[0];
-            let bestOverlap = overlapArea(best, allObstacles);
+            let bestScore = overlapArea(best, allObstacles) + (best.rightSide ? 0 : LEFT_PENALTY);
             for (const c of (valid.length ? valid : candidates)) {
-              const o = overlapArea(c, allObstacles);
-              if (o < bestOverlap) {
+              const score = overlapArea(c, allObstacles) + (c.rightSide ? 0 : LEFT_PENALTY);
+              if (score < bestScore) {
                 best = c;
-                bestOverlap = o;
-                if (o === 0) break;
+                bestScore = score;
+                if (score === 0) break;
               }
             }
 

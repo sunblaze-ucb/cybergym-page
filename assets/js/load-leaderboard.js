@@ -189,6 +189,7 @@ async function renderTimeVsSuccessChart() {
       plugins: {
         legend: { display: false },
         tooltip: {
+          displayColors: false,
           callbacks: {
             label: (ctx) => {
               const p = ctx.raw;

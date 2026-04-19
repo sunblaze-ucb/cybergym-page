@@ -96,6 +96,9 @@ const MODEL_ICON_MAP = [
   { match: (m) => /^Muse/i.test(m), icon: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Meta_AI_Logo_%282026%29.svg" },
 ];
 
+// Override the default label placement side for specific models
+const FORCE_LABEL_SIDE = { "Kimi K2.5": "left" };
+
 function getModelIconUrl(modelName) {
   for (const entry of MODEL_ICON_MAP) {
     if (entry.match(modelName)) {
@@ -151,7 +154,7 @@ async function renderTimeVsSuccessChart() {
 
   const minTime = Math.min(...points.map((p) => p.x.getTime()));
   const maxTime = Math.max(...points.map((p) => p.x.getTime()));
-  const monthsSpan = (maxTime - minTime) / (30 * 86400000) + 2; // +2 for padding
+  const monthsSpan = (maxTime - minTime) / (30 * 86400000) + 3; // 1mo left, 2mo right padding
 
   const maxY = Math.ceil(Math.max(...points.map((p) => p.y)) / 10) * 10;
   const minY = 0;
@@ -205,7 +208,7 @@ async function renderTimeVsSuccessChart() {
         x: {
           type: "time",
           min: new Date(Math.min(...points.map((p) => p.x.getTime())) - 30 * 86400000).toISOString(),
-          max: new Date(Math.max(...points.map((p) => p.x.getTime())) + 30 * 86400000).toISOString(),
+          max: new Date(Math.max(...points.map((p) => p.x.getTime())) + 60 * 86400000).toISOString(),
           time: { unit: "month", displayFormats: { month: "MMM yyyy" } },
           title: { display: true, text: "Release Date", font: { size: 14 } },
         },
@@ -260,7 +263,7 @@ async function renderTimeVsSuccessChart() {
           });
 
           // Add all data points as obstacles (small rects around each dot)
-          const r = 4;
+          const r = 6;
           const obstacles = meta.data.map((pt) => ({
             x: pt.x - r, y: pt.y - r, w: r * 2, h: r * 2,
           }));
@@ -288,10 +291,18 @@ async function renderTimeVsSuccessChart() {
             }));
 
             // Filter out candidates that go outside chart area
-            const valid = candidates.filter(
+            let valid = candidates.filter(
               (c) => c.x >= chartArea.left - 5 && c.x + c.w <= chartArea.right + 5 &&
                      c.y >= chartArea.top - 5 && c.y + c.h <= chartArea.bottom + 5
             );
+
+            // Apply per-model side override
+            const forceSide = FORCE_LABEL_SIDE[text];
+            if (forceSide) {
+              const wantRight = forceSide === "right";
+              const filtered = valid.filter((c) => c.rightSide === wantRight);
+              if (filtered.length) valid = filtered;
+            }
 
             // Pick the candidate with least overlap; prefer right-side placement
             const LEFT_PENALTY = 50;

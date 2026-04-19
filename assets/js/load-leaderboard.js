@@ -93,11 +93,14 @@ const MODEL_ICON_MAP = [
   { match: (m) => /^GLM/i.test(m), icon: "zai.svg" },
   { match: (m) => /^Kimi/i.test(m), icon: "kimi.svg" },
   { match: (m) => /^Qwen/i.test(m), icon: "qwen-color.svg" },
+  { match: (m) => /^Muse/i.test(m), icon: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Meta_AI_Logo_%282026%29.svg" },
 ];
 
 function getModelIconUrl(modelName) {
   for (const entry of MODEL_ICON_MAP) {
-    if (entry.match(modelName)) return ICON_BASE + entry.icon;
+    if (entry.match(modelName)) {
+      return /^https?:/.test(entry.icon) ? entry.icon : ICON_BASE + entry.icon;
+    }
   }
   return null;
 }

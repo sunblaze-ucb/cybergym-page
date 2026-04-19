@@ -1,6 +1,17 @@
 {
   "level1": [
     {
+      "agent": "Meta Agent",
+      "model": "Muse Spark",
+      "model_release_date": "2026-04-08",
+      "include_in_plot": true,
+      "score_10": 0.435,
+      "date": "2026-04-14",
+      "source": "Meta AI",
+      "source_url": "https://ai.meta.com/static-resource/muse-spark-safety-and-preparedness-report",
+      "trials": 1
+    },
+    {
       "agent": "Claude Code",
       "model": "GLM-5",
       "model_release_date": "2026-02-12",

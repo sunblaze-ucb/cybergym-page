@@ -210,7 +210,7 @@ async function renderTimeVsSuccessChart() {
           min: new Date(Math.min(...points.map((p) => p.x.getTime())) - 30 * 86400000).toISOString(),
           max: new Date(Math.max(...points.map((p) => p.x.getTime())) + 60 * 86400000).toISOString(),
           time: { unit: "month", displayFormats: { month: "MMM yyyy" } },
-          title: { display: true, text: "Release Date", font: { size: 14 } },
+          title: { display: true, text: "Model Release Date", font: { size: 14 } },
         },
         y: {
           min: minY,
@@ -368,7 +368,7 @@ function populateTable(level, results) {
           <tr>
             <td>${index + 1}</td>
             <td>${result.agent || "-"}</td>
-            <td>${result.model || "-"}</td>
+            <td>${result.model && result.model.includes(" (") ? `<span class="model-tooltip" data-tooltip="${result.model}">${result.model.split(" (")[0]}</span>` : (result.model || "-")}</td>
             <td>${result.trials}</td>
             <td>${(result.score_10 * 100).toFixed(1)}%</td>
             <td>${result.date}</td>

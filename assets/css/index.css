@@ -204,6 +204,34 @@ pre code {
   font-family: "Nunito Sans", sans-serif;
 }
 
+.model-tooltip {
+  position: relative;
+  cursor: help;
+  text-decoration: underline dotted;
+}
+
+.model-tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 10;
+}
+
+.model-tooltip:hover::after {
+  opacity: 1;
+}
+
 .leaderboard-image {
   width: 40%;
   height: auto;

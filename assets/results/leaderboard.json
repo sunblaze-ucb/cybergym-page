@@ -3,7 +3,8 @@
     {
       "agent": "MDASH",
       "model": "Multi-model (GPT-5.4, Claude Opus 4.6, Claude Sonnet 4.6)",
-      "include_in_plot": false,
+      "model_release_date": "2026-05-12",
+      "include_in_plot": true,
       "score_10": 0.8845,
       "date": "2026-05-12",
       "source": "Microsoft",

@@ -94,10 +94,11 @@ const MODEL_ICON_MAP = [
   { match: (m) => /^Kimi/i.test(m), icon: "kimi.svg" },
   { match: (m) => /^Qwen/i.test(m), icon: "qwen-color.svg" },
   { match: (m) => /^Muse/i.test(m), icon: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Meta_AI_Logo_%282026%29.svg" },
+  { match: (m) => /^MDASH/i.test(m), icon: "microsoft-color.svg" },
 ];
 
 // Override the default label placement side for specific models
-const FORCE_LABEL_SIDE = { "Kimi K2.5": "left" };
+const FORCE_LABEL_SIDE = { "Kimi K2.5": "left", "Claude Mythos Preview": "left", "GPT-5.5": "right-down" };
 
 function getModelIconUrl(modelName) {
   for (const entry of MODEL_ICON_MAP) {
@@ -128,7 +129,7 @@ async function renderTimeVsSuccessChart() {
   const points = plotData.map((d) => ({
     x: new Date(d.model_release_date),
     y: d.score_10 * 100,
-    label: d.model,
+    label: d.model.startsWith("Multi-model") ? `${d.agent} (Multi-model)` : d.model,
     agent: d.agent,
     trials: d.trials,
   }));
@@ -156,7 +157,7 @@ async function renderTimeVsSuccessChart() {
   const maxTime = Math.max(...points.map((p) => p.x.getTime()));
   const monthsSpan = (maxTime - minTime) / (30 * 86400000) + 3; // 1mo left, 2mo right padding
 
-  const maxY = Math.ceil(Math.max(...points.map((p) => p.y)) / 10) * 10;
+  const maxY = 100;
   const minY = 0;
   const ySpan = (maxY - minY) / 10;
 
@@ -210,7 +211,7 @@ async function renderTimeVsSuccessChart() {
           min: new Date(Math.min(...points.map((p) => p.x.getTime())) - 30 * 86400000).toISOString(),
           max: new Date(Math.max(...points.map((p) => p.x.getTime())) + 60 * 86400000).toISOString(),
           time: { unit: "month", displayFormats: { month: "MMM yyyy" } },
-          title: { display: true, text: "Model Release Date", font: { size: 14 } },
+          title: { display: true, text: "Release Date", font: { size: 14 } },
         },
         y: {
           min: minY,
@@ -288,6 +289,7 @@ async function renderTimeVsSuccessChart() {
               w: tw,
               h: H,
               rightSide: dx >= 0,
+              below: dy > 0,
             }));
 
             // Filter out candidates that go outside chart area
@@ -299,8 +301,11 @@ async function renderTimeVsSuccessChart() {
             // Apply per-model side override
             const forceSide = FORCE_LABEL_SIDE[text];
             if (forceSide) {
-              const wantRight = forceSide === "right";
-              const filtered = valid.filter((c) => c.rightSide === wantRight);
+              const parts = forceSide.split("-");
+              const wantRight = parts[0] === "right";
+              let filtered = valid.filter((c) => c.rightSide === wantRight);
+              if (parts[1] === "down") filtered = filtered.filter((c) => c.below);
+              else if (parts[1] === "up") filtered = filtered.filter((c) => !c.below);
               if (filtered.length) valid = filtered;
             }
 

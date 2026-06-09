@@ -137,9 +137,6 @@
   .lb-rank {
     @apply inline-flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-xs font-bold text-slate-600;
   }
-  .lb-rank-1 { background: #fef3c7; color: #92400e; }
-  .lb-rank-2 { background: #e2e8f0; color: #475569; }
-  .lb-rank-3 { background: #fde7d3; color: #9a3412; }
   .lb-score { @apply font-mono font-semibold; color: var(--accent-strong); }
   .lb-bar { @apply mt-1 h-1.5 w-full overflow-hidden rounded-full bg-slate-100; }
   .lb-bar > span { @apply block h-full rounded-full; background: var(--accent); }
@@ -149,14 +146,27 @@
     font-family: var(--font-sans);
   }
 
-  /* ---- Tooltip (model / agent notes) ---- */
-  .tooltip { @apply relative cursor-help underline decoration-dotted underline-offset-2; }
-  .tooltip::after {
-    content: attr(data-tooltip);
-    @apply pointer-events-none absolute bottom-full left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-md bg-slate-900 px-2 py-1 text-xs text-white opacity-0 transition-opacity;
+  /* ---- Note cue + JS tooltip (model / agent notes) ----
+     The popup is a single element appended to <body> by leaderboard.js, so it
+     escapes the table's scroll container (no clipping) and shows instantly. */
+  .note-cue { @apply cursor-help underline decoration-dotted underline-offset-2; }
+  .cg-tooltip {
+    position: fixed;
+    z-index: 60;
+    max-width: 18rem;
+    pointer-events: none;
+    border-radius: 0.5rem;
+    background: #0f172a;
+    color: #fff;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.78rem;
+    line-height: 1.15rem;
+    box-shadow: 0 6px 18px rgb(15 23 42 / 0.22);
+    opacity: 0;
+    transform: translateY(2px);
+    transition: opacity 0.12s ease, transform 0.12s ease;
   }
-  .tooltip:hover::after { @apply opacity-100; }
-  .tooltip-wrap::after { @apply whitespace-normal text-left; width: max-content; max-width: 16rem; }
+  .cg-tooltip.is-visible { opacity: 1; transform: translateY(0); }
 
   /* ---- BibTeX ---- */
   .bibtex-box { @apply relative; }

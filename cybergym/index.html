@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CyberGym — Evaluating AI Agents' Real-World Cybersecurity Capabilities at Scale</title>
+  <title>CyberGym: Evaluating AI Agents' Real-World Cybersecurity Capabilities at Scale</title>
   <meta name="description"
     content="CyberGym is a large-scale, high-quality cybersecurity evaluation framework that assesses AI agents on real-world vulnerability analysis. It includes 1,507 historical vulnerabilities from 188 large software projects." />
 
@@ -43,9 +43,7 @@
   <!-- Hero -->
   <header class="hero-mesh">
     <div class="container-page py-16 text-center sm:py-20">
-      <span class="eyebrow">ICLR 2026 · Berkeley RDI</span>
       <h1 class="mx-auto mt-6 flex flex-wrap items-center justify-center gap-3 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
-        <img src="/assets/images/favicon.ico" alt="" class="h-10 w-10 rounded" />
         <span>CyberGym</span>
       </h1>
       <p class="mx-auto mt-3 max-w-3xl text-xl font-medium text-slate-700 sm:text-2xl">
@@ -98,27 +96,28 @@
 
   <!-- Leaderboard -->
   <section class="section">
-    <div class="container-wide">
+    <div class="container-page">
       <div class="mx-auto max-w-2xl text-center">
         <h2 class="section-title">Leaderboard</h2>
-        <p class="lede mt-3">Agent performance on CyberGym Level&nbsp;1 — reproducing target vulnerabilities by generating working PoCs.</p>
+        <!-- <p class="lede mt-3">Agent performance on CyberGym Level&nbsp;1: reproducing target vulnerabilities by generating working PoCs.</p> -->
       </div>
       <div id="leaderboard" class="mt-10"></div>
 
-      <div class="content mx-auto mt-8 max-w-3xl text-sm text-slate-500">
+      <div class="content mt-8 text-sm text-slate-500">
         <p>
           The leaderboard ranks agent performance on CyberGym Level&nbsp;1, where agents receive a vulnerability
           description and unpatched codebase, and are evaluated on their ability to reproduce target
           vulnerabilities by generating working PoCs.
         </p>
         <p>
-          <strong>Success Rate:</strong> percentage of instances where the agent successfully reproduces the
-          target vulnerability with a working PoC. &nbsp;·&nbsp;
+          <strong>Success Rate:</strong> % of instances where the agent successfully reproduces the
+          target vulnerability with a working PoC.
+          <br>
           <strong>Trials:</strong> attempts per instance; an instance counts as solved if any trial succeeds.
         </p>
         <p>
           Beyond reproduction, the agents discovered <strong>34 zero-day</strong> vulnerabilities and
-          <strong>18 historically incomplete patches</strong> in total — detailed in
+          <strong>18 historically incomplete patches</strong> in total, detailed in
           <a href="#zero-days">this section</a>.
         </p>
       </div>
@@ -140,8 +139,8 @@
           security challenges from widely-used codebases.
         </p>
       </div>
-      <figure class="mx-auto mt-8 max-w-4xl">
-        <img src="/assets/images/cybergym/overview.png" alt="CyberGym overview" class="w-full rounded-2xl border border-slate-200 bg-white" />
+      <figure class="mx-auto mt-8 max-w-3xl">
+        <img src="/assets/images/cybergym/overview.png" alt="CyberGym overview" class="w-full" />
       </figure>
       <div class="content mx-auto mt-8 max-w-3xl">
         <p>
@@ -170,7 +169,7 @@
     <div class="container-page">
       <div class="mx-auto max-w-2xl text-center">
         <h2 class="section-title">CyberGym's Real-World Security Impact</h2>
-        <p class="lede mt-3">The agents not only reproduced known vulnerabilities — they uncovered incomplete patches and previously unknown zero-day bugs.</p>
+        <p class="lede mt-3">The agents not only reproduced known vulnerabilities, they uncovered incomplete patches and previously unknown zero-day bugs.</p>
       </div>
 
       <div class="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-4 sm:grid-cols-4">
@@ -334,6 +333,7 @@
         sort: (a, b) => b.score_10 - a.score_10,
         maxHeight: "460px",
         filters: [{
+          key: "trials",
           label: "Trials:",
           default: "1",
           options: (rows) => {
@@ -348,7 +348,7 @@
           { header: "#", cell: (r, rank) => C.cells.rank(r, rank) },
           { header: "Agent", cell: (r) => C.cells.agentWithNote(r) },
           { header: "Model", cell: (r) => C.cells.model(r) },
-          { header: "Trials", cell: (r) => r.trials },
+          { header: "Trials", visible: (s) => s.trials === "all", cell: (r) => r.trials },
           { header: "Success Rate", thClass: "min-w-32", cell: (r) => C.cells.percent(r.score_10) },
           { header: "Date", cell: (r) => r.date },
           { header: "Source", cell: (r) => C.cells.source(r) },

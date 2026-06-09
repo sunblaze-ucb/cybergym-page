@@ -41,10 +41,8 @@
   const headerHTML = `
     <div class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/80 backdrop-blur">
       <nav class="container-wide flex h-16 items-center justify-between">
-        <a href="/" class="flex items-center gap-2.5 font-bold tracking-tight text-slate-900">
-          <img src="/assets/images/favicon.ico" alt="" class="h-7 w-7 rounded" />
-          <span class="text-lg">CyberGym</span>
-          <span class="hidden text-xs font-semibold uppercase tracking-widest text-slate-400 sm:inline">Series</span>
+        <a href="/" class="flex items-center font-bold tracking-tight text-slate-900">
+          <span class="text-lg">Home</span>
         </a>
         <div class="hidden items-center gap-1 md:flex">
           ${navLinks(false)}
@@ -67,10 +65,6 @@
   const footerHTML = `
     <footer class="border-t border-slate-200 bg-slate-50">
       <div class="container-wide flex flex-col items-center justify-between gap-4 py-8 text-sm text-slate-500 sm:flex-row">
-        <div class="flex items-center gap-2.5">
-          <img src="/assets/images/favicon.ico" alt="" class="h-5 w-5 rounded" />
-          <span>The <strong class="font-semibold text-slate-700">CyberGym</strong> benchmark series &middot; <a href="https://rdi.berkeley.edu/" target="_blank" rel="noopener" class="hover:text-slate-900">Berkeley RDI</a></span>
-        </div>
         <div class="flex items-center gap-4">
           <a href="/cybergym/" class="hover:text-slate-900">CyberGym</a>
           <a href="/exploitgym/" class="hover:text-slate-900">ExploitGym</a>

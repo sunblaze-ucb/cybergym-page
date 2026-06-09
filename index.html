@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CyberGym — A Benchmark Series for AI Agents in Cybersecurity</title>
+  <title>CyberGym: Benchmarks for AI Agents in Cybersecurity</title>
   <meta name="description"
     content="The CyberGym series benchmarks how well AI agents perform real-world cybersecurity tasks — from reproducing vulnerabilities to turning them into working exploits. Built by Berkeley RDI and collaborators." />
   <meta name="keywords" content="cybersecurity, CyberGym, ExploitGym, AI agents, LLM, vulnerability, exploit, benchmark" />
@@ -38,14 +38,13 @@
   <!-- Hero -->
   <header class="hero-mesh">
     <div class="container-page py-20 text-center sm:py-28">
-      <span class="eyebrow">Berkeley RDI · Benchmark Series</span>
       <h1 class="mx-auto mt-6 max-w-4xl text-4xl font-bold tracking-tight text-slate-900 sm:text-6xl">
         How capable are AI agents at <span class="text-[color:var(--accent-strong)]">real-world cybersecurity?</span>
       </h1>
       <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 sm:text-xl">
         <strong class="font-semibold text-slate-900">CyberGym</strong> is a family of large-scale,
-        high-quality benchmarks that measure how well AI agents handle real software vulnerabilities —
-        from discovering and reproducing them to turning them into working exploits.
+        high-quality benchmarks that measure how well AI agents handle real vulnerabilities, 
+        from discovering and reproducing them to developing working exploits or patches.
       </p>
       <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
         <a href="#benchmarks" class="btn btn-primary">Explore the benchmarks</a>
@@ -56,7 +55,7 @@
   </header>
 
   <!-- The progression -->
-  <section class="section-tight">
+  <!-- <section class="section-tight">
     <div class="container-page">
       <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
         <div class="card text-center">
@@ -76,7 +75,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- Benchmarks -->
   <section id="benchmarks" class="section">
@@ -95,11 +94,11 @@
           <h3 class="mt-4 text-2xl font-bold text-slate-900">CyberGym</h3>
           <p class="mt-2 flex-1 text-slate-600">
             Given a vulnerability description and an unpatched codebase, agents must generate
-            proof-of-concept tests that reproduce the bug. Published at ICLR 2026.
+            proof-of-concept tests that reproduce the bug.
           </p>
           <div class="mt-5 grid grid-cols-2 gap-4 border-t border-slate-100 pt-5">
-            <div><div class="stat-num">1,507</div><div class="stat-label">benchmark instances</div></div>
-            <div><div class="stat-num">188</div><div class="stat-label">software projects</div></div>
+            <div><div class="stat-num">1,507</div><div class="stat-label min-h-[2.5rem]">real-world instances</div></div>
+            <div><div class="stat-num">188</div><div class="stat-label min-h-[2.5rem]">software projects</div></div>
           </div>
           <span class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--accent-strong)]">
             View benchmark
@@ -114,11 +113,11 @@
           <h3 class="mt-4 text-2xl font-bold text-slate-900">ExploitGym</h3>
           <p class="mt-2 flex-1 text-slate-600">
             Given a vulnerability and a proof-of-vulnerability input, agents must craft a full exploit
-            that achieves unauthorized code execution across userspace, V8, and the Linux kernel.
+            that achieves unauthorized code execution across userspace, browser, and the Linux kernel.
           </p>
           <div class="mt-5 grid grid-cols-2 gap-4 border-t border-slate-100 pt-5">
-            <div><div class="stat-num">898</div><div class="stat-label">real-world vulnerabilities</div></div>
-            <div><div class="stat-num">3</div><div class="stat-label">domains (userspace · V8 · kernel)</div></div>
+            <div><div class="stat-num">898</div><div class="stat-label min-h-[2.5rem]">real-world instances</div></div>
+            <div><div class="stat-num">3</div><div class="stat-label min-h-[2.5rem]">domains (userspace · browser · kernel)</div></div>
           </div>
           <span class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--accent-strong)]">
             View benchmark
@@ -136,8 +135,8 @@
             Workshop version available now; the full benchmark is in progress.
           </p>
           <div class="mt-5 grid grid-cols-2 gap-4 border-t border-slate-100 pt-5">
-            <div><div class="stat-num">2026</div><div class="stat-label">workshop preview</div></div>
-            <div><div class="stat-num">Soon</div><div class="stat-label">full release</div></div>
+            <div><div class="stat-num">2026</div><div class="stat-label min-h-[2.5rem]">workshop preview</div></div>
+            <div><div class="stat-num">Soon</div><div class="stat-label min-h-[2.5rem]">full release</div></div>
           </div>
           <span class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--accent-strong)]">
             Learn more
@@ -149,29 +148,22 @@
     </div>
   </section>
 
-  <!-- About / context -->
+  <!-- Mission -->
   <section class="section bg-slate-50">
     <div class="container-page">
-      <div class="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
-        <div>
-          <h2 class="section-title">Why a benchmark series?</h2>
-          <div class="content mt-5">
-            <p>
-              AI agents are becoming increasingly capable at autonomous cybersecurity work, and the
-              stakes are high. Rigorously measuring these capabilities — openly and reproducibly — is
-              the only way defenders, AI developers, and policymakers can make informed decisions.
-            </p>
-            <p>
-              The CyberGym series tracks this trajectory across the vulnerability lifecycle, built on
-              <strong>real-world</strong> vulnerabilities from widely used software rather than synthetic puzzles.
-            </p>
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div class="card"><div class="stat-num">2,400+</div><div class="stat-label">real vulnerabilities across the series</div></div>
-          <div class="card"><div class="stat-num">Live</div><div class="stat-label">leaderboards tracking frontier models</div></div>
-          <div class="card"><div class="stat-num">Open</div><div class="stat-label">code &amp; datasets released</div></div>
-          <div class="card"><div class="stat-num">RDI</div><div class="stat-label">Berkeley &amp; collaborators</div></div>
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="section-title">Why we built this</h2>
+        <p class="lede mt-5">
+          AI agents are rapidly getting better at autonomous cybersecurity, and the stakes are rising fast.
+          We built the CyberGym series to measure that capability rigorously and openly, on real-world software
+          drawn from widely deployed projects, so defenders, AI developers, and policymakers can act on real evidence.
+        </p>
+        <div class="mt-8 flex justify-center">
+          <a href="https://rdi.berkeley.edu/frontier-ai-impact-on-cybersecurity/" target="_blank" rel="noopener"
+            class="btn btn-ghost">
+            Frontier AI &amp; Cybersecurity
+            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
         </div>
       </div>
     </div>

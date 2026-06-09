@@ -22,32 +22,33 @@
     return t.content.firstElementChild;
   }
   function rankClass(rank) {
-    return rank === 1 ? "lb-rank lb-rank-1" : rank === 2 ? "lb-rank lb-rank-2" : rank === 3 ? "lb-rank lb-rank-3" : "lb-rank";
+    return "lb-rank";
   }
 
   /* Shared cell renderers so pages stay declarative. */
   const cells = {
     rank: (row, rank) => `<span class="${rankClass(rank)}">${rank}</span>`,
-    // Agent name with an optional "(note)" rendered as a hover tooltip.
+    // Agent name with an optional "(note)" shown via the native title tooltip
+    // (a styled ::after tooltip would be clipped by the table's scroll container).
     agentWithNote: (row) => {
       const a = row.agent || "-";
       const i = a.indexOf(" (");
       if (i === -1) return a;
       const note = a.slice(a.indexOf("(") + 1, a.lastIndexOf(")"));
-      return `<span class="tooltip tooltip-wrap" data-tooltip="${esc(note)}">${esc(a.slice(0, i))}</span>`;
+      return `<span class="note-cue" data-note="${esc(note)}">${esc(a.slice(0, i))}</span>`;
     },
-    // Model name; "Multi-model (a, b)" collapses to "Multi-model" + tooltip.
+    // Model name; "Multi-model (a, b)" collapses to "Multi-model" + note tooltip.
     model: (row) => {
       const m = row.model || "-";
       if (m.startsWith("Multi-model")) {
-        return `<span class="tooltip" data-tooltip="${esc(m)}">${esc(m.split(" (")[0])}</span>`;
+        return `<span class="note-cue" data-note="${esc(m)}">${esc(m.split(" (")[0])}</span>`;
       }
       return esc(m);
     },
     source: (row) =>
       row.source_url
-        ? `<a href="${esc(row.source_url)}" target="_blank" rel="noopener">${esc(row.source || "link")}</a>`
-        : esc(row.source || "-"),
+        ? `<a href="${esc(row.source_url)}" target="_blank" rel="noopener" class="inline-flex items-center gap-1 font-medium text-[color:var(--accent-strong)] underline-offset-2 hover:underline">${esc(row.source || "link")}<svg viewBox="0 0 24 24" class="h-3.5 w-3.5 opacity-70" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M9 7h8v8"/></svg></a>`
+        : `<span class="text-slate-400">${esc(row.source || "-")}</span>`,
     // Percentage score with a thin progress bar.
     percent: (value) => {
       const pct = (value * 100).toFixed(1);
@@ -59,19 +60,84 @@
     return String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   }
 
+  /* ---------- note tooltip ----------
+     One popup element on <body>, shown instantly on hover of any [data-note].
+     Clamped to the viewport so it never goes out of bounds. */
+  function initNoteTooltips() {
+    if (window.__cgTooltipInit) return;
+    window.__cgTooltipInit = true;
+    const tip = document.createElement("div");
+    tip.className = "cg-tooltip";
+    tip.setAttribute("role", "tooltip");
+    document.body.appendChild(tip);
+    let current = null;
+
+    function position(el) {
+      const r = el.getBoundingClientRect();
+      const t = tip.getBoundingClientRect();
+      const margin = 8;
+      let left = r.left + r.width / 2 - t.width / 2;
+      left = Math.max(margin, Math.min(left, window.innerWidth - t.width - margin));
+      let top = r.top - t.height - 8;
+      if (top < margin) top = r.bottom + 8; // not enough room above → flip below
+      tip.style.left = left + "px";
+      tip.style.top = top + "px";
+    }
+    function show(el) {
+      current = el;
+      tip.textContent = el.getAttribute("data-note") || "";
+      position(el); // measure & place before fading in (avoids 0,0 flash)
+      tip.classList.add("is-visible");
+    }
+    function hide() {
+      current = null;
+      tip.classList.remove("is-visible");
+    }
+
+    document.addEventListener("mouseover", (e) => {
+      const el = e.target.closest("[data-note]");
+      if (el && el !== current) show(el);
+    });
+    document.addEventListener("mouseout", (e) => {
+      const el = e.target.closest("[data-note]");
+      if (el && (!e.relatedTarget || !el.contains(e.relatedTarget))) hide();
+    });
+    document.addEventListener("scroll", () => { if (current) position(current); }, true);
+    window.addEventListener("resize", () => { if (current) position(current); });
+  }
+
   /* ---------- table rendering ---------- */
+  // Current filter selections, keyed by each filter's `key`.
+  function filterState(cfg) {
+    const state = {};
+    (cfg.filters || []).forEach((f) => {
+      if (f.key) state[f.key] = f._select ? f._select.value : f.default;
+    });
+    return state;
+  }
+  // Columns visible for the current filter state (a column may define visible(state)).
+  function visibleColumns(cfg) {
+    const state = filterState(cfg);
+    return cfg.columns.filter((c) => (c.visible ? c.visible(state) : true));
+  }
+
   function renderTable(cfg, rows) {
     const tbody = document.getElementById(cfg._tbodyId);
+    const thead = document.getElementById(cfg._theadId);
     if (!tbody) return;
+    const cols = visibleColumns(cfg);
+    if (thead) {
+      thead.innerHTML = `<tr>${cols.map((c) => `<th${c.thClass ? ` class="${c.thClass}"` : ""}>${c.header}</th>`).join("")}</tr>`;
+    }
     if (!rows.length) {
-      tbody.innerHTML = `<tr><td colspan="${cfg.columns.length}" class="px-4 py-6 text-center text-slate-400">No results available</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="${cols.length}" class="px-4 py-6 text-center text-slate-400">No results available</td></tr>`;
       return;
     }
     const sorted = cfg.sort ? [...rows].sort(cfg.sort) : rows;
     tbody.innerHTML = sorted
       .map((row, idx) => {
         const rank = idx + 1;
-        const tds = cfg.columns
+        const tds = cols
           .map((c) => `<td${c.tdClass ? ` class="${c.tdClass}"` : ""}>${c.cell(row, rank, sorted)}</td>`)
           .join("");
         return `<tr>${tds}</tr>`;
@@ -114,13 +180,15 @@
     if (!root) return;
     cfg._filtersId = cfg.rootId + "-filters";
     cfg._tbodyId = cfg.rootId + "-tbody";
+    cfg._theadId = cfg.rootId + "-thead";
 
-    // Scaffold: filter bar + scrollable table.
+    // Scaffold: filter bar + scrollable table. Header is filled in on each
+    // update so columns can appear/disappear with the active filter.
     root.innerHTML = `
       <div id="${cfg._filtersId}" class="mb-4 flex flex-wrap items-center gap-4"></div>
       <div class="lb-wrap" style="max-height:${cfg.maxHeight || "70vh"}">
         <table class="lb-table">
-          <thead><tr>${cfg.columns.map((c) => `<th${c.thClass ? ` class="${c.thClass}"` : ""}>${c.header}</th>`).join("")}</tr></thead>
+          <thead id="${cfg._theadId}"></thead>
           <tbody id="${cfg._tbodyId}"><tr><td colspan="${cfg.columns.length}" class="px-4 py-6 text-center text-slate-400">Loading…</td></tr></tbody>
         </table>
       </div>`;
@@ -347,4 +415,10 @@
   }
 
   window.CyberGymLeaderboard = { render, cells };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initNoteTooltips);
+  } else {
+    initNoteTooltips();
+  }
 })();

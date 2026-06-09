@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" data-benchmark="cybergym">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CyberGym — Evaluating AI Agents' Real-World Cybersecurity Capabilities at Scale</title>
+  <meta name="description"
+    content="CyberGym is a large-scale, high-quality cybersecurity evaluation framework that assesses AI agents on real-world vulnerability analysis. It includes 1,507 historical vulnerabilities from 188 large software projects." />
+
+  <meta property="og:title" content="CyberGym: Evaluating AI Agents' Real-World Cybersecurity Capabilities at Scale" />
+  <meta property="og:description"
+    content="A large-scale cybersecurity evaluation framework with 1,507 real-world vulnerabilities from 188 software projects." />
+  <meta property="og:url" content="https://www.cybergym.io/cybergym/" />
+  <meta property="og:image" content="https://www.cybergym.io/assets/images/cybergym/banner.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CyberGym: Evaluating AI Agents' Real-World Cybersecurity Capabilities at Scale" />
+  <meta name="twitter:description"
+    content="A large-scale cybersecurity evaluation framework with 1,507 real-world vulnerabilities from 188 software projects." />
+  <meta name="twitter:image" content="https://www.cybergym.io/assets/images/cybergym/banner.png" />
+  <meta name="keywords" content="cybersecurity, CyberGym, large language model, agent, LLM, vulnerability" />
+
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/app.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns" defer></script>
+  <script src="/assets/js/site.js" defer></script>
+  <script src="/assets/js/leaderboard.js" defer></script>
+  <script src="/assets/js/copy-bibtex.js" defer></script>
+</head>
+
+<body>
+  <div id="site-header"></div>
+
+  <!-- Hero -->
+  <header class="hero-mesh">
+    <div class="container-page py-16 text-center sm:py-20">
+      <span class="eyebrow">ICLR 2026 · Berkeley RDI</span>
+      <h1 class="mx-auto mt-6 flex flex-wrap items-center justify-center gap-3 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+        <img src="/assets/images/favicon.ico" alt="" class="h-10 w-10 rounded" />
+        <span>CyberGym</span>
+      </h1>
+      <p class="mx-auto mt-3 max-w-3xl text-xl font-medium text-slate-700 sm:text-2xl">
+        Evaluating AI Agents' Real-World Cybersecurity Capabilities at Scale
+      </p>
+
+      <!-- Authors -->
+      <div class="mx-auto mt-6 max-w-3xl text-lg text-slate-700">
+        <a class="font-medium hover:underline" href="mailto:zhun.wang@berkeley.edu">Zhun Wang</a><sup>*</sup>,
+        <a class="font-medium hover:underline" href="mailto:stneng@berkeley.edu">Tianneng Shi</a><sup>*</sup>,
+        Jingxuan He, Matthew Cai, Jialin Zhang, Dawn Song
+      </div>
+      <div class="mt-1 text-sm text-slate-500">
+        UC Berkeley &nbsp;·&nbsp; <sup>*</sup>Equal contribution
+      </div>
+
+      <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-slate-600">
+        A large-scale, high-quality cybersecurity evaluation framework designed to rigorously assess the
+        capabilities of AI agents on real-world vulnerability analysis tasks. CyberGym includes
+        <strong class="font-semibold text-slate-900">1,507 benchmark instances</strong> with historical
+        vulnerabilities from <strong class="font-semibold text-slate-900">188 large software projects</strong>.
+      </p>
+
+      <!-- Links -->
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <a href="https://arxiv.org/abs/2506.02548" target="_blank" rel="noopener" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M3 4h18v2H3zm0 7h18v2H3zm0 7h18v2H3z"/></svg>
+          Paper
+        </a>
+        <a href="https://github.com/sunblaze-ucb/cybergym" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+          Code
+        </a>
+        <a href="https://huggingface.co/datasets/sunblaze-ucb/cybergym" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>
+          Dataset
+        </a>
+        <a href="https://rdi.berkeley.edu/blog/cybergym/" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M14 3v6h6"/></svg>
+          Blog
+        </a>
+      </div>
+
+      <!-- Time vs success chart -->
+      <div class="mt-12 flex justify-center">
+        <canvas id="time-vs-success-chart"></canvas>
+      </div>
+    </div>
+  </header>
+
+  <!-- Leaderboard -->
+  <section class="section">
+    <div class="container-wide">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="section-title">Leaderboard</h2>
+        <p class="lede mt-3">Agent performance on CyberGym Level&nbsp;1 — reproducing target vulnerabilities by generating working PoCs.</p>
+      </div>
+      <div id="leaderboard" class="mt-10"></div>
+
+      <div class="content mx-auto mt-8 max-w-3xl text-sm text-slate-500">
+        <p>
+          The leaderboard ranks agent performance on CyberGym Level&nbsp;1, where agents receive a vulnerability
+          description and unpatched codebase, and are evaluated on their ability to reproduce target
+          vulnerabilities by generating working PoCs.
+        </p>
+        <p>
+          <strong>Success Rate:</strong> percentage of instances where the agent successfully reproduces the
+          target vulnerability with a working PoC. &nbsp;·&nbsp;
+          <strong>Trials:</strong> attempts per instance; an instance counts as solved if any trial succeeds.
+        </p>
+        <p>
+          Beyond reproduction, the agents discovered <strong>34 zero-day</strong> vulnerabilities and
+          <strong>18 historically incomplete patches</strong> in total — detailed in
+          <a href="#zero-days">this section</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section class="section bg-slate-50">
+    <div class="container-page">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="section-title">Overview of CyberGym</h2>
+      </div>
+      <div class="content mx-auto mt-8 max-w-3xl">
+        <p>CyberGym tests AI agents' ability to handle real-world cybersecurity tasks.</p>
+        <p>
+          We collect 1,507 benchmark instances by systematically gathering real-world vulnerabilities discovered
+          and patched across 188 widely distributed and large-scale software projects. Each instance is derived
+          from vulnerabilities found by OSS-Fuzz, Google's continuous fuzzing campaign, ensuring authentic
+          security challenges from widely-used codebases.
+        </p>
+      </div>
+      <figure class="mx-auto mt-8 max-w-4xl">
+        <img src="/assets/images/cybergym/overview.png" alt="CyberGym overview" class="w-full rounded-2xl border border-slate-200 bg-white" />
+      </figure>
+      <div class="content mx-auto mt-8 max-w-3xl">
+        <p>
+          <strong>Benchmarking with Vulnerability Reproduction.</strong>
+          CyberGym creates evaluation environments with target repositories at pre-patch commit states. Agents
+          receive a vulnerability description and unpatched codebase, then must generate proof-of-concept (PoC)
+          tests that reproduce the vulnerability by reasoning across entire codebases, often spanning thousands
+          of files and millions of lines of code. Agents iteratively refine PoCs based on execution feedback.
+          Success is determined by verifying the PoC triggers on the pre-patch version but not on the
+          post-patch version.
+        </p>
+        <p>
+          <strong>Open-Ended Vulnerability Discovery.</strong>
+          CyberGym also conducts comprehensive analyses of open-ended vulnerability discovery scenarios that
+          extend beyond static benchmarking. We deploy agents to analyze the latest codebases without prior
+          knowledge of existing vulnerabilities, generating PoCs to probe for potential vulnerabilities that are
+          then validated against the latest software versions with sanitizers enabled. This mirrors real-world
+          vulnerability discovery, enabling the identification of previously unknown vulnerabilities.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zero-day / real-world impact -->
+  <section id="zero-days" class="section">
+    <div class="container-page">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="section-title">CyberGym's Real-World Security Impact</h2>
+        <p class="lede mt-3">The agents not only reproduced known vulnerabilities — they uncovered incomplete patches and previously unknown zero-day bugs.</p>
+      </div>
+
+      <div class="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-4 sm:grid-cols-4">
+        <div class="card text-center"><div class="stat-num">34</div><div class="stat-label">zero-day vulnerabilities</div></div>
+        <div class="card text-center"><div class="stat-num">18</div><div class="stat-label">incomplete patches</div></div>
+        <div class="card text-center"><div class="stat-num">431</div><div class="stat-label">OSS-Fuzz projects scanned</div></div>
+        <div class="card text-center"><div class="stat-num">969</div><div class="stat-label">avg. days undiscovered</div></div>
+      </div>
+
+      <div class="content mx-auto mt-10 max-w-3xl">
+        <p>
+          <strong>PoCs Reveal Incomplete Patches.</strong>
+          During evaluation, some generated PoCs unexpectedly caused crashes even on <em>patched</em> versions of
+          programs, suggesting certain fixes were only partial. Out of all generated PoCs, 759 triggered crashes
+          across 60 projects, and manual inspection confirmed <em>17 cases of incomplete patches spanning 15
+          projects</em>. While none affected the latest releases, the results show AI-generated PoCs can help
+          identify flaws in existing security patches that might otherwise go unnoticed.
+        </p>
+        <p>
+          <strong>PoCs Reveal Zero-Day Vulnerabilities.</strong>
+          Further validation of those post-patch crashes revealed 35 PoCs that still crashed the latest versions
+          of their programs. After deduplication and analysis, these corresponded to <em>10 unique, previously
+          unknown zero-day vulnerabilities</em>, each persisting for an average of <em>969 days</em> before
+          discovery.
+        </p>
+        <p>
+          <strong>Agentic Vulnerability Discovery at Scale.</strong>
+          To test open-ended discovery, we ran OpenHands with GPT-4.1 and GPT-5 given only the latest codebases
+          across <em>431 OSS-Fuzz projects</em> with <em>1,748 executables</em>. GPT-4.1 triggered 16 crashes,
+          leading to 7 confirmed zero-days. GPT-5 triggered 56 crashes, yielding 22 confirmed zero-days (4
+          overlapping). These results confirm that modern LLM agents can autonomously discover new
+          vulnerabilities at scale, and that performance on CyberGym correlates strongly with real-world
+          vulnerability discovery capability.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key findings -->
+  <section class="section bg-slate-50">
+    <div class="container-wide">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="section-title">More Key Findings</h2>
+        <p class="lede mt-3">Beyond the leaderboard, our evaluation reveals several critical insights into the current capabilities of AI agents in cybersecurity.</p>
+      </div>
+
+      <div class="mt-12 space-y-6">
+        <!-- Finding 1 -->
+        <div class="card">
+          <h3 class="text-center text-xl font-bold text-slate-900">Thinking Mode Improves Success Rate</h3>
+          <div class="mt-6 grid grid-cols-1 items-center gap-8 md:grid-cols-2">
+            <img src="/assets/images/cybergym/thinking_vs_nonthinking.png" alt="thinking vs non-thinking mode" class="mx-auto max-h-72 w-auto" />
+            <p class="leading-relaxed text-slate-700">
+              We compare thinking and non-thinking modes on a randomly selected subset of 300 tasks (~20% of the
+              benchmark) using Qwen3-235B-A22B, GPT-5, Claude-3.7-Sonnet, and Claude-Sonnet-4. While thinking mode
+              yields modest gains for most models, it increases GPT-5's success rate from 7.7% (minimal reasoning)
+              to 22.0% (high reasoning), surpassing Claude-Sonnet-4. This is consistent with GPT-5's results on
+              other benchmarks.
+            </p>
+          </div>
+        </div>
+        <!-- Finding 2 -->
+        <div class="card">
+          <h3 class="text-center text-xl font-bold text-slate-900">Richer Input Information Enhances Reproduction</h3>
+          <div class="mt-6 grid grid-cols-1 items-center gap-8 md:grid-cols-2">
+            <p class="order-2 leading-relaxed text-slate-700 md:order-1">
+              We design four difficulty levels based on the amount of input information provided to agents. Richer
+              input — such as the stack trace in level 2 and ground-truth patch in level 3 — greatly enhances the
+              vulnerability reproduction success rate compared to level 1 (our primary task). For level 0, only
+              3.5% of instances can be reproduced without access to the text description of the target
+              vulnerability.
+            </p>
+            <img src="/assets/images/cybergym/different_levels.png" alt="different difficulty levels" class="order-1 mx-auto max-h-72 w-auto md:order-2" />
+          </div>
+        </div>
+        <!-- Finding 3 -->
+        <div class="card">
+          <h3 class="text-center text-xl font-bold text-slate-900">Challenges in Handling Longer PoCs</h3>
+          <div class="mt-6 grid grid-cols-1 items-center gap-8 md:grid-cols-2">
+            <img src="/assets/images/cybergym/poc_len.png" alt="different PoC lengths" class="mx-auto max-h-72 w-auto" />
+            <p class="leading-relaxed text-slate-700">
+              A longer ground-truth PoC typically implies more complex input-parsing logic, making it harder for
+              agents to trigger vulnerability conditions. Tasks in the [0, 10) byte range achieve the highest
+              success rate, but success drops significantly as PoC length increases. Agents show only ~10% success
+              on instances with PoCs longer than 100 bytes — which represent 65.7% of the benchmark.
+            </p>
+          </div>
+        </div>
+        <!-- Finding 4 -->
+        <div class="card">
+          <h3 class="text-center text-xl font-bold text-slate-900">Marginal Improvement with Higher Step Counts</h3>
+          <div class="mt-6 grid grid-cols-1 items-center gap-8 md:grid-cols-2">
+            <p class="order-2 leading-relaxed text-slate-700 md:order-1">
+              Results for OpenHands with Claude-4-Sonnet across execution steps (max 100): successful outcomes
+              concentrate between steps 20–80, peaking at 20–50. However, nearly half of runs terminate at 80–100
+              steps without success. This suggests agents solve simpler instances early but struggle with complex
+              cases. The 100-step limit offers an effective balance between solving capacity and resource use.
+            </p>
+            <img src="/assets/images/cybergym/success_vs_steps.png" alt="success vs steps" class="order-1 mx-auto max-h-72 w-auto md:order-2" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agent trace example -->
+  <section class="section">
+    <div class="container-page">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="section-title">An Example of a Successful Agent Trace</h2>
+      </div>
+      <div class="content mx-auto mt-8 max-w-3xl">
+        <p>
+          An example where the agent successfully reproduces the target vulnerability from the provided
+          description and codebase. The agent browses relevant files using the given keywords, constructs a test
+          case from the retrieved information, mutates it, and ultimately triggers the crash.
+        </p>
+      </div>
+      <figure class="mx-auto mt-6 max-w-4xl">
+        <img src="/assets/images/cybergym/case_study.png" alt="Agent trace example" class="w-full rounded-2xl border border-slate-200" />
+      </figure>
+    </div>
+  </section>
+
+  <!-- Citation -->
+  <section id="bibtex" class="section bg-slate-50">
+    <div class="container-page">
+      <h2 class="section-title">Citation</h2>
+      <p class="mt-3 text-slate-600">If you use this work in your research, please cite the following:</p>
+      <div class="bibtex-box mt-5">
+        <pre><code id="bibtex-code">@inproceedings{wang2026cybergym,
+  title={CyberGym: Evaluating {AI} Agents' Real-World Cybersecurity Capabilities at Scale},
+  author={Zhun Wang and Tianneng Shi and Jingxuan He and Matthew Cai and Jialin Zhang and Dawn Song},
+  booktitle={The Fourteenth International Conference on Learning Representations},
+  year={2026},
+  url={https://openreview.net/forum?id=2YvbLQEdYt}
+}</code></pre>
+        <button class="copy-btn" title="Copy BibTeX" onclick="copyBibtex(this)">Copy</button>
+      </div>
+
+      <h3 class="mt-10 text-xl font-bold text-slate-900">More from our group</h3>
+      <p class="content mt-3 max-w-3xl">
+        Check out
+        <a href="https://rdi.berkeley.edu/frontier-ai-impact-on-cybersecurity/" target="_blank" rel="noopener">Frontier AI's Impact on the Cybersecurity Landscape</a>,
+        a comprehensive analysis of how frontier AI is reshaping cybersecurity, and the
+        <a href="https://rdi.berkeley.edu/frontier-ai-impact-on-cybersecurity/benchmarks.html" target="_blank" rel="noopener">Frontier AI Cybersecurity Observatory</a>,
+        a live leaderboard tracking AI's cybersecurity capabilities across attack and defense tasks.
+      </p>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const C = window.CyberGymLeaderboard;
+      C.render({
+        dataUrl: "/assets/data/cybergym.json",
+        rootId: "leaderboard",
+        rows: (j) => j.level1 || [],
+        sort: (a, b) => b.score_10 - a.score_10,
+        maxHeight: "460px",
+        filters: [{
+          label: "Trials:",
+          default: "1",
+          options: (rows) => {
+            const u = [...new Set(rows.map((r) => r.trials))].sort((a, b) => a - b);
+            return [{ value: "all", label: "All trials" }].concat(
+              u.map((t) => ({ value: t, label: t + (t > 1 ? " trials" : " trial") }))
+            );
+          },
+          predicate: (r, v) => r.trials === parseInt(v),
+        }],
+        columns: [
+          { header: "#", cell: (r, rank) => C.cells.rank(r, rank) },
+          { header: "Agent", cell: (r) => C.cells.agentWithNote(r) },
+          { header: "Model", cell: (r) => C.cells.model(r) },
+          { header: "Trials", cell: (r) => r.trials },
+          { header: "Success Rate", thClass: "min-w-32", cell: (r) => C.cells.percent(r.score_10) },
+          { header: "Date", cell: (r) => r.date },
+          { header: "Source", cell: (r) => C.cells.source(r) },
+        ],
+        chart: { canvasId: "time-vs-success-chart", include: (d) => d.include_in_plot },
+      });
+    });
+  </script>
+</body>
+
+</html>

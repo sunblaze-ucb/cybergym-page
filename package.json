@@ -1,0 +1,15 @@
+{
+  "name": "cybergym-page",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The CyberGym benchmark series project pages (CyberGym, ExploitGym, CyberGym-E2E).",
+  "scripts": {
+    "build:css": "tailwindcss -i ./assets/css/src.css -o ./assets/css/app.css --minify",
+    "watch:css": "tailwindcss -i ./assets/css/src.css -o ./assets/css/app.css --watch",
+    "serve": "python3 -m http.server 8000"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.0.0",
+    "tailwindcss": "^4.0.0"
+  }
+}

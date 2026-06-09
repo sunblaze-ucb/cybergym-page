@@ -372,7 +372,7 @@ function populateTable(level, results) {
       (result, index) => `
           <tr>
             <td>${index + 1}</td>
-            <td>${result.agent || "-"}</td>
+            <td>${result.agent && result.agent.includes(" (") ? `<span class="model-tooltip wrap-tooltip" data-tooltip="${result.agent.slice(result.agent.indexOf("(") + 1, result.agent.lastIndexOf(")"))}">${result.agent.slice(0, result.agent.indexOf(" ("))}</span>` : (result.agent || "-")}</td>
             <td>${result.model && result.model.startsWith("Multi-model") ? `<span class="model-tooltip" data-tooltip="${result.model}">${result.model.split(" (")[0]}</span>` : (result.model || "-")}</td>
             <td>${result.trials}</td>
             <td>${(result.score_10 * 100).toFixed(1)}%</td>

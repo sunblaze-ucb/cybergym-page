@@ -232,6 +232,13 @@ pre code {
   opacity: 1;
 }
 
+.model-tooltip.wrap-tooltip::after {
+  white-space: normal;
+  width: max-content;
+  max-width: 240px;
+  text-align: left;
+}
+
 .leaderboard-image {
   width: 40%;
   height: auto;

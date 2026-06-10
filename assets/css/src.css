@@ -150,15 +150,25 @@
 
   /* Two-tone bar: full length = no-mitigation count (faded), inner solid = survives mitigations. */
   .lb-dualbar { @apply flex items-center gap-2.5; }
-  .lb-dualbar-lane { width: 5.5rem; flex: none; }
-  .lb-dualbar-track {
+  .lb-dualbar-lane { position: relative; width: 5.5rem; height: 1rem; flex: none; }
+  /* Track (faded, full no-mitigation length) and fill (solid, survives mitigations) are
+     overlaid siblings so each is its own hover target. Fill sits on top. */
+  .lb-dualbar-track,
+  .lb-dualbar-fill {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
     height: 0.5rem;
     border-radius: 9999px;
-    background: rgb(var(--accent-rgb) / 0.18);
-    overflow: hidden;
-    min-width: 2px;
+    transition: height 0.15s ease;
   }
-  .lb-dualbar-fill { display: block; height: 100%; border-radius: 9999px; background: var(--accent); }
+  .lb-dualbar-track { background: rgb(var(--accent-rgb) / 0.18); min-width: 2px; }
+  .lb-dualbar-fill { background: var(--accent); z-index: 1; }
+  /* Hover the faded part → expand the whole bar; hover the solid part → expand only it. */
+  .lb-dualbar-track:hover,
+  .lb-dualbar-track:hover ~ .lb-dualbar-fill,
+  .lb-dualbar-fill:hover { height: 0.95rem; }
   .lb-dualbar-num { @apply font-mono text-xs text-slate-600; font-variant-numeric: tabular-nums; min-width: 1.75rem; }
   .lb-dualbar-zero { @apply font-mono text-xs text-slate-300; }
 

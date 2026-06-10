@@ -127,13 +127,36 @@
     if (!tbody) return;
     const cols = visibleColumns(cfg);
     if (thead) {
-      thead.innerHTML = `<tr>${cols.map((c) => `<th${c.thClass ? ` class="${c.thClass}"` : ""}>${c.header}</th>`).join("")}</tr>`;
+      thead.innerHTML = `<tr>${cols
+        .map((c) => {
+          const cls = c.thClass ? ` class="${c.thClass}"` : "";
+          if (!c.sortBy) return `<th${cls}>${c.header}</th>`;
+          const i = cfg.columns.indexOf(c);
+          const active = cfg._sortCol === i;
+          const caret = active
+            ? (cfg._sortDir === 1
+                ? `<svg viewBox="0 0 24 24" class="lb-caret" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m6 15 6-6 6 6"/></svg>`
+                : `<svg viewBox="0 0 24 24" class="lb-caret" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg>`)
+            : `<svg viewBox="0 0 24 24" class="lb-caret lb-caret-idle" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m8 10 4-4 4 4M8 14l4 4 4-4"/></svg>`;
+          return `<th${cls}><button type="button" class="lb-sort${active ? " is-active" : ""}" data-col="${i}">${c.header}${caret}</button></th>`;
+        })
+        .join("")}</tr>`;
     }
     if (!rows.length) {
       tbody.innerHTML = `<tr><td colspan="${cols.length}" class="px-4 py-6 text-center text-slate-400">No results available</td></tr>`;
       return;
     }
-    const sorted = cfg.sort ? [...rows].sort(cfg.sort) : rows;
+    let sorted;
+    const activeCol = cfg._sortCol != null ? cfg.columns[cfg._sortCol] : null;
+    if (activeCol && activeCol.sortBy) {
+      const dir = cfg._sortDir;
+      sorted = [...rows].sort((a, b) => {
+        const d = activeCol.sortBy(a) - activeCol.sortBy(b);
+        return d !== 0 ? d * dir : 0;
+      });
+    } else {
+      sorted = cfg.sort ? [...rows].sort(cfg.sort) : rows;
+    }
     tbody.innerHTML = sorted
       .map((row, idx) => {
         const rank = idx + 1;
@@ -206,7 +229,29 @@
     }
 
     const allRows = cfg.rows ? cfg.rows(json) || [] : json;
+
+    // Initial sort: a column flagged defaultSort starts active (descending).
+    if (cfg._sortCol === undefined) {
+      const di = cfg.columns.findIndex((c) => c.defaultSort);
+      cfg._sortCol = di >= 0 ? di : null;
+      cfg._sortDir = -1;
+    }
+
     const update = () => renderTable(cfg, applyFilters(cfg, allRows));
+
+    // Click a sortable header to sort by it; click again to flip direction.
+    const thead = document.getElementById(cfg._theadId);
+    if (thead) {
+      thead.addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-col]");
+        if (!btn) return;
+        const i = parseInt(btn.dataset.col, 10);
+        if (cfg._sortCol === i) cfg._sortDir = -cfg._sortDir;
+        else { cfg._sortCol = i; cfg._sortDir = -1; }
+        update();
+      });
+    }
+
     buildFilters(cfg, allRows, update);
     update();
 

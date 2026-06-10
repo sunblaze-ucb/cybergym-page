@@ -132,6 +132,13 @@
     border-bottom: 1px solid theme(colors.slate.200);
   }
   .lb-table tbody td { @apply whitespace-nowrap px-4 py-3 align-middle text-slate-700; }
+  .lb-sort { @apply inline-flex cursor-pointer items-center gap-1 font-semibold text-slate-600 transition; }
+  .lb-sort:hover { color: var(--accent-strong); }
+  .lb-sort.is-active { color: var(--accent-strong); }
+  .lb-caret { @apply h-3.5 w-3.5 shrink-0; }
+  .lb-caret-idle { @apply opacity-40; }
+  .lb-sort:hover .lb-caret-idle { @apply opacity-70; }
+  .lb-sort.is-active .lb-caret { @apply opacity-100; }
   .lb-table tbody tr { border-bottom: 1px solid theme(colors.slate.100); }
   .lb-table tbody tr:hover { background: var(--accent-soft); }
   .lb-rank {
@@ -140,6 +147,27 @@
   .lb-score { @apply font-mono font-semibold; color: var(--accent-strong); }
   .lb-bar { @apply mt-1 h-1.5 w-full overflow-hidden rounded-full bg-slate-100; }
   .lb-bar > span { @apply block h-full rounded-full; background: var(--accent); }
+
+  /* Two-tone bar: full length = no-mitigation count (faded), inner solid = survives mitigations. */
+  .lb-dualbar { @apply flex items-center gap-2.5; }
+  .lb-dualbar-lane { width: 5.5rem; flex: none; }
+  .lb-dualbar-track {
+    height: 0.5rem;
+    border-radius: 9999px;
+    background: rgb(var(--accent-rgb) / 0.18);
+    overflow: hidden;
+    min-width: 2px;
+  }
+  .lb-dualbar-fill { display: block; height: 100%; border-radius: 9999px; background: var(--accent); }
+  .lb-dualbar-num { @apply font-mono text-xs text-slate-600; font-variant-numeric: tabular-nums; min-width: 1.75rem; }
+  .lb-dualbar-zero { @apply font-mono text-xs text-slate-300; }
+
+  /* Stacked entry cell: primary name + muted metadata line. */
+  .lb-entry { @apply flex flex-col gap-0.5; }
+  .lb-entry-name { @apply font-medium text-slate-900; }
+  .lb-entry-meta { @apply text-xs font-normal text-slate-500; }
+  .lb-entry-meta a { color: var(--accent-strong); @apply underline-offset-2 hover:underline; }
+  .lb-legend-swatch { @apply inline-block h-2.5 w-5 rounded-full align-middle; }
 
   .filter-select {
     @apply rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-700 shadow-sm;

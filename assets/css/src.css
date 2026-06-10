@@ -86,11 +86,22 @@
 
   /* ---- Hero gradient mesh ---- */
   .hero-mesh {
+    /* Pull up under the (transparent) sticky nav so the gradient spans both as one block.
+       The extra top padding pushes content back below the floating nav (4.75rem tall). */
+    margin-top: -4.75rem;
+    padding-top: 4.75rem;
     background:
       radial-gradient(60rem 40rem at 15% -10%, rgb(var(--accent-rgb) / 0.14), transparent 60%),
       radial-gradient(50rem 35rem at 95% 0%, rgb(6 182 212 / 0.10), transparent 55%),
       linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
   }
+
+  /* Series nav: transparent over the hero gradient, solid once scrolled. */
+  /* Let the sticky nav range over the whole page (the wrapper div shouldn't confine it). */
+  #site-header { display: contents; }
+  /* Floating "island" nav: rounded, frosted, with gaps around it; solidifies on scroll. */
+  .nav-island { @apply rounded-2xl bg-white/25 shadow-md backdrop-blur-md transition duration-200; }
+  #site-nav-bar.is-solid .nav-island { @apply bg-white/70 shadow-lg; }
 
   /* ---- Buttons ---- */
   .btn {
@@ -125,7 +136,19 @@
   .content em { @apply not-italic font-semibold text-slate-900; }
 
   /* ---- Leaderboard ---- */
-  .lb-wrap { @apply overflow-x-auto rounded-2xl border border-slate-200 shadow-sm; }
+  .lb-wrap { @apply overflow-auto rounded-2xl border border-slate-200 shadow-sm; }
+  /* Slim, rounded scrollbar */
+  .lb-wrap { scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; }
+  .lb-wrap::-webkit-scrollbar { width: 10px; height: 10px; }
+  .lb-wrap::-webkit-scrollbar-track { background: transparent; }
+  .lb-wrap::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 9999px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+  }
+  .lb-wrap::-webkit-scrollbar-thumb:hover { background-color: #94a3b8; }
+  .lb-wrap::-webkit-scrollbar-corner { background: transparent; }
   .lb-table { @apply w-full border-collapse text-left text-sm; }
   .lb-table thead th {
     @apply sticky top-0 z-10 whitespace-nowrap bg-slate-50 px-4 py-3 font-semibold text-slate-600;

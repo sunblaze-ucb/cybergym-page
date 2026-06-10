@@ -39,8 +39,8 @@
   }
 
   const headerHTML = `
-    <div class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/80 backdrop-blur">
-      <nav class="container-wide flex h-16 items-center justify-between">
+    <div id="site-nav-bar" class="sticky top-0 z-50 px-4 py-2.5">
+      <nav class="nav-island mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
         <a href="/" class="flex items-center font-bold tracking-tight text-slate-900">
           <span class="text-lg">Home</span>
         </a>
@@ -56,7 +56,7 @@
           <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
         </button>
       </nav>
-      <div id="nav-mobile" class="hidden border-t border-slate-200 bg-white px-4 py-3 md:hidden">
+      <div id="nav-mobile" class="mx-auto mt-2 hidden max-w-6xl rounded-2xl border border-slate-200 bg-white px-3 py-3 shadow-lg md:hidden">
         ${navLinks(true)}
         <a href="${GITHUB_ORG}" target="_blank" rel="noopener" class="block rounded-lg px-3 py-2 text-base font-medium text-slate-600">GitHub</a>
       </div>
@@ -83,6 +83,14 @@
     const mobile = document.getElementById("nav-mobile");
     if (toggle && mobile) {
       toggle.addEventListener("click", () => mobile.classList.toggle("hidden"));
+    }
+
+    // Transparent over the hero gradient at the top; solid bar once scrolled.
+    const bar = document.getElementById("site-nav-bar");
+    if (bar) {
+      const onScroll = () => bar.classList.toggle("is-solid", window.scrollY > 24);
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
     }
   }
 

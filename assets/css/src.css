@@ -152,7 +152,7 @@
   .lb-table { @apply w-full border-collapse text-left text-sm; }
   .lb-table thead th {
     @apply sticky top-0 z-10 whitespace-nowrap bg-slate-50 px-4 py-3 font-semibold text-slate-600;
-    border-bottom: 1px solid theme(colors.slate.200);
+    border-bottom: 1px solid var(--color-slate-200);
   }
   .lb-table tbody td { @apply whitespace-nowrap px-4 py-3 align-middle text-slate-700; }
   .lb-sort { @apply inline-flex cursor-pointer items-center gap-1 font-semibold text-slate-600 transition; }
@@ -162,7 +162,7 @@
   .lb-caret-idle { @apply opacity-40; }
   .lb-sort:hover .lb-caret-idle { @apply opacity-70; }
   .lb-sort.is-active .lb-caret { @apply opacity-100; }
-  .lb-table tbody tr { border-bottom: 1px solid theme(colors.slate.100); }
+  .lb-table tbody tr { border-bottom: 1px solid var(--color-slate-100); }
   .lb-table tbody tr:hover { background: var(--accent-soft); }
   .lb-rank {
     @apply inline-flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-xs font-bold text-slate-600;
@@ -238,3 +238,43 @@
     @apply absolute right-3 top-3 inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-600 shadow-sm transition hover:bg-slate-100;
   }
 }
+
+/* ============================================================
+   Dark theme — remaps the slate/white scale (utilities reference
+   var(--color-*)) plus a few hand-tuned surfaces. Toggle sets
+   <html data-theme="dark">.
+   ============================================================ */
+[data-theme="dark"] {
+  --color-white: #161f33;
+  --color-slate-50: #111a2c;
+  --color-slate-100: #233049;
+  --color-slate-200: #2c3a57;
+  --color-slate-300: #3b4a6b;
+  --color-slate-400: #64748b;
+  --color-slate-500: #94a3b8;
+  --color-slate-600: #aab6c9;
+  --color-slate-700: #cbd5e1;
+  --color-slate-800: #e2e8f0;
+  --color-slate-900: #f1f5f9;
+  --color-ink: #f1f5f9;
+  --color-muted: #aab6c9;
+  --accent-strong: #22d3ee;
+  --accent-soft: rgb(var(--accent-rgb) / 0.16);
+}
+[data-theme="dark"][data-benchmark="exploitgym"] { --accent-strong: #fb7185; }
+[data-theme="dark"][data-benchmark="cybergym-e2e"] { --accent-strong: #a78bfa; }
+
+[data-theme="dark"] body { background-color: #0b1120; }
+
+[data-theme="dark"] .hero-mesh {
+  background:
+    radial-gradient(60rem 40rem at 15% -10%, rgb(var(--accent-rgb) / 0.22), transparent 60%),
+    radial-gradient(50rem 35rem at 95% 0%, rgb(34 211 238 / 0.12), transparent 55%),
+    linear-gradient(180deg, #0d1426 0%, #0b1120 100%);
+}
+
+[data-theme="dark"] .cg-tooltip { background: #334155; }
+
+[data-theme="dark"] .lb-wrap { scrollbar-color: #475569 transparent; }
+[data-theme="dark"] .lb-wrap::-webkit-scrollbar-thumb { background-color: #475569; }
+[data-theme="dark"] .lb-wrap::-webkit-scrollbar-thumb:hover { background-color: #64748b; }

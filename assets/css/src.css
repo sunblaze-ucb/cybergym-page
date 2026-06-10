@@ -275,6 +275,13 @@
 
 [data-theme="dark"] .cg-tooltip { background: #334155; }
 
+/* Hub benchmark cards hardcode light accent-strong/soft inline; give their eyebrow
+   chips a dark-appropriate tint derived from each card's --accent. */
+[data-theme="dark"] #benchmarks .eyebrow {
+  color: color-mix(in srgb, var(--accent) 65%, white);
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
 [data-theme="dark"] .lb-wrap { scrollbar-color: #475569 transparent; }
 [data-theme="dark"] .lb-wrap::-webkit-scrollbar-thumb { background-color: #475569; }
 [data-theme="dark"] .lb-wrap::-webkit-scrollbar-thumb:hover { background-color: #64748b; }

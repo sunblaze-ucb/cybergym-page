@@ -298,6 +298,14 @@
     });
   }
 
+  // Theme-aware chart colors (canvas can't be styled by CSS).
+  function chartColors() {
+    const dark = document.documentElement.getAttribute("data-theme") === "dark";
+    return dark
+      ? { tick: "#94a3b8", grid: "rgba(148,163,184,0.16)", title: "#cbd5e1", label: "#e2e8f0", line: "#64748b" }
+      : { tick: "#666", grid: "rgba(0,0,0,0.08)", title: "#333", label: "#0f172a", line: "#aaa" };
+  }
+
   async function renderScatterChart(chartCfg, allRows) {
     const canvas = document.getElementById(chartCfg.canvasId);
     if (!canvas || typeof Chart === "undefined") return;
@@ -340,7 +348,8 @@
     scaleChart();
     window.addEventListener("resize", scaleChart);
 
-    new Chart(canvas, {
+    const col = chartColors();
+    const chart = new Chart(canvas, {
       type: "scatter",
       data: { datasets: [{ data: points, pointStyle: pointImages, pointRadius: ICON_SIZE / 2, pointHoverRadius: ICON_SIZE / 2 + 2 }] },
       options: {
@@ -356,13 +365,35 @@
             min: new Date(minTime - 30 * 86400000).toISOString(),
             max: new Date(maxTime + 60 * 86400000).toISOString(),
             time: { unit: "month", displayFormats: { month: "MMM yyyy" } },
-            title: { display: true, text: chartCfg.xTitle || "Release Date", font: { size: 14 } },
+            title: { display: true, text: chartCfg.xTitle || "Release Date", font: { size: 14 }, color: col.title },
+            ticks: { color: col.tick },
+            grid: { color: col.grid },
+            border: { color: col.grid },
           },
-          y: { min: minY, max: maxY, title: { display: true, text: chartCfg.yTitle || "Success Rate (%)", font: { size: 14 } } },
+          y: {
+            min: minY, max: maxY,
+            title: { display: true, text: chartCfg.yTitle || "Success Rate (%)", font: { size: 14 }, color: col.title },
+            ticks: { color: col.tick },
+            grid: { color: col.grid },
+            border: { color: col.grid },
+          },
         },
         layout: { padding: { top: 30, right: 20 } },
       },
       plugins: [labelPlugin()],
+    });
+
+    // Re-theme axes (and labels, via the plugin) when the user toggles theme.
+    document.addEventListener("themechange", () => {
+      const c = chartColors();
+      ["x", "y"].forEach((ax) => {
+        const s = chart.options.scales[ax];
+        s.ticks.color = c.tick;
+        s.grid.color = c.grid;
+        s.border.color = c.grid;
+        s.title.color = c.title;
+      });
+      chart.update();
     });
   }
 
@@ -372,8 +403,9 @@
       id: "labelPlugin",
       afterDatasetsDraw(chart) {
         const ctx = chart.ctx;
+        const col = chartColors();
         ctx.font = "12px sans-serif";
-        ctx.fillStyle = "#000";
+        ctx.fillStyle = col.label;
         const chartArea = chart.chartArea;
         const meta = chart.getDatasetMeta(0);
         const H = 12, pad = 6;
@@ -442,7 +474,7 @@
           const labelCx = l.x + l.w / 2, labelCy = l.y + l.h / 2;
           if (Math.hypot(labelCx - l.px, labelCy - l.py) > pad * 2) {
             ctx.beginPath();
-            ctx.strokeStyle = "#aaa";
+            ctx.strokeStyle = col.line;
             ctx.lineWidth = 0.8;
             ctx.moveTo(l.px, l.py);
             const tx = labelCx < l.px ? l.x + l.w : labelCx > l.px ? l.x : labelCx;
@@ -452,7 +484,7 @@
           }
           ctx.textAlign = "left";
           ctx.textBaseline = "top";
-          ctx.fillStyle = "#000";
+          ctx.fillStyle = col.label;
           ctx.fillText(l.text, l.x, l.y);
         });
       },

@@ -103,6 +103,7 @@
       document.documentElement.setAttribute("data-theme", t);
       try { localStorage.setItem("theme", t); } catch (e) {}
       paintIcons();
+      document.dispatchEvent(new CustomEvent("themechange", { detail: t }));
     };
     document.querySelectorAll("[data-theme-toggle]").forEach((btn) => {
       btn.addEventListener("click", () => applyTheme(curTheme() === "dark" ? "light" : "dark"));

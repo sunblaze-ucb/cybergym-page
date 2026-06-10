@@ -109,7 +109,8 @@
   }
   .btn-primary {
     background: var(--accent);
-    @apply text-white shadow-sm;
+    color: #fff; /* literal white — accent bg is colored in both themes */
+    @apply shadow-sm;
   }
   .btn-primary:hover { filter: brightness(0.94); }
   .btn-ghost {
@@ -274,6 +275,10 @@
 }
 
 [data-theme="dark"] .cg-tooltip { background: #334155; }
+
+/* Figure images carry black text on transparent/white backgrounds; give them a
+   light panel in dark mode so they stay legible. */
+[data-theme="dark"] .fig-shot { background: #e2e8f0; padding: 0.75rem; border-radius: 0.75rem; }
 
 /* Hub benchmark cards hardcode light accent-strong/soft inline; give their eyebrow
    chips a dark-appropriate tint derived from each card's --accent. */

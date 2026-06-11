@@ -1,17 +1,6 @@
 {
   "level1": [
     {
-      "agent": "Crystalline (with a pre-seeded, test-time-updated knowledge base)",
-      "model": "Claude Opus 4.6",
-      "model_release_date": "2026-02-05",
-      "include_in_plot": false,
-      "score_10": 0.902,
-      "date": "2026-06-08",
-      "source": "Independent researcher",
-      "source_url": "https://github.com/synchopate/cybergym-logos/blob/main/technical-report.md",
-      "trials": 1
-    },
-    {
       "agent": "MDASH",
       "model": "Multi-model (GPT-5.4, Claude Opus 4.6, Claude Sonnet 4.6)",
       "model_release_date": "2026-05-12",

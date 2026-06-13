@@ -174,7 +174,7 @@
 
   /* Two-tone bar: full length = no-mitigation count (faded), inner solid = survives mitigations. */
   .lb-dualbar { @apply flex items-center gap-2.5; }
-  .lb-dualbar-lane { position: relative; width: 5.5rem; height: 1rem; flex: none; }
+  .lb-dualbar-lane { position: relative; width: 4.25rem; height: 1rem; flex: none; }
   /* Track (faded, full no-mitigation length) and fill (solid, survives mitigations) are
      overlaid siblings so each is its own hover target. Fill sits on top. */
   .lb-dualbar-track,
@@ -194,6 +194,11 @@
   .lb-dualbar-track:hover ~ .lb-dualbar-fill,
   .lb-dualbar-fill:hover { height: 0.95rem; }
   .lb-dualbar-num { @apply font-mono text-xs text-slate-600; font-variant-numeric: tabular-nums; min-width: 1.75rem; }
+
+  /* Compact per-task metrics: 2x2 micro-grid (cost · tokens / time · calls). */
+  .lb-metrics { @apply grid text-xs text-slate-500; grid-template-columns: auto auto; gap: 0.1rem 0.7rem; }
+  .lb-metrics b { @apply font-semibold text-slate-700; font-variant-numeric: tabular-nums; }
+  .lb-metrics .lb-metrics-na { @apply text-slate-300; }
   .lb-dualbar-zero { @apply font-mono text-xs text-slate-300; }
 
   /* Stacked entry cell: primary name + muted metadata line. */
@@ -229,6 +234,9 @@
     transition: opacity 0.12s ease, transform 0.12s ease;
   }
   .cg-tooltip.is-visible { opacity: 1; transform: translateY(0); }
+  .cg-tip-title { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0.65; margin-bottom: 0.3rem; }
+  .cg-tip-metrics { display: grid; grid-template-columns: auto auto; gap: 0.15rem 0.9rem; }
+  .cg-tip-metrics b { font-weight: 600; }
 
   /* ---- BibTeX ---- */
   .bibtex-box { @apply relative; }

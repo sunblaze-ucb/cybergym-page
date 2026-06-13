@@ -85,7 +85,9 @@
     }
     function show(el) {
       current = el;
-      tip.textContent = el.getAttribute("data-note") || "";
+      const html = el.getAttribute("data-note-html");
+      if (html != null) tip.innerHTML = html;
+      else tip.textContent = el.getAttribute("data-note") || "";
       position(el); // measure & place before fading in (avoids 0,0 flash)
       tip.classList.add("is-visible");
     }
@@ -94,12 +96,13 @@
       tip.classList.remove("is-visible");
     }
 
+    const SEL = "[data-note], [data-note-html]";
     document.addEventListener("mouseover", (e) => {
-      const el = e.target.closest("[data-note]");
+      const el = e.target.closest(SEL);
       if (el && el !== current) show(el);
     });
     document.addEventListener("mouseout", (e) => {
-      const el = e.target.closest("[data-note]");
+      const el = e.target.closest(SEL);
       if (el && (!e.relatedTarget || !el.contains(e.relatedTarget))) hide();
     });
     document.addEventListener("scroll", () => { if (current) position(current); }, true);

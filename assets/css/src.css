@@ -279,7 +279,7 @@
   background:
     radial-gradient(60rem 40rem at 15% -10%, rgb(var(--accent-rgb) / 0.22), transparent 60%),
     radial-gradient(50rem 35rem at 95% 0%, rgb(34 211 238 / 0.12), transparent 55%),
-    linear-gradient(180deg, #0d1426 0%, #0b1120 100%);
+    linear-gradient(180deg, #0a1020 0%, #111a2c 100%);
 }
 
 [data-theme="dark"] .cg-tooltip { background: #334155; }

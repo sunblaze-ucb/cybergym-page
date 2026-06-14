@@ -81,6 +81,10 @@
     color: var(--accent-strong);
     background: var(--accent-soft);
   }
+  /* Author with an explicit email link: accent color + envelope icon. */
+  .email-author { @apply font-medium underline-offset-2 hover:underline; color: var(--accent-strong); }
+  .email-ico { @apply ml-1 inline-block h-3.5 w-3.5; vertical-align: -0.18em; }
+
   .section-title { @apply text-3xl sm:text-4xl font-bold tracking-tight text-slate-900; }
   .lede { @apply text-lg leading-relaxed text-slate-600; }
 

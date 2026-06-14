@@ -5,12 +5,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script>(function(){try{var t=localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
-  <title>Cybersecurity Observatory: Benchmarks for AI Agents in Cybersecurity</title>
+  <title>Frontier AI Cybersecurity Observatory</title>
   <meta name="description"
     content="A cybersecurity observatory of large-scale, high-quality benchmarks measuring how well AI agents handle real-world vulnerabilities, from discovering and reproducing them to developing working exploits or patches. Built by Berkeley RDI and collaborators." />
   <meta name="keywords" content="cybersecurity observatory, CyberGym, ExploitGym, AI agents, LLM, vulnerability, exploit, benchmark" />
 
-  <meta property="og:title" content="Cybersecurity Observatory: AI Agents in Cybersecurity" />
+  <meta property="og:title" content="Frontier AI Cybersecurity Observatory" />
   <meta property="og:description"
     content="A cybersecurity observatory of benchmarks measuring how well AI agents handle real-world vulnerabilities, from discovering and reproducing them to developing working exploits or patches." />
   <meta property="og:url" content="https://www.cybergym.io/" />
@@ -18,7 +18,7 @@
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Cybersecurity Observatory: AI Agents in Cybersecurity" />
+  <meta name="twitter:title" content="Frontier AI Cybersecurity Observatory" />
   <meta name="twitter:description"
     content="A cybersecurity observatory of benchmarks measuring how well AI agents handle real-world vulnerabilities." />
   <meta name="twitter:image" content="https://www.cybergym.io/assets/images/cybergym/banner.png" />
@@ -39,13 +39,19 @@
   <!-- Hero -->
   <header class="hero-mesh">
     <div class="container-page py-20 text-center sm:py-28">
-      <h1 class="mx-auto mt-6 max-w-4xl text-4xl font-bold tracking-tight text-slate-900 sm:text-6xl">
-        How capable are AI agents at <span class="text-[color:var(--accent-strong)]">real-world cybersecurity?</span>
+      <h1 class="mx-auto mt-6 max-w-4xl text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+        Frontier AI <span class="text-[color:var(--accent-strong)]">Cybersecurity Observatory</span>
       </h1>
-      <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 sm:text-xl">
-        A <strong class="font-semibold text-slate-900">cybersecurity observatory</strong> of large-scale,
-        high-quality benchmarks measuring how well AI agents handle real-world vulnerabilities,
-        from discovering and reproducing them to developing working exploits or patches.
+      <p class="mx-auto mt-6 max-w-3xl text-left leading-relaxed text-slate-600 text-lg">
+      AI is evolving at an unprecedented pace, making it increasingly difficult to anticipate its societal impacts and risks.
+      Recent benchmarks show that AI agents can already take on real-world cybersecurity tasks, including discovering and exploiting zero-day vulnerabilities.
+      In cybersecurity, AI plays a dual role, strengthening both offensive and defensive capabilities.
+      </p>
+      <p class="mx-auto mt-6 max-w-3xl text-left leading-relaxed text-slate-600 text-lg">
+      To address this need, we built this <strong>observatory</strong> to continuously and openly track AI's cybersecurity capabilities across the stages of attack and defense, so developers, researchers, and policymakers can stay informed in a timely manner.
+      </p>
+      <p class="mx-auto mt-6 max-w-3xl text-left leading-relaxed text-slate-600 text-lg">
+        <em>Have suggestions to improve the observatory?</em> We are actively gathering feedback from the community and would greatly value your input. Please share your suggestions <a href="mailto:rdi_research@berkeley.edu" class="text-[color:var(--accent-strong)] hover:underline">here</a>.
       </p>
       <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
         <a href="#benchmarks" class="btn btn-primary">Explore the benchmarks</a>
@@ -54,29 +60,6 @@
       </div>
     </div>
   </header>
-
-  <!-- The progression -->
-  <!-- <section class="section-tight">
-    <div class="container-page">
-      <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <div class="card text-center">
-          <div class="text-sm font-semibold uppercase tracking-wider text-slate-400">Step 1</div>
-          <div class="mt-1 text-lg font-bold text-slate-900">Find &amp; reproduce</div>
-          <p class="mt-1 text-sm text-slate-500">Generate a PoC that triggers a known bug from source.</p>
-        </div>
-        <div class="card text-center">
-          <div class="text-sm font-semibold uppercase tracking-wider text-slate-400">Step 2</div>
-          <div class="mt-1 text-lg font-bold text-slate-900">Weaponize</div>
-          <p class="mt-1 text-sm text-slate-500">Turn a crashing input into a working exploit that runs code.</p>
-        </div>
-        <div class="card text-center">
-          <div class="text-sm font-semibold uppercase tracking-wider text-slate-400">Step 3</div>
-          <div class="mt-1 text-lg font-bold text-slate-900">End-to-end</div>
-          <p class="mt-1 text-sm text-slate-500">Chain the full attack lifecycle, autonomously.</p>
-        </div>
-      </div>
-    </div>
-  </section> -->
 
   <!-- Benchmarks -->
   <section id="benchmarks" class="section">
@@ -145,34 +128,6 @@
           </span>
         </a>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- Mission -->
-  <section class="section bg-slate-50">
-    <div class="container-page">
-      <div class="mx-auto max-w-2xl text-center">
-        <h2 class="section-title">Why we built this</h2>
-        <p class="lede mt-5">
-          AI agents are rapidly getting better at autonomous cybersecurity, and the stakes are rising fast.
-          We built this cybersecurity observatory to measure that capability rigorously and openly, on real-world
-          software drawn from widely deployed projects, so defenders, AI developers, and policymakers can act on
-          real evidence.
-        </p>
-        <div class="mt-8 flex justify-center">
-          <a href="https://rdi.berkeley.edu/frontier-ai-impact-on-cybersecurity/" target="_blank" rel="noopener"
-            class="btn btn-ghost">
-            Frontier AI &amp; Cybersecurity
-            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-        </div>
-        <p class="mt-5 text-sm text-slate-500">
-          Supersedes our earlier
-          <a href="https://rdi.berkeley.edu/frontier-ai-impact-on-cybersecurity/benchmarks.html" target="_blank"
-            rel="noopener" class="underline underline-offset-2 hover:text-slate-700">Frontier AI Cybersecurity Observatory</a>
-          <span class="italic">(deprecated)</span>.
-        </p>
       </div>
     </div>
   </section>

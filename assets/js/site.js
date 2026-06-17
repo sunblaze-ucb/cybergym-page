@@ -6,8 +6,8 @@
    ============================================================ */
 (function () {
   const BENCHMARKS = [
-    { key: "cybergym", label: "CyberGym", href: "/cybergym/" },
-    { key: "exploitgym", label: "ExploitGym", href: "/exploitgym/" },
+    { key: "cybergym", label: "CyberGym", href: "/cybergym/", repo: "https://github.com/sunblaze-ucb/cybergym" },
+    { key: "exploitgym", label: "ExploitGym", href: "/exploitgym/", repo: "https://github.com/sunblaze-ucb/exploitgym" },
     { key: "cybergym-e2e", label: "CyberGym-E2E", href: "/cybergym-e2e/", tag: "soon" },
   ];
   const GITHUB_ORG = "https://github.com/sunblaze-ucb";
@@ -20,6 +20,9 @@
     document.documentElement.dataset.benchmark ||
     (BENCHMARKS.find((b) => location.pathname.startsWith(b.href)) || {}).key ||
     "";
+
+  // Header GitHub link points at the active benchmark's repo (org on the hub / E2E).
+  const githubHref = (BENCHMARKS.find((b) => b.key === active) || {}).repo || GITHUB_ORG;
 
   function navLinks(mobile) {
     return BENCHMARKS.map((b) => {
@@ -50,7 +53,7 @@
         <div class="hidden items-center gap-1 md:flex">
           ${navLinks(false)}
           <span class="mx-2 h-5 w-px bg-slate-200"></span>
-          <a href="${GITHUB_ORG}" target="_blank" rel="noopener" aria-label="GitHub"
+          <a href="${githubHref}" target="_blank" rel="noopener" aria-label="GitHub"
              class="rounded-lg p-2 text-slate-500 transition hover:bg-slate-100 hover:text-slate-900">
             <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
           </a>
@@ -66,7 +69,7 @@
       </nav>
       <div id="nav-mobile" class="mx-auto mt-2 hidden max-w-6xl rounded-2xl border border-slate-200 bg-white px-3 py-3 shadow-lg md:hidden">
         ${navLinks(true)}
-        <a href="${GITHUB_ORG}" target="_blank" rel="noopener" class="block rounded-lg px-3 py-2 text-base font-medium text-slate-600">GitHub</a>
+        <a href="${githubHref}" target="_blank" rel="noopener" class="block rounded-lg px-3 py-2 text-base font-medium text-slate-600">GitHub</a>
       </div>
     </div>`;
 

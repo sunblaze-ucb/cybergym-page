@@ -8,7 +8,7 @@
   const BENCHMARKS = [
     { key: "cybergym", label: "CyberGym", href: "/cybergym/", repo: "https://github.com/sunblaze-ucb/cybergym" },
     { key: "exploitgym", label: "ExploitGym", href: "/exploitgym/", repo: "https://github.com/sunblaze-ucb/exploitgym" },
-    { key: "cybergym-e2e", label: "CyberGym-E2E", href: "/cybergym-e2e/", tag: "soon" },
+    { key: "cybergym-e2e", label: "CyberGym-E2E", href: "/cybergym-e2e/", repo: "https://github.com/sunblaze-ucb/cybergym-e2e" },
   ];
   const GITHUB_ORG = "https://github.com/sunblaze-ucb";
 
@@ -79,6 +79,7 @@
         <div class="flex items-center gap-4">
           <a href="/cybergym/" class="hover:text-slate-900">CyberGym</a>
           <a href="/exploitgym/" class="hover:text-slate-900">ExploitGym</a>
+          <a href="/cybergym-e2e/" class="hover:text-slate-900">CyberGym-E2E</a>
           <a href="${GITHUB_ORG}" target="_blank" rel="noopener" class="hover:text-slate-900">GitHub</a>
         </div>
       </div>

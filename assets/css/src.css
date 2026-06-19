@@ -1,0 +1,308 @@
+@import "tailwindcss";
+
+/* ============================================================
+   CyberGym series — design tokens
+   ============================================================ */
+@theme {
+  --font-sans: "Nunito Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "Fira Code", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Series brand (cyan) */
+  --color-brand-50: #ecfeff;
+  --color-brand-100: #cffafe;
+  --color-brand-200: #a5f3fc;
+  --color-brand-300: #67e8f9;
+  --color-brand-400: #22d3ee;
+  --color-brand-500: #06b6d4;
+  --color-brand-600: #0891b2;
+  --color-brand-700: #0e7490;
+  --color-brand-800: #155e75;
+  --color-brand-900: #164e63;
+
+  --color-ink: #0f172a;        /* slate-900 */
+  --color-muted: #475569;      /* slate-600 */
+}
+
+/* ============================================================
+   Per-benchmark accent system
+   Each page sets --accent / --accent-strong / --accent-soft
+   on <html data-benchmark="..."> (defaults below = series cyan).
+   ============================================================ */
+:root {
+  --accent: #06b6d4;
+  --accent-strong: #0e7490;
+  --accent-soft: #ecfeff;
+  --accent-rgb: 6 182 212;
+}
+[data-benchmark="exploitgym"] {
+  --accent: #e11d48;          /* rose-600 */
+  --accent-strong: #be123c;   /* rose-700 */
+  --accent-soft: #fff1f2;     /* rose-50  */
+  --accent-rgb: 225 29 72;
+}
+[data-benchmark="cybergym-e2e"] {
+  --accent: #7c3aed;          /* violet-600 */
+  --accent-strong: #6d28d9;   /* violet-700 */
+  --accent-soft: #f5f3ff;     /* violet-50  */
+  --accent-rgb: 124 58 237;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    font-variation-settings: "wdth" 100, "YTLC" 500;
+  }
+  h1, h2, h3, h4 { text-wrap: balance; }
+  code, pre { font-family: var(--font-mono); }
+}
+
+/* ============================================================
+   Components
+   ============================================================ */
+@layer components {
+  /* ---- Layout ---- */
+  .container-page { @apply mx-auto w-full max-w-5xl px-5 sm:px-6; }
+  .container-wide { @apply mx-auto w-full max-w-6xl px-5 sm:px-6; }
+  .section { @apply py-16 sm:py-20; }
+  .section-tight { @apply py-10 sm:py-12; }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider;
+    color: var(--accent-strong);
+    background: var(--accent-soft);
+  }
+  /* Author with an explicit email link: accent color + envelope icon. */
+  .email-author { @apply font-medium underline-offset-2 hover:underline; color: var(--accent-strong); }
+  .email-ico { @apply ml-1 inline-block h-3.5 w-3.5; vertical-align: -0.18em; }
+
+  .section-title { @apply text-3xl sm:text-4xl font-bold tracking-tight text-slate-900; }
+  .lede { @apply text-lg leading-relaxed text-slate-600; }
+
+  /* ---- Hero gradient mesh ---- */
+  .hero-mesh {
+    /* Pull up under the (transparent) sticky nav so the gradient spans both as one block.
+       The extra top padding pushes content back below the floating nav (4.75rem tall). */
+    margin-top: -4.75rem;
+    padding-top: 4.75rem;
+    background:
+      radial-gradient(60rem 40rem at 15% -10%, rgb(var(--accent-rgb) / 0.14), transparent 60%),
+      radial-gradient(50rem 35rem at 95% 0%, rgb(6 182 212 / 0.10), transparent 55%),
+      linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  }
+
+  /* Series nav: transparent over the hero gradient, solid once scrolled. */
+  /* Let the sticky nav range over the whole page (the wrapper div shouldn't confine it). */
+  #site-header { display: contents; }
+  /* Floating "island" nav: rounded, frosted, with gaps around it; solidifies on scroll. */
+  .nav-island { @apply rounded-2xl bg-white/25 shadow-md backdrop-blur-md transition duration-200; }
+  #site-nav-bar.is-solid .nav-island { @apply bg-white/70 shadow-lg; }
+
+  /* ---- Buttons ---- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff; /* literal white — accent bg is colored in both themes */
+    @apply shadow-sm;
+  }
+  .btn-primary:hover { filter: brightness(0.94); }
+  .btn-ghost {
+    @apply border border-slate-200 bg-white/70 text-slate-700 backdrop-blur;
+  }
+  .btn-ghost:hover { @apply border-slate-300 bg-white; }
+
+  /* ---- Cards ---- */
+  .card {
+    @apply rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition;
+  }
+  .card-link:hover {
+    @apply -translate-y-0.5 shadow-md;
+    border-color: var(--accent);
+  }
+  .stat-num { @apply text-3xl font-bold tracking-tight; color: var(--accent-strong); }
+  .stat-label { @apply mt-1 text-sm text-slate-500; }
+
+  /* ---- Prose-ish content blocks ---- */
+  .content p { @apply leading-relaxed text-slate-700; }
+  .content p + p { @apply mt-4; }
+  .content strong { @apply font-semibold text-slate-900; }
+  .content a { color: var(--accent-strong); @apply font-medium underline-offset-2 hover:underline; }
+  .content em { @apply not-italic font-semibold text-slate-900; }
+
+  /* ---- Leaderboard ---- */
+  .lb-wrap { @apply overflow-auto rounded-2xl border border-slate-200 shadow-sm; }
+  /* Slim, rounded scrollbar */
+  .lb-wrap { scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; }
+  .lb-wrap::-webkit-scrollbar { width: 10px; height: 10px; }
+  .lb-wrap::-webkit-scrollbar-track { background: transparent; }
+  .lb-wrap::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 9999px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+  }
+  .lb-wrap::-webkit-scrollbar-thumb:hover { background-color: #94a3b8; }
+  .lb-wrap::-webkit-scrollbar-corner { background: transparent; }
+  .lb-table { @apply w-full border-collapse text-left text-sm; }
+  .lb-table thead th {
+    @apply sticky top-0 z-10 whitespace-nowrap bg-slate-50 px-4 py-3 font-semibold text-slate-600;
+    border-bottom: 1px solid var(--color-slate-200);
+  }
+  .lb-table tbody td { @apply whitespace-nowrap px-4 py-3 align-middle text-slate-700; }
+  .lb-sort { @apply inline-flex cursor-pointer items-center gap-1 font-semibold text-slate-600 transition; }
+  .lb-sort:hover { color: var(--accent-strong); }
+  .lb-sort.is-active { color: var(--accent-strong); }
+  .lb-caret { @apply h-3.5 w-3.5 shrink-0; }
+  .lb-caret-idle { @apply opacity-40; }
+  .lb-sort:hover .lb-caret-idle { @apply opacity-70; }
+  .lb-sort.is-active .lb-caret { @apply opacity-100; }
+  .lb-table tbody tr { border-bottom: 1px solid var(--color-slate-100); }
+  .lb-table tbody tr:hover { background: var(--accent-soft); }
+  .lb-rank {
+    @apply inline-flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-xs font-bold text-slate-600;
+  }
+  .lb-score { @apply font-mono font-semibold; color: var(--accent-strong); }
+  .lb-bar { @apply mt-1 h-1.5 w-full overflow-hidden rounded-full bg-slate-100; }
+  .lb-bar > span { @apply block h-full rounded-full; background: var(--accent); }
+
+  /* Two-tone bar: full length = no-mitigation count (faded), inner solid = survives mitigations. */
+  .lb-dualbar { @apply flex items-center gap-2.5; }
+  .lb-dualbar-lane { position: relative; width: 4.25rem; height: 1rem; flex: none; }
+  /* Track (faded, full no-mitigation length) and fill (solid, survives mitigations) are
+     overlaid siblings so each is its own hover target. Fill sits on top. */
+  .lb-dualbar-track,
+  .lb-dualbar-fill {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 0.5rem;
+    border-radius: 9999px;
+    transition: height 0.15s ease;
+  }
+  .lb-dualbar-track { background: rgb(var(--accent-rgb) / 0.18); min-width: 2px; }
+  .lb-dualbar-fill { background: var(--accent); z-index: 1; }
+  /* Hover the faded part → expand the whole bar; hover the solid part → expand only it. */
+  .lb-dualbar-track:hover,
+  .lb-dualbar-track:hover ~ .lb-dualbar-fill,
+  .lb-dualbar-fill:hover { height: 0.95rem; }
+  .lb-dualbar-num { @apply font-mono text-xs text-slate-600; font-variant-numeric: tabular-nums; min-width: 1.75rem; }
+
+  /* Compact per-task metrics: 2x2 micro-grid (cost · tokens / time · calls). */
+  .lb-metrics { @apply grid text-xs text-slate-500; grid-template-columns: auto auto; gap: 0.1rem 0.7rem; }
+  .lb-metrics b { @apply font-semibold text-slate-700; font-variant-numeric: tabular-nums; }
+  .lb-metrics .lb-metrics-na { @apply text-slate-300; }
+  .lb-dualbar-zero { @apply font-mono text-xs text-slate-300; }
+
+  /* Stacked entry cell: primary name + muted metadata line. */
+  .lb-entry { @apply flex flex-col gap-0.5; }
+  .lb-entry-name { @apply font-medium text-slate-900; }
+  .lb-entry-meta { @apply text-xs font-normal text-slate-500; }
+  .lb-entry-meta a { color: var(--accent-strong); @apply underline-offset-2 hover:underline; }
+  /* Per-row benchmark version badge (latest = accent, older = neutral grey) */
+  .lb-ver { @apply ml-1.5 inline-block rounded bg-slate-100 px-1.5 py-0.5 align-middle text-[0.65rem] font-semibold text-slate-500; }
+  .lb-ver-latest { background-color: var(--accent-soft); color: var(--accent-strong); }
+  .lb-legend-swatch { @apply inline-block h-2.5 w-5 rounded-full align-middle; }
+
+  .filter-select {
+    @apply rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-700 shadow-sm;
+    font-family: var(--font-sans);
+  }
+
+  /* ---- Note cue + JS tooltip (model / agent notes) ----
+     The popup is a single element appended to <body> by leaderboard.js, so it
+     escapes the table's scroll container (no clipping) and shows instantly. */
+  .note-cue { @apply cursor-help underline decoration-dotted underline-offset-2; }
+  .cg-tooltip {
+    position: fixed;
+    z-index: 60;
+    max-width: 18rem;
+    pointer-events: none;
+    border-radius: 0.5rem;
+    background: #0f172a;
+    color: #fff;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.78rem;
+    line-height: 1.15rem;
+    box-shadow: 0 6px 18px rgb(15 23 42 / 0.22);
+    opacity: 0;
+    transform: translateY(2px);
+    transition: opacity 0.12s ease, transform 0.12s ease;
+  }
+  .cg-tooltip.is-visible { opacity: 1; transform: translateY(0); }
+  .cg-tip-title { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0.65; margin-bottom: 0.3rem; }
+  .cg-tip-metrics { display: grid; grid-template-columns: auto auto; gap: 0.15rem 0.9rem; }
+  .cg-tip-metrics b { font-weight: 600; }
+
+  /* ---- BibTeX ---- */
+  .bibtex-box { @apply relative; }
+  .bibtex-box pre {
+    @apply overflow-x-auto rounded-2xl border border-slate-200 bg-slate-50 p-5 text-xs leading-relaxed text-slate-800;
+  }
+  .copy-btn {
+    @apply absolute right-3 top-3 inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-600 shadow-sm transition hover:bg-slate-100;
+  }
+}
+
+/* ============================================================
+   Dark theme — remaps the slate/white scale (utilities reference
+   var(--color-*)) plus a few hand-tuned surfaces. Toggle sets
+   <html data-theme="dark">.
+   ============================================================ */
+[data-theme="dark"] {
+  --color-white: #161f33;
+  --color-slate-50: #111a2c;
+  --color-slate-100: #233049;
+  --color-slate-200: #2c3a57;
+  --color-slate-300: #3b4a6b;
+  --color-slate-400: #64748b;
+  --color-slate-500: #94a3b8;
+  --color-slate-600: #aab6c9;
+  --color-slate-700: #cbd5e1;
+  --color-slate-800: #e2e8f0;
+  --color-slate-900: #f1f5f9;
+  --color-ink: #f1f5f9;
+  --color-muted: #aab6c9;
+  --accent-strong: #22d3ee;
+  --accent-soft: rgb(var(--accent-rgb) / 0.16);
+}
+[data-theme="dark"][data-benchmark="exploitgym"] { --accent-strong: #fb7185; }
+[data-theme="dark"][data-benchmark="cybergym-e2e"] { --accent-strong: #a78bfa; }
+
+[data-theme="dark"] body { background-color: #0b1120; }
+
+[data-theme="dark"] .hero-mesh {
+  background:
+    radial-gradient(60rem 40rem at 15% -10%, rgb(var(--accent-rgb) / 0.22), transparent 60%),
+    radial-gradient(50rem 35rem at 95% 0%, rgb(34 211 238 / 0.12), transparent 55%),
+    linear-gradient(180deg, #0a1020 0%, #111a2c 100%);
+}
+
+[data-theme="dark"] .cg-tooltip { background: #334155; }
+
+/* Figure images carry black text on transparent/white backgrounds; give them a
+   light panel in dark mode so they stay legible. */
+[data-theme="dark"] .fig-shot { background: #e2e8f0; padding: 0.75rem; border-radius: 0.75rem; }
+
+/* Hub benchmark cards hardcode light accent-strong/soft inline; give their eyebrow
+   chips a dark-appropriate tint derived from each card's --accent. */
+[data-theme="dark"] #benchmarks .eyebrow {
+  color: color-mix(in srgb, var(--accent) 65%, white);
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+[data-theme="dark"] .lb-wrap { scrollbar-color: #475569 transparent; }
+[data-theme="dark"] .lb-wrap::-webkit-scrollbar-thumb { background-color: #475569; }
+[data-theme="dark"] .lb-wrap::-webkit-scrollbar-thumb:hover { background-color: #64748b; }
+

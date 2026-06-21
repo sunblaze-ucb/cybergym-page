@@ -234,7 +234,7 @@
             <img src="/assets/images/cybergym-e2e/cost_scaling_frontier.png" alt="Pass rate vs cost across frontier models" class="fig-shot mx-auto max-h-72 w-auto" />
             <p class="leading-relaxed text-slate-700">
               Success rates rise steadily with the cost budget before flattening out. Patch-only performance
-              saturates early (most models are near their ceiling by a few dollars), but end-to-end discovery
+              plateaus early (most models are near their ceiling by a few dollars), but end-to-end discovery
               keeps benefiting from more runway. The $10 cap is an evaluation choice for fair cross-model
               comparison, not a property of the dataset — researchers with more resources can push further.
             </p>
@@ -297,10 +297,11 @@
       </div>
       <div class="content mx-auto mt-8 max-w-3xl">
         <p>
-          CyberGym-E2E makes one thing measurable and concrete: today's frontier agents are reasonably capable
-          at fixing vulnerabilities once localized, and the larger gap is about autonomous discovery — a gap the
-          newest models are closing quickly. For defenders, that's an actionable signal: automated end-to-end
-          remediation could accelerate triage and patching.
+          CyberGym-E2E makes one thing measurable and concrete: today's frontier agents are frequently able to
+          produce a passing fix once the vulnerability is localized, and the larger gap is about autonomous
+          discovery — a gap the newest models are closing quickly. For defenders, that's an actionable signal:
+          automated end-to-end remediation could accelerate triage and patching, with human review still in the
+          loop, since not every passing patch is a clean fix.
         </p>
         <p>
           The benchmark contributes to both sides of the responsible-development equation: it gives defenders a

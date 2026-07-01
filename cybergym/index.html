@@ -327,6 +327,27 @@
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const C = window.CyberGymLeaderboard;
+      const focusTag = (r) => {
+        const agent = (r.focus || "model") === "agent";
+        return ' <span class="lb-focus' + (agent ? " lb-focus-agent" : "") + '">' + (agent ? "Agent" : "Model") + "</span>";
+      };
+      // Merged Agent/Model cell: headline is the agent name for agent-focused rows
+      // (with the model it uses on the muted second line) and the model name for
+      // model-focused rows (with the harness/scaffold on the second line).
+      // Multi-model rows show the full comma-separated model list rather than the
+      // collapsed "Multi-model" chip.
+      const modelText = (r) => {
+        const m = r.model || "-";
+        if (m.startsWith("Multi-model")) return m.slice(m.indexOf("(") + 1, m.lastIndexOf(")"));
+        return C.cells.model(r);
+      };
+      const entity = (r) => {
+        const isAgent = (r.focus || "model") === "agent";
+        const name = isAgent ? C.cells.agentWithNote(r) : C.cells.model(r);
+        const sub = isAgent ? "uses " + modelText(r) : C.cells.agentWithNote(r);
+        return '<div class="lb-entry"><span class="lb-entry-name">' + name + focusTag(r) +
+          '</span><span class="lb-entry-meta">' + sub + "</span></div>";
+      };
       C.render({
         dataUrl: "/assets/data/cybergym.json",
         rootId: "leaderboard",
@@ -334,6 +355,12 @@
         sort: (a, b) => b.score_10 - a.score_10,
         maxHeight: "460px",
         filters: [{
+          key: "focus",
+          label: "Type:",
+          default: "all",
+          options: () => [{ value: "all", label: "All" }, { value: "model", label: "Model-focused" }, { value: "agent", label: "Agent-focused" }],
+          predicate: (r, v) => (r.focus || "model") === v,
+        }, {
           key: "trials",
           label: "Trials:",
           default: "1",
@@ -347,8 +374,7 @@
         }],
         columns: [
           { header: "#", cell: (r, rank) => C.cells.rank(r, rank) },
-          { header: "Agent", cell: (r) => C.cells.agentWithNote(r) },
-          { header: "Model", cell: (r) => C.cells.model(r) },
+          { header: "Agent / Model", cell: (r) => entity(r) },
           { header: "Trials", visible: (s) => s.trials === "all", cell: (r) => r.trials },
           { header: "Success Rate", thClass: "min-w-32", cell: (r) => C.cells.percent(r.score_10) },
           { header: "Date", cell: (r) => r.date },

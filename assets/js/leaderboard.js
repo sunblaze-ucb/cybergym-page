@@ -293,9 +293,17 @@
   }
   function loadIcon(url, size) {
     return new Promise((resolve) => {
-      const img = new Image(size, size);
+      const img = new Image();
       img.crossOrigin = "anonymous";
-      img.onload = () => resolve(img);
+      img.onload = () => {
+        // Fit within `size` preserving the source aspect ratio (avoids squished non-square icons).
+        const nw = img.naturalWidth || size;
+        const nh = img.naturalHeight || size;
+        const s = size / Math.max(nw, nh);
+        img.width = Math.round(nw * s);
+        img.height = Math.round(nh * s);
+        resolve(img);
+      };
       img.onerror = () => resolve(null);
       img.src = url;
     });
@@ -309,6 +317,16 @@
       : { tick: "#666", grid: "rgba(0,0,0,0.08)", title: "#333", label: "#0f172a", line: "#aaa" };
   }
 
+  // A point is "active" (fully opaque) on hover if it's the hovered icon or linked to/from it.
+  function activeOnHover(chart, i) {
+    const h = chart.hoverIndex;
+    if (h == null) return true;
+    const data = chart.data.datasets[0].data;
+    const hLinks = data[h].links || [];
+    const iLinks = data[i].links || [];
+    return i === h || hLinks.includes(i) || iLinks.includes(h);
+  }
+
   async function renderScatterChart(chartCfg, allRows) {
     const canvas = document.getElementById(chartCfg.canvasId);
     if (!canvas || typeof Chart === "undefined") return;
@@ -316,20 +334,48 @@
     const plotData = allRows.filter(chartCfg.include || ((d) => d.include_in_plot));
     if (!plotData.length) return;
 
-    const points = plotData.map((d) => ({
-      x: new Date(d[chartCfg.xField || "model_release_date"]),
-      y: d[chartCfg.yField || "score_10"] * 100,
-      label: d.model && d.model.startsWith("Multi-model") ? `${d.agent} (Multi-model)` : d.model,
-    }));
-
     const ICON_SIZE = 14;
-    const iconUrls = [...new Set(points.map((p) => getModelIconUrl(p.label)).filter(Boolean))];
-    const iconCache = {};
-    await Promise.all(iconUrls.map(async (url) => { iconCache[url] = await loadIcon(url, ICON_SIZE); }));
-    const pointImages = points.map((p) => {
-      const url = getModelIconUrl(p.label);
-      return url && iconCache[url] ? iconCache[url] : "circle";
+    // Model-focused points are labeled with the model; agent-focused with the agent name.
+    // Icon resolution: a per-row `icon` (path/URL) wins; else the model-name rules. `icon_scale` resizes.
+    const points = plotData.map((d) => {
+      const isAgent = d.focus === "agent";
+      const modelLabel = d.model && d.model.startsWith("Multi-model") ? `${d.agent} (Multi-model)` : d.model;
+      const agentLabel = (d.agent || "").split(" (")[0];
+      const label = isAgent ? agentLabel : modelLabel;
+      return {
+        // Model-focused: model release date. Agent-focused: submission date.
+        x: new Date(isAgent ? d.date : d[chartCfg.xField || "model_release_date"]),
+        y: d[chartCfg.yField || "score_10"] * 100,
+        label: label,
+        focus: isAgent ? "agent" : "model",
+        model: d.model,
+        baseModel: d.base_model || d.model,
+        icon: d.icon || getModelIconUrl(label),
+        size: Math.max(6, Math.round(ICON_SIZE * (d.icon_scale || 1))),
+      };
     });
+    // Agent-focused points link (dashed) to the model-focused point(s) they build on.
+    // A row may list multiple base models via `plot_links` (e.g. a multi-model agent);
+    // otherwise we fall back to its single `base_model`/`model`.
+    points.forEach((p, idx) => {
+      p.links = [];
+      if (p.focus !== "agent") return;
+      const names = plotData[idx].plot_links || [p.baseModel];
+      names.forEach((name) => {
+        const i = points.findIndex((q) => q.focus === "model" && q.model === name);
+        if (i >= 0 && !p.links.includes(i)) p.links.push(i);
+      });
+    });
+
+    const iconCache = {};
+    await Promise.all(
+      points.filter((p) => p.icon).map(async (p) => {
+        const key = p.icon + "@" + p.size;
+        if (!iconCache[key]) iconCache[key] = await loadIcon(p.icon, p.size);
+      })
+    );
+    const pointImages = points.map((p) => (p.icon && iconCache[p.icon + "@" + p.size]) || "circle");
+    const pointRadii = points.map((p) => p.size / 2);
 
     const PX_PER_MONTH = 45, PX_PER_10PCT = 40, AXIS_PADDING = 80;
     const minTime = Math.min(...points.map((p) => p.x.getTime()));
@@ -352,15 +398,18 @@
     window.addEventListener("resize", scaleChart);
 
     const col = chartColors();
+    points.forEach((p, i) => { p.img = pointImages[i] === "circle" ? null : pointImages[i]; });
     const chart = new Chart(canvas, {
       type: "scatter",
-      data: { datasets: [{ data: points, pointStyle: pointImages, pointRadius: ICON_SIZE / 2, pointHoverRadius: ICON_SIZE / 2 + 2 }] },
+      // Positions only — icons/labels/links are drawn by our plugins so we control per-point alpha.
+      data: { datasets: [{ data: points, pointStyle: "circle", pointRadius: 0, pointHoverRadius: 0 }] },
       options: {
         responsive: false,
         animation: false,
+        events: [],
         plugins: {
           legend: { display: false },
-          tooltip: { displayColors: false, callbacks: { label: (ctx) => `${ctx.raw.label}: ${ctx.raw.y.toFixed(1)}%` } },
+          tooltip: { enabled: false },
         },
         scales: {
           x: {
@@ -383,7 +432,37 @@
         },
         layout: { padding: { top: 30, right: 20 } },
       },
-      plugins: [labelPlugin()],
+      plugins: [linkPlugin(), iconPlugin(), labelPlugin(), hoverInfoPlugin()],
+    });
+    chart.hoverIndex = null;
+
+    // Hover a point's icon → highlight it and the model it links to; dim the rest.
+    function hitTest(mx, my) {
+      const meta = chart.getDatasetMeta(0);
+      let found = null, best = Infinity;
+      meta.data.forEach((el, i) => {
+        const img = points[i].img;
+        const hw = (img ? img.width : points[i].size) / 2 + 3;
+        const hh = (img ? img.height : points[i].size) / 2 + 3;
+        if (Math.abs(mx - el.x) <= hw && Math.abs(my - el.y) <= hh) {
+          const d = Math.hypot(mx - el.x, my - el.y);
+          if (d < best) { best = d; found = i; }
+        }
+      });
+      return found;
+    }
+    canvas.addEventListener("mousemove", (e) => {
+      const rect = canvas.getBoundingClientRect();
+      // Map display px → Chart.js logical space (chart.width/height), which is what
+      // el.x/el.y use. Using canvas.width would be off by devicePixelRatio on HiDPI.
+      const mx = (e.clientX - rect.left) * (chart.width / rect.width);
+      const my = (e.clientY - rect.top) * (chart.height / rect.height);
+      const idx = hitTest(mx, my);
+      canvas.style.cursor = idx == null ? "" : "pointer";
+      if (idx !== chart.hoverIndex) { chart.hoverIndex = idx; chart.draw(); }
+    });
+    canvas.addEventListener("mouseleave", () => {
+      if (chart.hoverIndex != null) { chart.hoverIndex = null; chart.draw(); }
     });
 
     // Re-theme axes (and labels, via the plugin) when the user toggles theme.
@@ -400,6 +479,95 @@
     });
   }
 
+  /* Draws the point icons (or a fallback dot), dimming non-active ones on hover. */
+  function iconPlugin() {
+    return {
+      id: "iconPlugin",
+      afterDatasetsDraw(chart) {
+        const ctx = chart.ctx;
+        const meta = chart.getDatasetMeta(0);
+        const data = chart.data.datasets[0].data;
+        const dot = chartColors().tick;
+        meta.data.forEach((el, i) => {
+          const img = data[i].img;
+          ctx.globalAlpha = activeOnHover(chart, i) ? 1 : 0.15;
+          if (img) {
+            ctx.drawImage(img, el.x - img.width / 2, el.y - img.height / 2, img.width, img.height);
+          } else {
+            ctx.fillStyle = dot;
+            ctx.beginPath();
+            ctx.arc(el.x, el.y, (data[i].size || 10) / 2, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        });
+        ctx.globalAlpha = 1;
+      },
+    };
+  }
+
+  /* Dashed connector from an agent-focused point to the model-focused point it builds on. */
+  function linkPlugin() {
+    return {
+      id: "linkPlugin",
+      beforeDatasetsDraw(chart) {
+        // Connector lines are only shown for the hovered icon (and its links).
+        if (chart.hoverIndex == null) return;
+        const ctx = chart.ctx;
+        const meta = chart.getDatasetMeta(0);
+        const data = chart.data.datasets[0].data;
+        ctx.save();
+        ctx.setLineDash([3, 3]);
+        ctx.strokeStyle = chartColors().line;
+        ctx.lineWidth = 1;
+        data.forEach((p, i) => {
+          const a = meta.data[i];
+          if (!a || !p.links || !p.links.length || !activeOnHover(chart, i)) return;
+          p.links.forEach((j) => {
+            const b = meta.data[j];
+            if (!b) return;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          });
+        });
+        ctx.restore();
+      },
+    };
+  }
+
+  /* On hover, show the exact score (and date) for the hovered icon in a small box. */
+  function hoverInfoPlugin() {
+    return {
+      id: "hoverInfoPlugin",
+      afterDatasetsDraw(chart) {
+        const h = chart.hoverIndex;
+        if (h == null) return;
+        const ctx = chart.ctx;
+        const el = chart.getDatasetMeta(0).data[h];
+        const d = chart.data.datasets[0].data[h];
+        if (!el) return;
+        const text = d.y.toFixed(1) + "%  ·  " + d.x.toISOString().slice(0, 10);
+        ctx.save();
+        ctx.font = "600 12px sans-serif";
+        const pad = 6, bh = 22, tw = ctx.measureText(text).width, bw = tw + pad * 2;
+        const area = chart.chartArea;
+        let bx = el.x + 12, by = el.y - bh - 6;
+        if (bx + bw > area.right) bx = el.x - bw - 12;
+        if (bx < area.left) bx = area.left + 2;
+        if (by < area.top) by = el.y + 8;
+        ctx.fillStyle = "rgba(15,23,42,0.92)";
+        if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(bx, by, bw, bh, 5); ctx.fill(); }
+        else ctx.fillRect(bx, by, bw, bh);
+        ctx.fillStyle = "#fff";
+        ctx.textBaseline = "middle";
+        ctx.textAlign = "left";
+        ctx.fillText(text, bx + pad, by + bh / 2 + 1);
+        ctx.restore();
+      },
+    };
+  }
+
   /* Non-overlapping label placement plugin (unchanged logic). */
   function labelPlugin() {
     return {
@@ -407,89 +575,51 @@
       afterDatasetsDraw(chart) {
         const ctx = chart.ctx;
         const col = chartColors();
-        ctx.font = "12px sans-serif";
-        ctx.fillStyle = col.label;
-        const chartArea = chart.chartArea;
+        const area = chart.chartArea;
         const meta = chart.getDatasetMeta(0);
-        const H = 12, pad = 6;
+        const data = chart.data.datasets[0].data;
+        const GAP = 7; // point-to-label gap
+        const LH = 14; // line height used for vertical de-overlap
+        ctx.font = "12px sans-serif";
+        ctx.textBaseline = "middle";
 
-        function overlaps(a, b) {
-          return a.x < b.x + b.w + 1 && a.x + a.w + 1 > b.x && a.y < b.y + b.h + 1 && a.y + a.h + 1 > b.y;
-        }
-        function overlapArea(a, obstacles) {
-          let total = 0;
-          for (const b of obstacles) {
-            if (overlaps(a, b)) {
-              const ox = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x);
-              const oy = Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y);
-              total += ox * oy;
-            }
+        // Place each label beside its point (default right; flip left near the right edge or
+        // when forced), then push down past any already-placed label it would overlap.
+        const placed = [];
+        const order = meta.data.map((_, i) => i).sort((a, b) => meta.data[a].y - meta.data[b].y);
+        order.forEach((i) => {
+          const pt = meta.data[i];
+          const text = data[i].label;
+          if (!text) return;
+          const w = ctx.measureText(text).width;
+          const force = FORCE_LABEL_SIDE[text];
+          const right = force ? force.startsWith("right") : pt.x + GAP + w <= area.right;
+          const x = right ? pt.x + GAP : pt.x - GAP - w;
+          let y = pt.y;
+          for (let guard = 0; guard < 50; guard++) {
+            const hit = placed.find((q) => q.right === right && Math.abs(q.y - y) < LH && x < q.x + q.w && x + w > q.x);
+            if (!hit) break;
+            y = hit.y + LH;
           }
-          return total;
-        }
-
-        const indices = meta.data.map((_, i) => i);
-        indices.sort((a, b) => chart.data.datasets[0].data[b].y - chart.data.datasets[0].data[a].y);
-
-        const r = 6;
-        const obstacles = meta.data.map((pt) => ({ x: pt.x - r, y: pt.y - r, w: r * 2, h: r * 2 }));
-        const labels = [];
-
-        indices.forEach((i) => {
-          const point = meta.data[i];
-          const p = chart.data.datasets[0].data[i];
-          const text = p.label;
-          const tw = ctx.measureText(text).width;
-          const offsets = [
-            [1, -1], [1, 1], [-1, -1], [-1, 1], [1, -2], [1, 2], [-1, -2], [-1, 2],
-            [1, -3], [1, 3], [-1, -3], [-1, 3], [0, -2], [0, 2], [0, -3], [0, 3],
-          ];
-          const candidates = offsets.map(([dx, dy]) => ({
-            x: dx >= 0 ? point.x + pad * dx : point.x + pad * dx - tw,
-            y: point.y + pad * dy - (dy < 0 ? H : 0),
-            w: tw, h: H, rightSide: dx >= 0, below: dy > 0,
-          }));
-          let valid = candidates.filter(
-            (c) => c.x >= chartArea.left - 5 && c.x + c.w <= chartArea.right + 5 && c.y >= chartArea.top - 5 && c.y + c.h <= chartArea.bottom + 5
-          );
-          const forceSide = FORCE_LABEL_SIDE[text];
-          if (forceSide) {
-            const parts = forceSide.split("-");
-            const wantRight = parts[0] === "right";
-            let filtered = valid.filter((c) => c.rightSide === wantRight);
-            if (parts[1] === "down") filtered = filtered.filter((c) => c.below);
-            else if (parts[1] === "up") filtered = filtered.filter((c) => !c.below);
-            if (filtered.length) valid = filtered;
-          }
-          const LEFT_PENALTY = 50;
-          const allObstacles = obstacles.concat(labels);
-          const pool = valid.length ? valid : candidates;
-          let best = pool[0];
-          let bestScore = overlapArea(best, allObstacles) + (best.rightSide ? 0 : LEFT_PENALTY);
-          for (const c of pool) {
-            const score = overlapArea(c, allObstacles) + (c.rightSide ? 0 : LEFT_PENALTY);
-            if (score < bestScore) { best = c; bestScore = score; if (score === 0) break; }
-          }
-          labels.push({ ...best, text, idx: i, px: point.x, py: point.y });
+          y = Math.max(area.top + LH / 2, Math.min(area.bottom - LH / 2, y));
+          placed.push({ x, y, w, right, text, px: pt.x, py: pt.y, idx: i });
         });
 
-        labels.forEach((l) => {
-          const labelCx = l.x + l.w / 2, labelCy = l.y + l.h / 2;
-          if (Math.hypot(labelCx - l.px, labelCy - l.py) > pad * 2) {
-            ctx.beginPath();
+        placed.forEach((l) => {
+          ctx.globalAlpha = activeOnHover(chart, l.idx) ? 1 : 0.15;
+          if (Math.abs(l.y - l.py) > 3) {
             ctx.strokeStyle = col.line;
             ctx.lineWidth = 0.8;
+            ctx.beginPath();
             ctx.moveTo(l.px, l.py);
-            const tx = labelCx < l.px ? l.x + l.w : labelCx > l.px ? l.x : labelCx;
-            const ty = labelCy < l.py ? l.y + l.h : labelCy > l.py ? l.y : labelCy;
-            ctx.lineTo(tx, ty);
+            ctx.lineTo(l.right ? l.x : l.x + l.w, l.y);
             ctx.stroke();
           }
-          ctx.textAlign = "left";
-          ctx.textBaseline = "top";
           ctx.fillStyle = col.label;
+          ctx.textAlign = "left";
           ctx.fillText(l.text, l.x, l.y);
         });
+        ctx.globalAlpha = 1;
       },
     };
   }

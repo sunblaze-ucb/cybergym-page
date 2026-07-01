@@ -33,6 +33,11 @@
   --accent-strong: #0e7490;
   --accent-soft: #ecfeff;
   --accent-rgb: 6 182 212;
+
+  /* Categorical domain colors (leaderboard stacked bars) */
+  --dom-user: #f43f5e;
+  --dom-browser: #f59e0b;
+  --dom-kernel: #6366f1;
 }
 [data-benchmark="exploitgym"] {
   --accent: #e11d48;          /* rose-600 */
@@ -199,6 +204,21 @@
   .lb-dualbar-fill:hover { height: 0.95rem; }
   .lb-dualbar-num { @apply font-mono text-xs text-slate-600; font-variant-numeric: tabular-nums; min-width: 1.75rem; }
 
+  /* Stacked domain bars: two rows (no-mitigation / with-mitigation), each segmented by domain. */
+  .lb-stack { @apply flex flex-col gap-1.5; }
+  .lb-stack-row { @apply flex items-center gap-2; }
+  .lb-stack-track { @apply relative flex h-2 cursor-help overflow-hidden rounded-full; width: 15rem; background: var(--color-slate-100); }
+  .lb-seg { height: 100%; }
+  /* With-mitigation bar: diagonal hatch so it reads as the reduced/mitigated subset. */
+  .lb-stack-mit .lb-seg { position: relative; }
+  .lb-stack-mit .lb-seg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.55) 0 1px, rgba(255, 255, 255, 0) 1px 5px);
+  }
+  .lb-stack-num { @apply font-mono text-xs text-slate-600; min-width: 1.75rem; font-variant-numeric: tabular-nums; }
+
   /* Compact per-task metrics: 2x2 micro-grid (cost · tokens / time · calls). */
   .lb-metrics { @apply grid text-xs text-slate-500; grid-template-columns: auto auto; gap: 0.1rem 0.7rem; }
   .lb-metrics b { @apply font-semibold text-slate-700; font-variant-numeric: tabular-nums; }
@@ -213,7 +233,17 @@
   /* Per-row benchmark version badge (latest = accent, older = neutral grey) */
   .lb-ver { @apply ml-1.5 inline-block rounded bg-slate-100 px-1.5 py-0.5 align-middle text-[0.65rem] font-semibold text-slate-500; }
   .lb-ver-latest { background-color: var(--accent-soft); color: var(--accent-strong); }
+  /* Model-focused vs agent-focused row tag */
+  .lb-focus { @apply ml-1.5 inline-block rounded px-1.5 py-0.5 align-middle text-[0.6rem] font-semibold uppercase tracking-wide; background-color: var(--color-slate-100); color: var(--color-slate-500); }
+  .lb-focus-agent { background-color: var(--accent-soft); color: var(--accent-strong); }
   .lb-legend-swatch { @apply inline-block h-2.5 w-5 rounded-full align-middle; }
+  .lb-legend-hatch { position: relative; overflow: hidden; }
+  .lb-legend-hatch::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.6) 0 1px, rgba(255, 255, 255, 0) 1px 5px);
+  }
 
   .filter-select {
     @apply rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-700 shadow-sm;

@@ -1,6 +1,6 @@
 {
   "level1": [
-  {
+    {
       "agent": "MopMonk Agent",
       "model": "MiniMax M3",
       "model_release_date": "2026-06-01",
@@ -9,7 +9,8 @@
       "date": "2026-06-28",
       "source": "MopMonk AI",
       "source_url": "https://github.com/MopMonkAI/MopMonkAgent",
-      "trials": 1
+      "trials": 1,
+      "focus": "agent"
     },
     {
       "agent": "OpenAI Agent",
@@ -20,29 +21,36 @@
       "date": "2026-06-22",
       "source": "OpenAI",
       "source_url": "https://openai.com/index/daybreak-securing-the-world/",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "Crystalline (with a pre-seeded, test-time-updated knowledge base)",
       "model": "Claude Opus 4.6",
       "model_release_date": "2026-02-05",
-      "include_in_plot": false,
+      "include_in_plot": true,
+      "icon": "/assets/images/cybergym/crystalline.png",
+      "features": ["Knowledge base", "Test-time memory"],
       "score_10": 0.896,
       "date": "2026-06-08",
       "source": "Independent researcher",
       "source_url": "https://github.com/synchopate/cybergym-logos",
-      "trials": 1
+      "trials": 1,
+      "focus": "agent"
     },
     {
       "agent": "MDASH",
       "model": "Multi-model (GPT-5.4, Claude Opus 4.6, Claude Sonnet 4.6)",
       "model_release_date": "2026-05-12",
       "include_in_plot": true,
+      "plot_links": ["GPT-5.4", "Claude Opus 4.6", "Claude Sonnet 4.6"],
+      "features": ["Multi-model", "Orchestration"],
       "score_10": 0.8845,
       "date": "2026-05-12",
       "source": "Microsoft",
       "source_url": "https://www.microsoft.com/en-us/security/blog/2026/05/12/defense-at-ai-speed-microsofts-new-multi-model-agentic-security-system-tops-leading-industry-benchmark/",
-      "trials": 1
+      "trials": 1,
+      "focus": "agent"
     },
     {
       "agent": "Meta Agent",
@@ -53,18 +61,20 @@
       "date": "2026-04-14",
       "source": "Meta AI",
       "source_url": "https://ai.meta.com/static-resource/muse-spark-safety-and-preparedness-report",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "OpenAI Agent",
       "model": "GPT-5.4",
       "model_release_date": "2026-03-05",
       "include_in_plot": true,
-      "score_10": 0.790,
+      "score_10": 0.79,
       "date": "2026-04-23",
       "source": "OpenAI",
       "source_url": "https://openai.com/index/introducing-gpt-5-5",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "OpenAI Agent",
@@ -75,7 +85,8 @@
       "date": "2026-04-23",
       "source": "OpenAI",
       "source_url": "https://openai.com/index/introducing-gpt-5-5",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "Claude Code",
@@ -86,7 +97,8 @@
       "date": "2026-02-12",
       "source": "Zhipu AI",
       "source_url": "https://z.ai/blog/glm-5",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "Claude Code",
@@ -97,7 +109,8 @@
       "date": "2026-04-07",
       "source": "Zhipu AI",
       "source_url": "https://z.ai/blog/glm-5.1",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "Codex CLI",
@@ -108,7 +121,8 @@
       "date": "2026-04-07",
       "source": "Zhipu AI",
       "source_url": "https://z.ai/blog/glm-5.1",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "Gemini CLI",
@@ -119,7 +133,8 @@
       "date": "2026-04-07",
       "source": "Zhipu AI",
       "source_url": "https://z.ai/blog/glm-5.1",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "Claude Code",
@@ -130,7 +145,8 @@
       "date": "2026-02-12",
       "source": "Zhipu AI",
       "source_url": "https://z.ai/blog/glm-5",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "Kimi Agent",
@@ -141,18 +157,22 @@
       "date": "2026-02-02",
       "source": "Kimi",
       "source_url": "https://arxiv.org/abs/2602.02276",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "SageAgent",
       "model": "GPT-5",
       "model_release_date": "2025-08-07",
-      "include_in_plot": false,
+      "include_in_plot": true,
+      "icon": "/assets/images/cybergym/sageagent.png",
+      "plot_links": ["GPT-5 (high)"],
       "score_10": 0.602,
       "date": "2026-02-09",
       "source": "OpenSage Team",
       "source_url": "https://www.opensage-agent.ai/",
-      "trials": 1
+      "trials": 1,
+      "focus": "agent"
     },
     {
       "agent": "Anthropic Agent",
@@ -163,7 +183,8 @@
       "date": "2026-04-07",
       "source": "Anthropic",
       "source_url": "https://www.anthropic.com/claude-mythos-preview-system-card",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "Anthropic Agent",
@@ -174,7 +195,8 @@
       "date": "2026-02-05",
       "source": "Anthropic",
       "source_url": "https://www.anthropic.com/claude-opus-4-6-system-card",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "Anthropic Agent",
@@ -185,7 +207,8 @@
       "date": "2026-02-17",
       "source": "Anthropic",
       "source_url": "https://www.anthropic.com/claude-sonnet-4-6-system-card",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "Anthropic Agent",
@@ -196,7 +219,8 @@
       "date": "2026-02-05",
       "source": "Anthropic",
       "source_url": "https://www.anthropic.com/claude-opus-4-5-system-card",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "Anthropic Agent",
@@ -207,7 +231,8 @@
       "date": "2025-09-29",
       "source": "Anthropic",
       "source_url": "https://www.anthropic.com/claude-sonnet-4-5-system-card",
-      "trials": 30
+      "trials": 30,
+      "focus": "model"
     },
     {
       "agent": "Anthropic Agent",
@@ -218,7 +243,8 @@
       "date": "2025-09-29",
       "source": "Anthropic",
       "source_url": "https://www.anthropic.com/claude-sonnet-4-5-system-card",
-      "trials": 30
+      "trials": 30,
+      "focus": "model"
     },
     {
       "agent": "Anthropic Agent",
@@ -229,7 +255,8 @@
       "date": "2025-09-29",
       "source": "Anthropic",
       "source_url": "https://www.anthropic.com/claude-sonnet-4-5-system-card",
-      "trials": 30
+      "trials": 30,
+      "focus": "model"
     },
     {
       "agent": "Anthropic Agent",
@@ -240,7 +267,8 @@
       "date": "2025-09-29",
       "source": "Anthropic",
       "source_url": "https://www.anthropic.com/claude-sonnet-4-5-system-card",
-      "trials": 30
+      "trials": 30,
+      "focus": "model"
     },
     {
       "agent": "Anthropic Agent",
@@ -251,7 +279,8 @@
       "date": "2025-09-29",
       "source": "Anthropic",
       "source_url": "https://www.anthropic.com/claude-sonnet-4-5-system-card",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "Anthropic Agent",
@@ -262,7 +291,8 @@
       "date": "2025-09-29",
       "source": "Anthropic",
       "source_url": "https://www.anthropic.com/claude-sonnet-4-5-system-card",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "Anthropic Agent",
@@ -273,7 +303,8 @@
       "date": "2025-09-29",
       "source": "Anthropic",
       "source_url": "https://www.anthropic.com/claude-sonnet-4-5-system-card",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "Anthropic Agent",
@@ -284,7 +315,8 @@
       "date": "2025-09-29",
       "source": "Anthropic",
       "source_url": "https://www.anthropic.com/claude-sonnet-4-5-system-card",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "OpenHands",
@@ -295,7 +327,8 @@
       "score_x1": 0.019907100199071003,
       "date": "2025-05-23",
       "source": "CyberGym Team",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "OpenHands",
@@ -306,7 +339,8 @@
       "score_x1": 0.021897810218978103,
       "date": "2025-05-15",
       "source": "CyberGym Team",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "OpenHands",
@@ -316,7 +350,8 @@
       "score_10": 0.394,
       "date": "2025-12-05",
       "source": "CyberGym Team",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "OpenHands",
@@ -327,7 +362,8 @@
       "score_x1": 0.012607830126078301,
       "date": "2025-05-15",
       "source": "CyberGym Team",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "Cybench",
@@ -338,7 +374,8 @@
       "score_x1": 0.0225613802256138,
       "date": "2025-05-15",
       "source": "CyberGym Team",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "Codex CLI",
@@ -349,7 +386,8 @@
       "score_x1": 0.011944260119442602,
       "date": "2025-05-15",
       "source": "CyberGym Team",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "ENiGMA",
@@ -360,7 +398,8 @@
       "score_x1": 0.019243530192435302,
       "date": "2025-05-15",
       "source": "CyberGym Team",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "OpenHands",
@@ -371,7 +410,8 @@
       "score_x1": 0.007962840079628402,
       "date": "2025-05-15",
       "source": "CyberGym Team",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "OpenHands",
@@ -382,7 +422,8 @@
       "score_x1": 0.006635700066357001,
       "date": "2025-05-15",
       "source": "CyberGym Team",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "OpenHands",
@@ -393,7 +434,8 @@
       "score_x1": 0.0006635700066357001,
       "date": "2025-05-15",
       "source": "CyberGym Team",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "OpenHands",
@@ -403,7 +445,8 @@
       "score_x1": 0.005972130059721301,
       "date": "2025-05-15",
       "source": "CyberGym Team",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "OpenHands",
@@ -414,7 +457,8 @@
       "score_x1": 0.0033178500331785005,
       "date": "2025-05-15",
       "source": "CyberGym Team",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "OpenHands",
@@ -424,7 +468,8 @@
       "score_x1": 0.0033178500331785005,
       "date": "2025-05-15",
       "source": "CyberGym Team",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     },
     {
       "agent": "OpenHands",
@@ -434,7 +479,8 @@
       "score_x1": 0.0006635700066357001,
       "date": "2025-05-15",
       "source": "CyberGym Team",
-      "trials": 1
+      "trials": 1,
+      "focus": "model"
     }
   ],
   "level0": [
